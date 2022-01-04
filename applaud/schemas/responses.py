@@ -15,13 +15,13 @@ class AgeRatingDeclarationResponse(ApplaudModel):
 class AppCategoriesResponse(ApplaudModel):
     data: list[AppCategory]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppCategory, AppCategory]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppCategory, AppCategory]]]
     meta: Optional[PagingInformation]
 
 class AppCategoryResponse(ApplaudModel):
     data: AppCategory
     links: DocumentLinks
-    included: Optional[list[Union[AppCategory, AppCategory]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppCategory, AppCategory]]]
 
 class AppClipAdvancedExperienceImageResponse(ApplaudModel):
     data: AppClipAdvancedExperienceImage
@@ -30,13 +30,13 @@ class AppClipAdvancedExperienceImageResponse(ApplaudModel):
 class AppClipAdvancedExperiencesResponse(ApplaudModel):
     data: list[AppClipAdvancedExperience]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppClip, AppClipAdvancedExperienceImage, AppClipAdvancedExperienceLocalization]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppClip, AppClipAdvancedExperienceImage, AppClipAdvancedExperienceLocalization]]]
     meta: Optional[PagingInformation]
 
 class AppClipAdvancedExperienceResponse(ApplaudModel):
     data: AppClipAdvancedExperience
     links: DocumentLinks
-    included: Optional[list[Union[AppClip, AppClipAdvancedExperienceImage, AppClipAdvancedExperienceLocalization]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppClip, AppClipAdvancedExperienceImage, AppClipAdvancedExperienceLocalization]]]
 
 class AppClipAppStoreReviewDetailResponse(ApplaudModel):
     data: AppClipAppStoreReviewDetail
@@ -46,24 +46,24 @@ class AppClipAppStoreReviewDetailResponse(ApplaudModel):
 class AppClipDefaultExperienceLocalizationsResponse(ApplaudModel):
     data: list[AppClipDefaultExperienceLocalization]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppClipDefaultExperience, AppClipHeaderImage]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppClipDefaultExperience, AppClipHeaderImage]]]
     meta: Optional[PagingInformation]
 
 class AppClipDefaultExperienceLocalizationResponse(ApplaudModel):
     data: AppClipDefaultExperienceLocalization
     links: DocumentLinks
-    included: Optional[list[Union[AppClipDefaultExperience, AppClipHeaderImage]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppClipDefaultExperience, AppClipHeaderImage]]]
 
 class AppClipDefaultExperiencesResponse(ApplaudModel):
     data: list[AppClipDefaultExperience]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail]]]
     meta: Optional[PagingInformation]
 
 class AppClipDefaultExperienceResponse(ApplaudModel):
     data: AppClipDefaultExperience
     links: DocumentLinks
-    included: Optional[list[Union[AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail]]]
 
 class AppClipDomainStatusResponse(ApplaudModel):
     data: AppClipDomainStatus
@@ -77,13 +77,13 @@ class AppClipHeaderImageResponse(ApplaudModel):
 class AppClipsResponse(ApplaudModel):
     data: list[AppClip]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, AppClipDefaultExperience]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AppClipDefaultExperience]]]
     meta: Optional[PagingInformation]
 
 class AppClipResponse(ApplaudModel):
     data: AppClip
     links: DocumentLinks
-    included: Optional[list[Union[App, AppClipDefaultExperience]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AppClipDefaultExperience]]]
 
 class AppEncryptionDeclarationsResponse(ApplaudModel):
     data: list[AppEncryptionDeclaration]
@@ -110,13 +110,13 @@ class AppInfoLocalizationResponse(ApplaudModel):
 class AppInfosResponse(ApplaudModel):
     data: list[AppInfo]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, AgeRatingDeclaration, AppInfoLocalization, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AgeRatingDeclaration, AppInfoLocalization, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory]]]
     meta: Optional[PagingInformation]
 
 class AppInfoResponse(ApplaudModel):
     data: AppInfo
     links: DocumentLinks
-    included: Optional[list[Union[App, AgeRatingDeclaration, AppInfoLocalization, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AgeRatingDeclaration, AppInfoLocalization, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory]]]
 
 class AppPreOrderResponse(ApplaudModel):
     data: AppPreOrder
@@ -126,13 +126,13 @@ class AppPreOrderResponse(ApplaudModel):
 class AppPreviewSetsResponse(ApplaudModel):
     data: list[AppPreviewSet]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppStoreVersionLocalization, AppPreview]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersionLocalization, AppPreview]]]
     meta: Optional[PagingInformation]
 
 class AppPreviewSetResponse(ApplaudModel):
     data: AppPreviewSet
     links: DocumentLinks
-    included: Optional[list[Union[AppStoreVersionLocalization, AppPreview]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersionLocalization, AppPreview]]]
 
 class AppPreviewsResponse(ApplaudModel):
     data: list[AppPreview]
@@ -148,13 +148,13 @@ class AppPreviewResponse(ApplaudModel):
 class AppPricePointsResponse(ApplaudModel):
     data: list[AppPricePoint]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppPriceTier, Territory]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppPriceTier, Territory]]]
     meta: Optional[PagingInformation]
 
 class AppPricePointResponse(ApplaudModel):
     data: AppPricePoint
     links: DocumentLinks
-    included: Optional[list[Union[AppPriceTier, Territory]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppPriceTier, Territory]]]
 
 class AppPriceTiersResponse(ApplaudModel):
     data: list[AppPriceTier]
@@ -170,24 +170,24 @@ class AppPriceTierResponse(ApplaudModel):
 class AppPricesResponse(ApplaudModel):
     data: list[AppPrice]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, AppPriceTier]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AppPriceTier]]]
     meta: Optional[PagingInformation]
 
 class AppPriceResponse(ApplaudModel):
     data: AppPrice
     links: DocumentLinks
-    included: Optional[list[Union[App, AppPriceTier]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AppPriceTier]]]
 
 class AppScreenshotSetsResponse(ApplaudModel):
     data: list[AppScreenshotSet]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppStoreVersionLocalization, AppScreenshot]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersionLocalization, AppScreenshot]]]
     meta: Optional[PagingInformation]
 
 class AppScreenshotSetResponse(ApplaudModel):
     data: AppScreenshotSet
     links: DocumentLinks
-    included: Optional[list[Union[AppStoreVersionLocalization, AppScreenshot]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersionLocalization, AppScreenshot]]]
 
 class AppScreenshotsResponse(ApplaudModel):
     data: list[AppScreenshot]
@@ -214,18 +214,18 @@ class AppStoreReviewAttachmentResponse(ApplaudModel):
 class AppStoreReviewDetailResponse(ApplaudModel):
     data: AppStoreReviewDetail
     links: DocumentLinks
-    included: Optional[list[Union[AppStoreVersion, AppStoreReviewAttachment]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersion, AppStoreReviewAttachment]]]
 
 class AppStoreVersionLocalizationsResponse(ApplaudModel):
     data: list[AppStoreVersionLocalization]
     links: PagedDocumentLinks
-    included: Optional[list[Union[AppStoreVersion, AppScreenshotSet, AppPreviewSet]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersion, AppScreenshotSet, AppPreviewSet]]]
     meta: Optional[PagingInformation]
 
 class AppStoreVersionLocalizationResponse(ApplaudModel):
     data: AppStoreVersionLocalization
     links: DocumentLinks
-    included: Optional[list[Union[AppStoreVersion, AppScreenshotSet, AppPreviewSet]]] = Field(discriminator='type')
+    included: Optional[list[Union[AppStoreVersion, AppScreenshotSet, AppPreviewSet]]]
 
 class AppStoreVersionPhasedReleaseResponse(ApplaudModel):
     data: AppStoreVersionPhasedRelease
@@ -243,24 +243,24 @@ class AppStoreVersionSubmissionResponse(ApplaudModel):
 class AppStoreVersionsResponse(ApplaudModel):
     data: list[AppStoreVersion]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, IdfaDeclaration, AppClipDefaultExperience]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, IdfaDeclaration, AppClipDefaultExperience]]]
     meta: Optional[PagingInformation]
 
 class AppStoreVersionResponse(ApplaudModel):
     data: AppStoreVersion
     links: DocumentLinks
-    included: Optional[list[Union[App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, IdfaDeclaration, AppClipDefaultExperience]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, IdfaDeclaration, AppClipDefaultExperience]]]
 
 class AppsResponse(ApplaudModel):
     data: list[App]
     links: PagedDocumentLinks
-    included: Optional[list[Union[CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, GameCenterEnabledVersion]]] = Field(discriminator='type')
+    included: Optional[list[Union[CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, GameCenterEnabledVersion]]]
     meta: Optional[PagingInformation]
 
 class AppResponse(ApplaudModel):
     data: App
     links: DocumentLinks
-    included: Optional[list[Union[CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, GameCenterEnabledVersion]]] = Field(discriminator='type')
+    included: Optional[list[Union[CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, GameCenterEnabledVersion]]]
 
 class BetaAppClipInvocationLocalizationResponse(ApplaudModel):
     data: BetaAppClipInvocationLocalization
@@ -324,13 +324,13 @@ class BetaBuildLocalizationResponse(ApplaudModel):
 class BetaGroupsResponse(ApplaudModel):
     data: list[BetaGroup]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, Build, BetaTester]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, Build, BetaTester]]]
     meta: Optional[PagingInformation]
 
 class BetaGroupResponse(ApplaudModel):
     data: BetaGroup
     links: DocumentLinks
-    included: Optional[list[Union[App, Build, BetaTester]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, Build, BetaTester]]]
 
 class BetaLicenseAgreementsResponse(ApplaudModel):
     data: list[BetaLicenseAgreement]
@@ -350,13 +350,13 @@ class BetaTesterInvitationResponse(ApplaudModel):
 class BetaTestersResponse(ApplaudModel):
     data: list[BetaTester]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, BetaGroup, Build]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, BetaGroup, Build]]]
     meta: Optional[PagingInformation]
 
 class BetaTesterResponse(ApplaudModel):
     data: BetaTester
     links: DocumentLinks
-    included: Optional[list[Union[App, BetaGroup, Build]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, BetaGroup, Build]]]
 
 class BuildBetaDetailsResponse(ApplaudModel):
     data: list[BuildBetaDetail]
@@ -386,13 +386,13 @@ class BuildIconsResponse(ApplaudModel):
 class BuildsResponse(ApplaudModel):
     data: list[Build]
     links: PagedDocumentLinks
-    included: Optional[list[Union[PrereleaseVersion, BetaTester, BetaBuildLocalization, AppEncryptionDeclaration, BetaAppReviewSubmission, App, BuildBetaDetail, AppStoreVersion, BuildIcon, BuildBundle]]] = Field(discriminator='type')
+    included: Optional[list[Union[PrereleaseVersion, BetaTester, BetaBuildLocalization, AppEncryptionDeclaration, BetaAppReviewSubmission, App, BuildBetaDetail, AppStoreVersion, BuildIcon, BuildBundle]]]
     meta: Optional[PagingInformation]
 
 class BuildResponse(ApplaudModel):
     data: Build
     links: DocumentLinks
-    included: Optional[list[Union[PrereleaseVersion, BetaTester, BetaBuildLocalization, AppEncryptionDeclaration, BetaAppReviewSubmission, App, BuildBetaDetail, AppStoreVersion, BuildIcon, BuildBundle]]] = Field(discriminator='type')
+    included: Optional[list[Union[PrereleaseVersion, BetaTester, BetaBuildLocalization, AppEncryptionDeclaration, BetaAppReviewSubmission, App, BuildBetaDetail, AppStoreVersion, BuildIcon, BuildBundle]]]
 
 class BundleIdCapabilitiesResponse(ApplaudModel):
     data: list[BundleIdCapability]
@@ -406,13 +406,13 @@ class BundleIdCapabilityResponse(ApplaudModel):
 class BundleIdsResponse(ApplaudModel):
     data: list[BundleId]
     links: PagedDocumentLinks
-    included: Optional[list[Union[Profile, BundleIdCapability, App]]] = Field(discriminator='type')
+    included: Optional[list[Union[Profile, BundleIdCapability, App]]]
     meta: Optional[PagingInformation]
 
 class BundleIdResponse(ApplaudModel):
     data: BundleId
     links: DocumentLinks
-    included: Optional[list[Union[Profile, BundleIdCapability, App]]] = Field(discriminator='type')
+    included: Optional[list[Union[Profile, BundleIdCapability, App]]]
 
 class CertificatesResponse(ApplaudModel):
     data: list[Certificate]
@@ -446,13 +446,13 @@ class CiBuildActionResponse(ApplaudModel):
 class CiBuildRunsResponse(ApplaudModel):
     data: list[CiBuildRun]
     links: PagedDocumentLinks
-    included: Optional[list[Union[Build, CiWorkflow, CiProduct, ScmGitReference, ScmGitReference, ScmPullRequest]]] = Field(discriminator='type')
+    included: Optional[list[Union[Build, CiWorkflow, CiProduct, ScmGitReference, ScmGitReference, ScmPullRequest]]]
     meta: Optional[PagingInformation]
 
 class CiBuildRunResponse(ApplaudModel):
     data: CiBuildRun
     links: DocumentLinks
-    included: Optional[list[Union[Build, CiWorkflow, CiProduct, ScmGitReference, ScmGitReference, ScmPullRequest]]] = Field(discriminator='type')
+    included: Optional[list[Union[Build, CiWorkflow, CiProduct, ScmGitReference, ScmGitReference, ScmPullRequest]]]
 
 class CiIssuesResponse(ApplaudModel):
     data: list[CiIssue]
@@ -477,13 +477,13 @@ class CiMacOsVersionResponse(ApplaudModel):
 class CiProductsResponse(ApplaudModel):
     data: list[CiProduct]
     links: PagedDocumentLinks
-    included: Optional[list[Union[App, BundleId, ScmRepository]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, BundleId, ScmRepository]]]
     meta: Optional[PagingInformation]
 
 class CiProductResponse(ApplaudModel):
     data: CiProduct
     links: DocumentLinks
-    included: Optional[list[Union[App, BundleId, ScmRepository]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, BundleId, ScmRepository]]]
 
 class CiTestResultsResponse(ApplaudModel):
     data: list[CiTestResult]
@@ -497,13 +497,13 @@ class CiTestResultResponse(ApplaudModel):
 class CiWorkflowsResponse(ApplaudModel):
     data: list[CiWorkflow]
     links: PagedDocumentLinks
-    included: Optional[list[Union[CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion]]] = Field(discriminator='type')
+    included: Optional[list[Union[CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion]]]
     meta: Optional[PagingInformation]
 
 class CiWorkflowResponse(ApplaudModel):
     data: CiWorkflow
     links: DocumentLinks
-    included: Optional[list[Union[CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion]]] = Field(discriminator='type')
+    included: Optional[list[Union[CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion]]]
 
 class CiXcodeVersionsResponse(ApplaudModel):
     data: list[CiXcodeVersion]
@@ -538,12 +538,12 @@ class DiagnosticSignaturesResponse(ApplaudModel):
 class EndUserLicenseAgreementResponse(ApplaudModel):
     data: EndUserLicenseAgreement
     links: DocumentLinks
-    included: Optional[list[Union[App, Territory]]] = Field(discriminator='type')
+    included: Optional[list[Union[App, Territory]]]
 
 class GameCenterEnabledVersionsResponse(ApplaudModel):
     data: list[GameCenterEnabledVersion]
     links: PagedDocumentLinks
-    included: Optional[list[Union[GameCenterEnabledVersion, App]]] = Field(discriminator='type')
+    included: Optional[list[Union[GameCenterEnabledVersion, App]]]
     meta: Optional[PagingInformation]
 
 @deprecated
@@ -571,24 +571,24 @@ class PerfPowerMetricsResponse(ApplaudModel):
 class PreReleaseVersionsResponse(ApplaudModel):
     data: list[PrereleaseVersion]
     links: PagedDocumentLinks
-    included: Optional[list[Union[Build, App]]] = Field(discriminator='type')
+    included: Optional[list[Union[Build, App]]]
     meta: Optional[PagingInformation]
 
 class PrereleaseVersionResponse(ApplaudModel):
     data: PrereleaseVersion
     links: DocumentLinks
-    included: Optional[list[Union[Build, App]]] = Field(discriminator='type')
+    included: Optional[list[Union[Build, App]]]
 
 class ProfilesResponse(ApplaudModel):
     data: list[Profile]
     links: PagedDocumentLinks
-    included: Optional[list[Union[BundleId, Device, Certificate]]] = Field(discriminator='type')
+    included: Optional[list[Union[BundleId, Device, Certificate]]]
     meta: Optional[PagingInformation]
 
 class ProfileResponse(ApplaudModel):
     data: Profile
     links: DocumentLinks
-    included: Optional[list[Union[BundleId, Device, Certificate]]] = Field(discriminator='type')
+    included: Optional[list[Union[BundleId, Device, Certificate]]]
 
 class RoutingAppCoverageResponse(ApplaudModel):
     data: RoutingAppCoverage
@@ -629,13 +629,13 @@ class ScmPullRequestResponse(ApplaudModel):
 class ScmRepositoriesResponse(ApplaudModel):
     data: list[ScmRepository]
     links: PagedDocumentLinks
-    included: Optional[list[Union[ScmProvider, ScmGitReference]]] = Field(discriminator='type')
+    included: Optional[list[Union[ScmProvider, ScmGitReference]]]
     meta: Optional[PagingInformation]
 
 class ScmRepositoryResponse(ApplaudModel):
     data: ScmRepository
     links: DocumentLinks
-    included: Optional[list[Union[ScmProvider, ScmGitReference]]] = Field(discriminator='type')
+    included: Optional[list[Union[ScmProvider, ScmGitReference]]]
 
 class TerritoriesResponse(ApplaudModel):
     data: list[Territory]
