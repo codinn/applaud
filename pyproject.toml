@@ -3,13 +3,24 @@ name = "applaud"
 version = "0.1.0"
 description = "The Python SDK to work with the App Store Connect API from Apple."
 authors = ["Yang.Y <yang@yangyubo.com>"]
-license = "MIT License"
+readme = "README.md"
+homepage = "https://github.com/codinn/applaud"
+repository = "https://github.com/codinn/applaud.git"
+license = "MIT"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 authlib = "^0.15.5"
 pydantic = "^1.9.0"
 requests = "^2.27.0"
+Deprecated = "^1.2.13"
 
 [tool.poetry.dev-dependencies]
 
