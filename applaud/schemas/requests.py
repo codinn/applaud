@@ -2,6 +2,7 @@
 # Do not modify this file -- YOUR CHANGES WILL BE ERASED!
 
 from deprecated import deprecated
+from pydantic import Field
 from .enums import *
 from .models import *
 from typing import Optional, Literal
@@ -12,7 +13,7 @@ class AgeRatingDeclarationUpdateRequest(ApplaudModel):
         class Attributes(ApplaudModel):
             alcohol_tobacco_or_drug_use_or_references: Optional[AgeRatingDeclarationLevel]
             contests: Optional[AgeRatingDeclarationLevel]
-            gambling_and_contests: Optional[bool]
+            gambling_and_contests: Optional[bool] = Field(None, deprecated=True)
             gambling: Optional[bool]
             gambling_simulated: Optional[AgeRatingDeclarationLevel]
             kids_age_band: Optional[KidsAgeBand]
@@ -774,7 +775,7 @@ class AppStoreVersionCreateRequest(ApplaudModel):
             copyright: Optional[str]
             release_type: Optional[AppStoreVersionReleaseType]
             earliest_release_date: Optional[datetime.datetime]
-            uses_idfa: Optional[bool]
+            uses_idfa: Optional[bool] = Field(None, deprecated=True)
 
         relationships: Relationships
         attributes: Attributes
@@ -789,7 +790,7 @@ class AppStoreVersionUpdateRequest(ApplaudModel):
             copyright: Optional[str]
             release_type: Optional[AppStoreVersionReleaseType]
             earliest_release_date: Optional[datetime.datetime]
-            uses_idfa: Optional[bool]
+            uses_idfa: Optional[bool] = Field(None, deprecated=True)
             downloadable: Optional[bool]
 
         class Relationships(ApplaudModel):
