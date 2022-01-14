@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -11,6 +11,22 @@ from ..schemas.enums import *
 class CiBuildActionEndpoint(IDEndpoint):
     path = '/v1/ciBuildActions/{id}'
 
+    @endpoint('/v1/ciBuildActions/{id}/artifacts')
+    def artifacts(self) -> ArtifactsOfCiBuildActionEndpoint:
+        return ArtifactsOfCiBuildActionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciBuildActions/{id}/buildRun')
+    def build_run(self) -> BuildRunOfCiBuildActionEndpoint:
+        return BuildRunOfCiBuildActionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciBuildActions/{id}/issues')
+    def issues(self) -> IssuesOfCiBuildActionEndpoint:
+        return IssuesOfCiBuildActionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciBuildActions/{id}/testResults')
+    def test_results(self) -> TestResultsOfCiBuildActionEndpoint:
+        return TestResultsOfCiBuildActionEndpoint(self.id, self.session)
+        
     def fields(self, *, ci_build_action: Union[CiBuildActionField, list[CiBuildActionField]]=None, ci_issue: Union[CiIssueField, list[CiIssueField]]=None, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, ci_test_result: Union[CiTestResultField, list[CiTestResultField]]=None, ci_artifact: Union[CiArtifactField, list[CiArtifactField]]=None) -> CiBuildActionEndpoint:
         '''Fields to return for included related types.
 
@@ -62,29 +78,29 @@ class CiBuildActionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return CiBuildActionResponse.parse_obj(json)
 
-class ArtifactListOfCiBuildActionEndpoint(IDEndpoint):
+class ArtifactsOfCiBuildActionEndpoint(IDEndpoint):
     path = '/v1/ciBuildActions/{id}/artifacts'
 
-    def fields(self, *, ci_artifact: Union[CiArtifactField, list[CiArtifactField]]=None) -> ArtifactListOfCiBuildActionEndpoint:
+    def fields(self, *, ci_artifact: Union[CiArtifactField, list[CiArtifactField]]=None) -> ArtifactsOfCiBuildActionEndpoint:
         '''Fields to return for included related types.
 
         :param ci_artifact: the fields to include for returned resources of type ciArtifacts
         :type ci_artifact: Union[CiArtifactField, list[CiArtifactField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.ArtifactListOfCiBuildActionEndpoint
+        :rtype: applaud.endpoints.ArtifactsOfCiBuildActionEndpoint
         '''
         if ci_artifact: self._set_fields('ciArtifacts',ci_artifact if type(ci_artifact) is list else [ci_artifact])
         return self
         
-    def limit(self, number: int=None) -> ArtifactListOfCiBuildActionEndpoint:
+    def limit(self, number: int=None) -> ArtifactsOfCiBuildActionEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.ArtifactListOfCiBuildActionEndpoint
+        :rtype: applaud.endpoints.ArtifactsOfCiBuildActionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -160,29 +176,29 @@ class BuildRunOfCiBuildActionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return CiBuildRunResponse.parse_obj(json)
 
-class IssueListOfCiBuildActionEndpoint(IDEndpoint):
+class IssuesOfCiBuildActionEndpoint(IDEndpoint):
     path = '/v1/ciBuildActions/{id}/issues'
 
-    def fields(self, *, ci_issue: Union[CiIssueField, list[CiIssueField]]=None) -> IssueListOfCiBuildActionEndpoint:
+    def fields(self, *, ci_issue: Union[CiIssueField, list[CiIssueField]]=None) -> IssuesOfCiBuildActionEndpoint:
         '''Fields to return for included related types.
 
         :param ci_issue: the fields to include for returned resources of type ciIssues
         :type ci_issue: Union[CiIssueField, list[CiIssueField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.IssueListOfCiBuildActionEndpoint
+        :rtype: applaud.endpoints.IssuesOfCiBuildActionEndpoint
         '''
         if ci_issue: self._set_fields('ciIssues',ci_issue if type(ci_issue) is list else [ci_issue])
         return self
         
-    def limit(self, number: int=None) -> IssueListOfCiBuildActionEndpoint:
+    def limit(self, number: int=None) -> IssuesOfCiBuildActionEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.IssueListOfCiBuildActionEndpoint
+        :rtype: applaud.endpoints.IssuesOfCiBuildActionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -201,29 +217,29 @@ class IssueListOfCiBuildActionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return CiIssuesResponse.parse_obj(json)
 
-class TestResultListOfCiBuildActionEndpoint(IDEndpoint):
+class TestResultsOfCiBuildActionEndpoint(IDEndpoint):
     path = '/v1/ciBuildActions/{id}/testResults'
 
-    def fields(self, *, ci_test_result: Union[CiTestResultField, list[CiTestResultField]]=None) -> TestResultListOfCiBuildActionEndpoint:
+    def fields(self, *, ci_test_result: Union[CiTestResultField, list[CiTestResultField]]=None) -> TestResultsOfCiBuildActionEndpoint:
         '''Fields to return for included related types.
 
         :param ci_test_result: the fields to include for returned resources of type ciTestResults
         :type ci_test_result: Union[CiTestResultField, list[CiTestResultField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.TestResultListOfCiBuildActionEndpoint
+        :rtype: applaud.endpoints.TestResultsOfCiBuildActionEndpoint
         '''
         if ci_test_result: self._set_fields('ciTestResults',ci_test_result if type(ci_test_result) is list else [ci_test_result])
         return self
         
-    def limit(self, number: int=None) -> TestResultListOfCiBuildActionEndpoint:
+    def limit(self, number: int=None) -> TestResultsOfCiBuildActionEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.TestResultListOfCiBuildActionEndpoint
+        :rtype: applaud.endpoints.TestResultsOfCiBuildActionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

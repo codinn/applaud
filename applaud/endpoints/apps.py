@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppListEndpoint(Endpoint):
+class AppsEndpoint(Endpoint):
     path = '/v1/apps'
 
-    def fields(self, *, app: Union[AppField, list[AppField]]=None, beta_license_agreement: Union[BetaLicenseAgreementField, list[BetaLicenseAgreementField]]=None, beta_app_review_detail: Union[BetaAppReviewDetailField, list[BetaAppReviewDetailField]]=None, app_clip: Union[AppClipField, list[AppClipField]]=None, app_info: Union[AppInfoField, list[AppInfoField]]=None, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None, in_app_purchase: Union[InAppPurchaseField, list[InAppPurchaseField]]=None, pre_release_version: Union[PreReleaseVersionField, list[PreReleaseVersionField]]=None, ci_product: Union[CiProductField, list[CiProductField]]=None, app_price: Union[AppPriceField, list[AppPriceField]]=None, app_pre_order: Union[AppPreOrderField, list[AppPreOrderField]]=None, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None, end_user_license_agreement: Union[EndUserLicenseAgreementField, list[EndUserLicenseAgreementField]]=None, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None, perf_power_metric: Union[PerfPowerMetricField, list[PerfPowerMetricField]]=None, build: Union[BuildField, list[BuildField]]=None) -> AppListEndpoint:
+    def fields(self, *, app: Union[AppField, list[AppField]]=None, beta_license_agreement: Union[BetaLicenseAgreementField, list[BetaLicenseAgreementField]]=None, beta_app_review_detail: Union[BetaAppReviewDetailField, list[BetaAppReviewDetailField]]=None, app_clip: Union[AppClipField, list[AppClipField]]=None, app_info: Union[AppInfoField, list[AppInfoField]]=None, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None, in_app_purchase: Union[InAppPurchaseField, list[InAppPurchaseField]]=None, pre_release_version: Union[PreReleaseVersionField, list[PreReleaseVersionField]]=None, ci_product: Union[CiProductField, list[CiProductField]]=None, app_price: Union[AppPriceField, list[AppPriceField]]=None, app_pre_order: Union[AppPreOrderField, list[AppPreOrderField]]=None, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None, end_user_license_agreement: Union[EndUserLicenseAgreementField, list[EndUserLicenseAgreementField]]=None, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None, perf_power_metric: Union[PerfPowerMetricField, list[PerfPowerMetricField]]=None, build: Union[BuildField, list[BuildField]]=None) -> AppsEndpoint:
         '''Fields to return for included related types.
 
         :param app: the fields to include for returned resources of type apps
@@ -69,7 +69,7 @@ class AppListEndpoint(Endpoint):
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppListEndpoint
+        :rtype: applaud.endpoints.AppsEndpoint
         '''
         if app: self._set_fields('apps',app if type(app) is list else [app])
         if beta_license_agreement: self._set_fields('betaLicenseAgreements',beta_license_agreement if type(beta_license_agreement) is list else [beta_license_agreement])
@@ -109,11 +109,11 @@ class AppListEndpoint(Endpoint):
         PRE_RELEASE_VERSIONS = 'preReleaseVersions'
         PRICES = 'prices'
 
-    def exists(self, *, game_center_enabled_versions: bool=None) -> AppListEndpoint:
+    def exists(self, *, game_center_enabled_versions: bool=None) -> AppsEndpoint:
         ''' Filter by existence or non-existence of related resource.
         
         :returns: self
-        :rtype: applaud.endpoints.AppListEndpoint
+        :rtype: applaud.endpoints.AppsEndpoint
         '''
         if game_center_enabled_versions == None:
             return
@@ -121,7 +121,7 @@ class AppListEndpoint(Endpoint):
         self._set_exists('gameCenterEnabledVersions', 'true' if game_center_enabled_versions  else 'false')
         return self
         
-    def filter(self, *, app_store_versions_app_store_state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None, app_store_versions_platform: Union[Platform, list[Platform]]=None, bundle_id: Union[str, list[str]]=None, name: Union[str, list[str]]=None, sku: Union[str, list[str]]=None, app_store_versions: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> AppListEndpoint:
+    def filter(self, *, app_store_versions_app_store_state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None, app_store_versions_platform: Union[Platform, list[Platform]]=None, bundle_id: Union[str, list[str]]=None, name: Union[str, list[str]]=None, sku: Union[str, list[str]]=None, app_store_versions: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> AppsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param app_store_versions_app_store_state: filter by attribute 'appStoreVersions.appStoreState'
@@ -146,7 +146,7 @@ class AppListEndpoint(Endpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppListEndpoint
+        :rtype: applaud.endpoints.AppsEndpoint
         '''
         if app_store_versions_app_store_state: self._set_filter('appStoreVersions.appStoreState', app_store_versions_app_store_state if type(app_store_versions_app_store_state) is list else [app_store_versions_app_store_state])
         
@@ -164,27 +164,27 @@ class AppListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppListEndpoint
+        :rtype: applaud.endpoints.AppsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, bundle_id: SortOrder=None, name: SortOrder=None, sku: SortOrder=None) -> AppListEndpoint:
+    def sort(self, *, bundle_id: SortOrder=None, name: SortOrder=None, sku: SortOrder=None) -> AppsEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.AppListEndpoint
+        :rtype: applaud.endpoints.AppsEndpoint
         '''
         if bundle_id: self.sort_expressions.append('bundleId' if bundle_id == SortOrder.ASC else '-bundleId')
         if name: self.sort_expressions.append('name' if name == SortOrder.ASC else '-name')
         if sku: self.sort_expressions.append('sku' if sku == SortOrder.ASC else '-sku')
         return self
         
-    def limit(self, number: int=None, *, app_clips: int=None, app_infos: int=None, app_store_versions: int=None, available_territories: int=None, beta_app_localizations: int=None, beta_groups: int=None, builds: int=None, game_center_enabled_versions: int=None, in_app_purchases: int=None, pre_release_versions: int=None, prices: int=None) -> AppListEndpoint:
+    def limit(self, number: int=None, *, app_clips: int=None, app_infos: int=None, app_store_versions: int=None, available_territories: int=None, beta_app_localizations: int=None, beta_groups: int=None, builds: int=None, game_center_enabled_versions: int=None, in_app_purchases: int=None, pre_release_versions: int=None, prices: int=None) -> AppsEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -224,7 +224,7 @@ class AppListEndpoint(Endpoint):
         :type prices: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppListEndpoint
+        :rtype: applaud.endpoints.AppsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -290,6 +290,78 @@ class AppListEndpoint(Endpoint):
 class AppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}'
 
+    @endpoint('/v1/apps/{id}/appClips')
+    def app_clips(self) -> AppClipsOfAppEndpoint:
+        return AppClipsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/appInfos')
+    def app_infos(self) -> AppInfosOfAppEndpoint:
+        return AppInfosOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/appStoreVersions')
+    def app_store_versions(self) -> AppStoreVersionsOfAppEndpoint:
+        return AppStoreVersionsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/availableTerritories')
+    def available_territories(self) -> AvailableTerritoriesOfAppEndpoint:
+        return AvailableTerritoriesOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/betaAppLocalizations')
+    def beta_app_localizations(self) -> BetaAppLocalizationsOfAppEndpoint:
+        return BetaAppLocalizationsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/betaAppReviewDetail')
+    def beta_app_review_detail(self) -> BetaAppReviewDetailOfAppEndpoint:
+        return BetaAppReviewDetailOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/betaGroups')
+    def beta_groups(self) -> BetaGroupsOfAppEndpoint:
+        return BetaGroupsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/betaLicenseAgreement')
+    def beta_license_agreement(self) -> BetaLicenseAgreementOfAppEndpoint:
+        return BetaLicenseAgreementOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/builds')
+    def builds(self) -> BuildsOfAppEndpoint:
+        return BuildsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/ciProduct')
+    def ci_product(self) -> CiProductOfAppEndpoint:
+        return CiProductOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/endUserLicenseAgreement')
+    def end_user_license_agreement(self) -> EndUserLicenseAgreementOfAppEndpoint:
+        return EndUserLicenseAgreementOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/gameCenterEnabledVersions')
+    def game_center_enabled_versions(self) -> GameCenterEnabledVersionsOfAppEndpoint:
+        return GameCenterEnabledVersionsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/inAppPurchases')
+    def in_app_purchases(self) -> InAppPurchasesOfAppEndpoint:
+        return InAppPurchasesOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/perfPowerMetrics')
+    def perf_power_metrics(self) -> PerfPowerMetricsOfAppEndpoint:
+        return PerfPowerMetricsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/preOrder')
+    def pre_order(self) -> PreOrderOfAppEndpoint:
+        return PreOrderOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/preReleaseVersions')
+    def pre_release_versions(self) -> PreReleaseVersionsOfAppEndpoint:
+        return PreReleaseVersionsOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/prices')
+    def prices(self) -> PricesOfAppEndpoint:
+        return PricesOfAppEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/apps/{id}/relationships/betaTesters')
+    def beta_testers_linkages(self) -> BetaTestersLinkagesOfAppEndpoint:
+        return BetaTestersLinkagesOfAppEndpoint(self.id, self.session)
+        
     def fields(self, *, app: Union[AppField, list[AppField]]=None, beta_license_agreement: Union[BetaLicenseAgreementField, list[BetaLicenseAgreementField]]=None, beta_app_review_detail: Union[BetaAppReviewDetailField, list[BetaAppReviewDetailField]]=None, app_clip: Union[AppClipField, list[AppClipField]]=None, app_info: Union[AppInfoField, list[AppInfoField]]=None, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None, in_app_purchase: Union[InAppPurchaseField, list[InAppPurchaseField]]=None, pre_release_version: Union[PreReleaseVersionField, list[PreReleaseVersionField]]=None, ci_product: Union[CiProductField, list[CiProductField]]=None, app_price: Union[AppPriceField, list[AppPriceField]]=None, app_pre_order: Union[AppPreOrderField, list[AppPreOrderField]]=None, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None, end_user_license_agreement: Union[EndUserLicenseAgreementField, list[EndUserLicenseAgreementField]]=None, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None, perf_power_metric: Union[PerfPowerMetricField, list[PerfPowerMetricField]]=None, build: Union[BuildField, list[BuildField]]=None) -> AppEndpoint:
         '''Fields to return for included related types.
 
@@ -507,10 +579,10 @@ class AppEndpoint(IDEndpoint):
         response_json = super()._perform_patch(json)
         return AppResponse.parse_obj(response_json)
 
-class AppClipListOfAppEndpoint(IDEndpoint):
+class AppClipsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/appClips'
 
-    def fields(self, *, app_clip: Union[AppClipField, list[AppClipField]]=None, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None) -> AppClipListOfAppEndpoint:
+    def fields(self, *, app_clip: Union[AppClipField, list[AppClipField]]=None, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None) -> AppClipsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param app_clip: the fields to include for returned resources of type appClips
@@ -520,7 +592,7 @@ class AppClipListOfAppEndpoint(IDEndpoint):
         :type app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipListOfAppEndpoint
+        :rtype: applaud.endpoints.AppClipsOfAppEndpoint
         '''
         if app_clip: self._set_fields('appClips',app_clip if type(app_clip) is list else [app_clip])
         if app_clip_default_experience: self._set_fields('appClipDefaultExperiences',app_clip_default_experience if type(app_clip_default_experience) is list else [app_clip_default_experience])
@@ -529,29 +601,29 @@ class AppClipListOfAppEndpoint(IDEndpoint):
     class Include(StringEnum):
         APP_CLIP_DEFAULT_EXPERIENCES = 'appClipDefaultExperiences'
 
-    def filter(self, *, bundle_id: Union[str, list[str]]=None) -> AppClipListOfAppEndpoint:
+    def filter(self, *, bundle_id: Union[str, list[str]]=None) -> AppClipsOfAppEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param bundle_id: filter by attribute 'bundleId'
         :type bundle_id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipListOfAppEndpoint
+        :rtype: applaud.endpoints.AppClipsOfAppEndpoint
         '''
         if bundle_id: self._set_filter('bundleId', bundle_id if type(bundle_id) is list else [bundle_id])
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppClipListOfAppEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppClipsOfAppEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipListOfAppEndpoint
+        :rtype: applaud.endpoints.AppClipsOfAppEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_clip_default_experiences: int=None) -> AppClipListOfAppEndpoint:
+    def limit(self, number: int=None, *, app_clip_default_experiences: int=None) -> AppClipsOfAppEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -561,7 +633,7 @@ class AppClipListOfAppEndpoint(IDEndpoint):
         :type app_clip_default_experiences: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipListOfAppEndpoint
+        :rtype: applaud.endpoints.AppClipsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -584,10 +656,10 @@ class AppClipListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppClipsResponse.parse_obj(json)
 
-class AppInfoListOfAppEndpoint(IDEndpoint):
+class AppInfosOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/appInfos'
 
-    def fields(self, *, app_info: Union[AppInfoField, list[AppInfoField]]=None, app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]]=None) -> AppInfoListOfAppEndpoint:
+    def fields(self, *, app_info: Union[AppInfoField, list[AppInfoField]]=None, app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]]=None) -> AppInfosOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param app_info: the fields to include for returned resources of type appInfos
@@ -597,7 +669,7 @@ class AppInfoListOfAppEndpoint(IDEndpoint):
         :type app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppInfoListOfAppEndpoint
+        :rtype: applaud.endpoints.AppInfosOfAppEndpoint
         '''
         if app_info: self._set_fields('appInfos',app_info if type(app_info) is list else [app_info])
         if app_info_localization: self._set_fields('appInfoLocalizations',app_info_localization if type(app_info_localization) is list else [app_info_localization])
@@ -606,16 +678,16 @@ class AppInfoListOfAppEndpoint(IDEndpoint):
     class Include(StringEnum):
         APP_INFO_LOCALIZATIONS = 'appInfoLocalizations'
 
-    def include(self, relationship: Union[Include, list[Include]]) -> AppInfoListOfAppEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppInfosOfAppEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppInfoListOfAppEndpoint
+        :rtype: applaud.endpoints.AppInfosOfAppEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_info_localizations: int=None) -> AppInfoListOfAppEndpoint:
+    def limit(self, number: int=None, *, app_info_localizations: int=None) -> AppInfosOfAppEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -625,7 +697,7 @@ class AppInfoListOfAppEndpoint(IDEndpoint):
         :type app_info_localizations: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppInfoListOfAppEndpoint
+        :rtype: applaud.endpoints.AppInfosOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -648,10 +720,10 @@ class AppInfoListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppInfosResponse.parse_obj(json)
 
-class AppStoreVersionListOfAppEndpoint(IDEndpoint):
+class AppStoreVersionsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/appStoreVersions'
 
-    def fields(self, *, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None) -> AppStoreVersionListOfAppEndpoint:
+    def fields(self, *, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None) -> AppStoreVersionsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param app_store_version: the fields to include for returned resources of type appStoreVersions
@@ -661,7 +733,7 @@ class AppStoreVersionListOfAppEndpoint(IDEndpoint):
         :type app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.AppStoreVersionsOfAppEndpoint
         '''
         if app_store_version: self._set_fields('appStoreVersions',app_store_version if type(app_store_version) is list else [app_store_version])
         if app_store_version_localization: self._set_fields('appStoreVersionLocalizations',app_store_version_localization if type(app_store_version_localization) is list else [app_store_version_localization])
@@ -670,7 +742,7 @@ class AppStoreVersionListOfAppEndpoint(IDEndpoint):
     class Include(StringEnum):
         APP_STORE_VERSION_LOCALIZATIONS = 'appStoreVersionLocalizations'
 
-    def filter(self, *, app_store_state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None, platform: Union[Platform, list[Platform]]=None, version_string: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> AppStoreVersionListOfAppEndpoint:
+    def filter(self, *, app_store_state: Union[AppStoreVersionState, list[AppStoreVersionState]]=None, platform: Union[Platform, list[Platform]]=None, version_string: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> AppStoreVersionsOfAppEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param app_store_state: filter by attribute 'appStoreState'
@@ -686,7 +758,7 @@ class AppStoreVersionListOfAppEndpoint(IDEndpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.AppStoreVersionsOfAppEndpoint
         '''
         if app_store_state: self._set_filter('appStoreState', app_store_state if type(app_store_state) is list else [app_store_state])
         
@@ -698,16 +770,16 @@ class AppStoreVersionListOfAppEndpoint(IDEndpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppStoreVersionListOfAppEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppStoreVersionsOfAppEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.AppStoreVersionsOfAppEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_store_version_localizations: int=None) -> AppStoreVersionListOfAppEndpoint:
+    def limit(self, number: int=None, *, app_store_version_localizations: int=None) -> AppStoreVersionsOfAppEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -717,7 +789,7 @@ class AppStoreVersionListOfAppEndpoint(IDEndpoint):
         :type app_store_version_localizations: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.AppStoreVersionsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -740,29 +812,29 @@ class AppStoreVersionListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppStoreVersionsResponse.parse_obj(json)
 
-class AvailableTerritoryListOfAppEndpoint(IDEndpoint):
+class AvailableTerritoriesOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/availableTerritories'
 
-    def fields(self, *, territory: Union[TerritoryField, list[TerritoryField]]=None) -> AvailableTerritoryListOfAppEndpoint:
+    def fields(self, *, territory: Union[TerritoryField, list[TerritoryField]]=None) -> AvailableTerritoriesOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param territory: the fields to include for returned resources of type territories
         :type territory: Union[TerritoryField, list[TerritoryField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AvailableTerritoryListOfAppEndpoint
+        :rtype: applaud.endpoints.AvailableTerritoriesOfAppEndpoint
         '''
         if territory: self._set_fields('territories',territory if type(territory) is list else [territory])
         return self
         
-    def limit(self, number: int=None) -> AvailableTerritoryListOfAppEndpoint:
+    def limit(self, number: int=None) -> AvailableTerritoriesOfAppEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AvailableTerritoryListOfAppEndpoint
+        :rtype: applaud.endpoints.AvailableTerritoriesOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -781,29 +853,29 @@ class AvailableTerritoryListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return TerritoriesResponse.parse_obj(json)
 
-class BetaAppLocalizationListOfAppEndpoint(IDEndpoint):
+class BetaAppLocalizationsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/betaAppLocalizations'
 
-    def fields(self, *, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None) -> BetaAppLocalizationListOfAppEndpoint:
+    def fields(self, *, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None) -> BetaAppLocalizationsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param beta_app_localization: the fields to include for returned resources of type betaAppLocalizations
         :type beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaAppLocalizationListOfAppEndpoint
+        :rtype: applaud.endpoints.BetaAppLocalizationsOfAppEndpoint
         '''
         if beta_app_localization: self._set_fields('betaAppLocalizations',beta_app_localization if type(beta_app_localization) is list else [beta_app_localization])
         return self
         
-    def limit(self, number: int=None) -> BetaAppLocalizationListOfAppEndpoint:
+    def limit(self, number: int=None) -> BetaAppLocalizationsOfAppEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaAppLocalizationListOfAppEndpoint
+        :rtype: applaud.endpoints.BetaAppLocalizationsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -848,29 +920,29 @@ class BetaAppReviewDetailOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return BetaAppReviewDetailResponse.parse_obj(json)
 
-class BetaGroupListOfAppEndpoint(IDEndpoint):
+class BetaGroupsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/betaGroups'
 
-    def fields(self, *, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None) -> BetaGroupListOfAppEndpoint:
+    def fields(self, *, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None) -> BetaGroupsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param beta_group: the fields to include for returned resources of type betaGroups
         :type beta_group: Union[BetaGroupField, list[BetaGroupField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListOfAppEndpoint
+        :rtype: applaud.endpoints.BetaGroupsOfAppEndpoint
         '''
         if beta_group: self._set_fields('betaGroups',beta_group if type(beta_group) is list else [beta_group])
         return self
         
-    def limit(self, number: int=None) -> BetaGroupListOfAppEndpoint:
+    def limit(self, number: int=None) -> BetaGroupsOfAppEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListOfAppEndpoint
+        :rtype: applaud.endpoints.BetaGroupsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -915,7 +987,7 @@ class BetaLicenseAgreementOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return BetaLicenseAgreementResponse.parse_obj(json)
 
-class BetaTesterListOfAppRelationshipsEndpoint(IDEndpoint):
+class BetaTestersLinkagesOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/relationships/betaTesters'
 
     def delete(self, request: AppBetaTestersLinkagesRequest):
@@ -929,29 +1001,29 @@ class BetaTesterListOfAppRelationshipsEndpoint(IDEndpoint):
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_delete(json)
 
-class BuildListOfAppEndpoint(IDEndpoint):
+class BuildsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/builds'
 
-    def fields(self, *, build: Union[BuildField, list[BuildField]]=None) -> BuildListOfAppEndpoint:
+    def fields(self, *, build: Union[BuildField, list[BuildField]]=None) -> BuildsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param build: the fields to include for returned resources of type builds
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildListOfAppEndpoint
+        :rtype: applaud.endpoints.BuildsOfAppEndpoint
         '''
         if build: self._set_fields('builds',build if type(build) is list else [build])
         return self
         
-    def limit(self, number: int=None) -> BuildListOfAppEndpoint:
+    def limit(self, number: int=None) -> BuildsOfAppEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildListOfAppEndpoint
+        :rtype: applaud.endpoints.BuildsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -1053,17 +1125,17 @@ class EndUserLicenseAgreementOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return EndUserLicenseAgreementResponse.parse_obj(json)
 
-class GameCenterEnabledVersionListOfAppEndpoint(IDEndpoint):
+class GameCenterEnabledVersionsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/gameCenterEnabledVersions'
 
-    def fields(self, *, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None) -> GameCenterEnabledVersionListOfAppEndpoint:
+    def fields(self, *, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None) -> GameCenterEnabledVersionsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param game_center_enabled_version: the fields to include for returned resources of type gameCenterEnabledVersions
         :type game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.GameCenterEnabledVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.GameCenterEnabledVersionsOfAppEndpoint
         '''
         if game_center_enabled_version: self._set_fields('gameCenterEnabledVersions',game_center_enabled_version if type(game_center_enabled_version) is list else [game_center_enabled_version])
         return self
@@ -1071,7 +1143,7 @@ class GameCenterEnabledVersionListOfAppEndpoint(IDEndpoint):
     class Include(StringEnum):
         COMPATIBLE_VERSIONS = 'compatibleVersions'
 
-    def filter(self, *, platform: Union[Platform, list[Platform]]=None, version_string: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> GameCenterEnabledVersionListOfAppEndpoint:
+    def filter(self, *, platform: Union[Platform, list[Platform]]=None, version_string: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> GameCenterEnabledVersionsOfAppEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param platform: filter by attribute 'platform'
@@ -1084,7 +1156,7 @@ class GameCenterEnabledVersionListOfAppEndpoint(IDEndpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.GameCenterEnabledVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.GameCenterEnabledVersionsOfAppEndpoint
         '''
         if platform: self._set_filter('platform', platform if type(platform) is list else [platform])
         
@@ -1094,25 +1166,25 @@ class GameCenterEnabledVersionListOfAppEndpoint(IDEndpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> GameCenterEnabledVersionListOfAppEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> GameCenterEnabledVersionsOfAppEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.GameCenterEnabledVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.GameCenterEnabledVersionsOfAppEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, version_string: SortOrder=None) -> GameCenterEnabledVersionListOfAppEndpoint:
+    def sort(self, *, version_string: SortOrder=None) -> GameCenterEnabledVersionsOfAppEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.GameCenterEnabledVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.GameCenterEnabledVersionsOfAppEndpoint
         '''
         if version_string: self.sort_expressions.append('versionString' if version_string == SortOrder.ASC else '-versionString')
         return self
         
-    def limit(self, number: int=None, *, compatible_versions: int=None) -> GameCenterEnabledVersionListOfAppEndpoint:
+    def limit(self, number: int=None, *, compatible_versions: int=None) -> GameCenterEnabledVersionsOfAppEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -1122,7 +1194,7 @@ class GameCenterEnabledVersionListOfAppEndpoint(IDEndpoint):
         :type compatible_versions: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.GameCenterEnabledVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.GameCenterEnabledVersionsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -1145,10 +1217,10 @@ class GameCenterEnabledVersionListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return GameCenterEnabledVersionsResponse.parse_obj(json)
 
-class InAppPurchaseListOfAppEndpoint(IDEndpoint):
+class InAppPurchasesOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/inAppPurchases'
 
-    def fields(self, *, in_app_purchase: Union[InAppPurchaseField, list[InAppPurchaseField]]=None, app: Union[AppField, list[AppField]]=None) -> InAppPurchaseListOfAppEndpoint:
+    def fields(self, *, in_app_purchase: Union[InAppPurchaseField, list[InAppPurchaseField]]=None, app: Union[AppField, list[AppField]]=None) -> InAppPurchasesOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param in_app_purchase: the fields to include for returned resources of type inAppPurchases
@@ -1158,7 +1230,7 @@ class InAppPurchaseListOfAppEndpoint(IDEndpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.InAppPurchaseListOfAppEndpoint
+        :rtype: applaud.endpoints.InAppPurchasesOfAppEndpoint
         '''
         if in_app_purchase: self._set_fields('inAppPurchases',in_app_purchase if type(in_app_purchase) is list else [in_app_purchase])
         if app: self._set_fields('apps',app if type(app) is list else [app])
@@ -1167,7 +1239,7 @@ class InAppPurchaseListOfAppEndpoint(IDEndpoint):
     class Include(StringEnum):
         APPS = 'apps'
 
-    def filter(self, *, in_app_purchase_type: Union[InAppPurchaseType, list[InAppPurchaseType]]=None, can_be_submitted: Union[str, list[str]]=None) -> InAppPurchaseListOfAppEndpoint:
+    def filter(self, *, in_app_purchase_type: Union[InAppPurchaseType, list[InAppPurchaseType]]=None, can_be_submitted: Union[str, list[str]]=None) -> InAppPurchasesOfAppEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param in_app_purchase_type: filter by attribute 'inAppPurchaseType'
@@ -1177,7 +1249,7 @@ class InAppPurchaseListOfAppEndpoint(IDEndpoint):
         :type can_be_submitted: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.InAppPurchaseListOfAppEndpoint
+        :rtype: applaud.endpoints.InAppPurchasesOfAppEndpoint
         '''
         if in_app_purchase_type: self._set_filter('inAppPurchaseType', in_app_purchase_type if type(in_app_purchase_type) is list else [in_app_purchase_type])
         
@@ -1185,27 +1257,27 @@ class InAppPurchaseListOfAppEndpoint(IDEndpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> InAppPurchaseListOfAppEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> InAppPurchasesOfAppEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.InAppPurchaseListOfAppEndpoint
+        :rtype: applaud.endpoints.InAppPurchasesOfAppEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, in_app_purchase_type: SortOrder=None, product_id: SortOrder=None, reference_name: SortOrder=None) -> InAppPurchaseListOfAppEndpoint:
+    def sort(self, *, in_app_purchase_type: SortOrder=None, product_id: SortOrder=None, reference_name: SortOrder=None) -> InAppPurchasesOfAppEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.InAppPurchaseListOfAppEndpoint
+        :rtype: applaud.endpoints.InAppPurchasesOfAppEndpoint
         '''
         if in_app_purchase_type: self.sort_expressions.append('inAppPurchaseType' if in_app_purchase_type == SortOrder.ASC else '-inAppPurchaseType')
         if product_id: self.sort_expressions.append('productId' if product_id == SortOrder.ASC else '-productId')
         if reference_name: self.sort_expressions.append('referenceName' if reference_name == SortOrder.ASC else '-referenceName')
         return self
         
-    def limit(self, number: int=None, *, apps: int=None) -> InAppPurchaseListOfAppEndpoint:
+    def limit(self, number: int=None, *, apps: int=None) -> InAppPurchasesOfAppEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -1215,7 +1287,7 @@ class InAppPurchaseListOfAppEndpoint(IDEndpoint):
         :type apps: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.InAppPurchaseListOfAppEndpoint
+        :rtype: applaud.endpoints.InAppPurchasesOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -1238,10 +1310,10 @@ class InAppPurchaseListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return InAppPurchasesResponse.parse_obj(json)
 
-class PerfPowerMetricListOfAppEndpoint(IDEndpoint):
+class PerfPowerMetricsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/perfPowerMetrics'
 
-    def filter(self, *, device_type: Union[str, list[str]]=None, metric_type: Union[PerfPowerMetricType, list[PerfPowerMetricType]]=None, platform: Union[PerfPowerMetricPlatform, list[PerfPowerMetricPlatform]]=None) -> PerfPowerMetricListOfAppEndpoint:
+    def filter(self, *, device_type: Union[str, list[str]]=None, metric_type: Union[PerfPowerMetricType, list[PerfPowerMetricType]]=None, platform: Union[PerfPowerMetricPlatform, list[PerfPowerMetricPlatform]]=None) -> PerfPowerMetricsOfAppEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param device_type: filter by attribute 'deviceType'
@@ -1254,7 +1326,7 @@ class PerfPowerMetricListOfAppEndpoint(IDEndpoint):
         :type platform: Union[PerfPowerMetricPlatform, list[PerfPowerMetricPlatform]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.PerfPowerMetricListOfAppEndpoint
+        :rtype: applaud.endpoints.PerfPowerMetricsOfAppEndpoint
         '''
         if device_type: self._set_filter('deviceType', device_type if type(device_type) is list else [device_type])
         
@@ -1301,29 +1373,29 @@ class PreOrderOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppPreOrderResponse.parse_obj(json)
 
-class PreReleaseVersionListOfAppEndpoint(IDEndpoint):
+class PreReleaseVersionsOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/preReleaseVersions'
 
-    def fields(self, *, pre_release_version: Union[PreReleaseVersionField, list[PreReleaseVersionField]]=None) -> PreReleaseVersionListOfAppEndpoint:
+    def fields(self, *, pre_release_version: Union[PreReleaseVersionField, list[PreReleaseVersionField]]=None) -> PreReleaseVersionsOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param pre_release_version: the fields to include for returned resources of type preReleaseVersions
         :type pre_release_version: Union[PreReleaseVersionField, list[PreReleaseVersionField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.PreReleaseVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.PreReleaseVersionsOfAppEndpoint
         '''
         if pre_release_version: self._set_fields('preReleaseVersions',pre_release_version if type(pre_release_version) is list else [pre_release_version])
         return self
         
-    def limit(self, number: int=None) -> PreReleaseVersionListOfAppEndpoint:
+    def limit(self, number: int=None) -> PreReleaseVersionsOfAppEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.PreReleaseVersionListOfAppEndpoint
+        :rtype: applaud.endpoints.PreReleaseVersionsOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -1342,29 +1414,29 @@ class PreReleaseVersionListOfAppEndpoint(IDEndpoint):
         json = super()._perform_get()
         return PreReleaseVersionsResponse.parse_obj(json)
 
-class PriceListOfAppEndpoint(IDEndpoint):
+class PricesOfAppEndpoint(IDEndpoint):
     path = '/v1/apps/{id}/prices'
 
-    def fields(self, *, app_price: Union[AppPriceField, list[AppPriceField]]=None) -> PriceListOfAppEndpoint:
+    def fields(self, *, app_price: Union[AppPriceField, list[AppPriceField]]=None) -> PricesOfAppEndpoint:
         '''Fields to return for included related types.
 
         :param app_price: the fields to include for returned resources of type appPrices
         :type app_price: Union[AppPriceField, list[AppPriceField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.PriceListOfAppEndpoint
+        :rtype: applaud.endpoints.PricesOfAppEndpoint
         '''
         if app_price: self._set_fields('appPrices',app_price if type(app_price) is list else [app_price])
         return self
         
-    def limit(self, number: int=None) -> PriceListOfAppEndpoint:
+    def limit(self, number: int=None) -> PricesOfAppEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.PriceListOfAppEndpoint
+        :rtype: applaud.endpoints.PricesOfAppEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

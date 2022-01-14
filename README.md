@@ -50,7 +50,7 @@ In most of cases, all tasks you'd like to perform on remote service should be in
 
 ```python
 # Return an AppListEndpoint object
-connection.app_list()
+connection.apps()
 ```
 
 ### Endpoint
@@ -59,7 +59,7 @@ A `…Endpoint` class encapsulates all operations you can perform on a specific 
 
 ```python
 # Return an AppsResponse object
-connection.app_list().filter(
+connection.apps().filter(
     app_store_versions_app_store_state=AppStoreVersionState.READY_FOR_SALE
 ).exists(
     game_center_enabled_versions=True
@@ -80,7 +80,7 @@ GET https://api.appstoreconnect.apple.com/v1/apps
 The corresponding code in `applaud`:
 ```python
 # Return an AppsResponse object
-response = connection.app_list().get()
+response = connection.apps().get()
 
 for app in response.data:
     print(f'{app.attributes.name}: {app.attributes.bundle_id}')
@@ -98,11 +98,11 @@ filter[bundleId]  Attributes, relationships, and IDs by which to filter.
 
 The corresponding code in `applaud`:
 ```python
-response = connection.app_list().filter(
+response = connection.apps().filter(
     bundle_id="com.exmaple.app1"
 ).get()
 # or
-connection.app_list().filter(
+connection.apps().filter(
     bundle_id=["com.exmaple.app1", "com.exmaple.app2"]
 ).get()
 
@@ -125,11 +125,11 @@ You use `include()` function to ask relationship data to include in the response
 
 The corresponding code in `applaud`:
 ```python
-response = connection.app_list().include(
+response = connection.apps().include(
     AppListEndpoint.Include.BETA_LICENSE_AGREEMENT
 ).get()
 # or
-response = connection.app_list().include(
+response = connection.apps().include(
     [AppListEndpoint.Include.BETA_LICENSE_AGREEMENT, AppListEndpoint.Include.PRICES]
 ).get()
 ```
@@ -144,7 +144,7 @@ fields[betaLicenseAgreements]  Fields to return for included related types.
 
 The corresponding code in `applaud`:
 ```python
-connection.app_list().include(
+connection.apps().include(
     AppListEndpoint.Include.BETA_LICENSE_AGREEMENT
 ).fields(
     beta_license_agreement=[BetaLicenseAgreementField.AGREEMENT_TEXT, BetaLicenseAgreementField.APP]
@@ -162,10 +162,10 @@ integer  Maximum Value: 200
 The corresponding code in `applaud`:
 ```python
 # Return a response contains 10 apps at most
-connection.app_list().limit(10).get()
+connection.apps().limit(10).get()
 
 # Raise a ValueError exception, the maxinmu allowed value is 400
-connection.app_list().limit(400).get()
+connection.apps().limit(400).get()
 ```
 
 You can also included limit the number of related resources to return, as in `fields()` function, you *MUST* also specify the related resources explicitly in `include()` function. For example:
@@ -177,12 +177,12 @@ limit[appStoreVersions]  integer
 The corresponding code in `applaud`:
 ```python
 # All returned apps have 5 related app store version at most
-connection.app_list().include(
+connection.apps().include(
     AppListEndpoint.Include.APP_STORE_VERSIONS
 ).limit(app_store_versions=5).get()
 
 # Raise a ValueError exception, the maxinmu allowed value is 50
-connection.app_list().include(
+connection.apps().include(
     AppListEndpoint.Include.APP_STORE_VERSIONS
 ).limit(app_store_versions=100).get()
 ```
@@ -199,7 +199,7 @@ You use `sort()` function to sort the returned resources by attributes in ascend
 
 The corresponding code in `applaud`:
 ```python
-connection.app_list().sort(name=SortOrder.ASC, bundleId=SortOrder.DESC).get()
+connection.apps().sort(name=SortOrder.ASC, bundleId=SortOrder.DESC).get()
 ```
 
 **`exists()`**
@@ -211,7 +211,7 @@ exists[gameCenterEnabledVersions]  [string]
 
 The corresponding code in `applaud`:
 ```python
-connection.app_list().exists(game_center_enabled_versions=True).get()
+connection.apps().exists(game_center_enabled_versions=True).get()
 ```
 
 #### `…Endpoint.create()`
@@ -242,7 +242,7 @@ request = AppStoreVersionCreateRequest(
         )
 
 # Return an AppStoreVersionResponse object
-reponse = connection.app_store_version_list().create(request)
+reponse = connection.app_store_versions().create(request)
 
 version = response.data
 print(f'{version.version_string}: {version.created_date}, {version.app_store_state}')
@@ -310,7 +310,7 @@ Some errors are harmless, for example, App Store Connect has no API for you to t
 ```python
 try:
     # Send / resend beta test invitations
-    response = connection.beta_tester_invitation_list().create(…)
+    response = connection.beta_tester_invitations().create(…)
 except EndpointException as err:
     already_accepted_error = False
     for e in err.errors:

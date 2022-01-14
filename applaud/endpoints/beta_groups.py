@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class BetaGroupListEndpoint(Endpoint):
+class BetaGroupsEndpoint(Endpoint):
     path = '/v1/betaGroups'
 
-    def fields(self, *, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None, beta_tester: Union[BetaTesterField, list[BetaTesterField]]=None, app: Union[AppField, list[AppField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BetaGroupListEndpoint:
+    def fields(self, *, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None, beta_tester: Union[BetaTesterField, list[BetaTesterField]]=None, app: Union[AppField, list[AppField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BetaGroupsEndpoint:
         '''Fields to return for included related types.
 
         :param beta_group: the fields to include for returned resources of type betaGroups
@@ -27,7 +27,7 @@ class BetaGroupListEndpoint(Endpoint):
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListEndpoint
+        :rtype: applaud.endpoints.BetaGroupsEndpoint
         '''
         if beta_group: self._set_fields('betaGroups',beta_group if type(beta_group) is list else [beta_group])
         if beta_tester: self._set_fields('betaTesters',beta_tester if type(beta_tester) is list else [beta_tester])
@@ -40,7 +40,7 @@ class BetaGroupListEndpoint(Endpoint):
         BETA_TESTERS = 'betaTesters'
         BUILDS = 'builds'
 
-    def filter(self, *, is_internal_group: Union[str, list[str]]=None, name: Union[str, list[str]]=None, public_link: Union[str, list[str]]=None, public_link_enabled: Union[str, list[str]]=None, public_link_limit_enabled: Union[str, list[str]]=None, app: Union[str, list[str]]=None, builds: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> BetaGroupListEndpoint:
+    def filter(self, *, is_internal_group: Union[str, list[str]]=None, name: Union[str, list[str]]=None, public_link: Union[str, list[str]]=None, public_link_enabled: Union[str, list[str]]=None, public_link_limit_enabled: Union[str, list[str]]=None, app: Union[str, list[str]]=None, builds: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> BetaGroupsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param is_internal_group: filter by attribute 'isInternalGroup'
@@ -68,7 +68,7 @@ class BetaGroupListEndpoint(Endpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListEndpoint
+        :rtype: applaud.endpoints.BetaGroupsEndpoint
         '''
         if is_internal_group: self._set_filter('isInternalGroup', is_internal_group if type(is_internal_group) is list else [is_internal_group])
         
@@ -88,20 +88,20 @@ class BetaGroupListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BetaGroupListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BetaGroupsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListEndpoint
+        :rtype: applaud.endpoints.BetaGroupsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, created_date: SortOrder=None, name: SortOrder=None, public_link_enabled: SortOrder=None, public_link_limit: SortOrder=None) -> BetaGroupListEndpoint:
+    def sort(self, *, created_date: SortOrder=None, name: SortOrder=None, public_link_enabled: SortOrder=None, public_link_limit: SortOrder=None) -> BetaGroupsEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListEndpoint
+        :rtype: applaud.endpoints.BetaGroupsEndpoint
         '''
         if created_date: self.sort_expressions.append('createdDate' if created_date == SortOrder.ASC else '-createdDate')
         if name: self.sort_expressions.append('name' if name == SortOrder.ASC else '-name')
@@ -109,7 +109,7 @@ class BetaGroupListEndpoint(Endpoint):
         if public_link_limit: self.sort_expressions.append('publicLinkLimit' if public_link_limit == SortOrder.ASC else '-publicLinkLimit')
         return self
         
-    def limit(self, number: int=None, *, beta_testers: int=None, builds: int=None) -> BetaGroupListEndpoint:
+    def limit(self, number: int=None, *, beta_testers: int=None, builds: int=None) -> BetaGroupsEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -122,7 +122,7 @@ class BetaGroupListEndpoint(Endpoint):
         :type builds: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaGroupListEndpoint
+        :rtype: applaud.endpoints.BetaGroupsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -166,6 +166,26 @@ class BetaGroupListEndpoint(Endpoint):
 class BetaGroupEndpoint(IDEndpoint):
     path = '/v1/betaGroups/{id}'
 
+    @endpoint('/v1/betaGroups/{id}/app')
+    def app(self) -> AppOfBetaGroupEndpoint:
+        return AppOfBetaGroupEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/betaGroups/{id}/betaTesters')
+    def beta_testers(self) -> BetaTestersOfBetaGroupEndpoint:
+        return BetaTestersOfBetaGroupEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/betaGroups/{id}/builds')
+    def builds(self) -> BuildsOfBetaGroupEndpoint:
+        return BuildsOfBetaGroupEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/betaGroups/{id}/relationships/betaTesters')
+    def beta_testers_linkages(self) -> BetaTestersLinkagesOfBetaGroupEndpoint:
+        return BetaTestersLinkagesOfBetaGroupEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/betaGroups/{id}/relationships/builds')
+    def builds_linkages(self) -> BuildsLinkagesOfBetaGroupEndpoint:
+        return BuildsLinkagesOfBetaGroupEndpoint(self.id, self.session)
+        
     def fields(self, *, beta_group: Union[BetaGroupField, list[BetaGroupField]]=None, beta_tester: Union[BetaTesterField, list[BetaTesterField]]=None, app: Union[AppField, list[AppField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BetaGroupEndpoint:
         '''Fields to return for included related types.
 
@@ -284,17 +304,17 @@ class AppOfBetaGroupEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppResponse.parse_obj(json)
 
-class BetaTesterListOfBetaGroupRelationshipsEndpoint(IDEndpoint):
+class BetaTestersLinkagesOfBetaGroupEndpoint(IDEndpoint):
     path = '/v1/betaGroups/{id}/relationships/betaTesters'
 
-    def limit(self, number: int=None) -> BetaTesterListOfBetaGroupRelationshipsEndpoint:
+    def limit(self, number: int=None) -> BetaTestersLinkagesOfBetaGroupEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaTesterListOfBetaGroupRelationshipsEndpoint
+        :rtype: applaud.endpoints.BetaTestersLinkagesOfBetaGroupEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -335,29 +355,29 @@ class BetaTesterListOfBetaGroupRelationshipsEndpoint(IDEndpoint):
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_delete(json)
 
-class BetaTesterListOfBetaGroupEndpoint(IDEndpoint):
+class BetaTestersOfBetaGroupEndpoint(IDEndpoint):
     path = '/v1/betaGroups/{id}/betaTesters'
 
-    def fields(self, *, beta_tester: Union[BetaTesterField, list[BetaTesterField]]=None) -> BetaTesterListOfBetaGroupEndpoint:
+    def fields(self, *, beta_tester: Union[BetaTesterField, list[BetaTesterField]]=None) -> BetaTestersOfBetaGroupEndpoint:
         '''Fields to return for included related types.
 
         :param beta_tester: the fields to include for returned resources of type betaTesters
         :type beta_tester: Union[BetaTesterField, list[BetaTesterField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaTesterListOfBetaGroupEndpoint
+        :rtype: applaud.endpoints.BetaTestersOfBetaGroupEndpoint
         '''
         if beta_tester: self._set_fields('betaTesters',beta_tester if type(beta_tester) is list else [beta_tester])
         return self
         
-    def limit(self, number: int=None) -> BetaTesterListOfBetaGroupEndpoint:
+    def limit(self, number: int=None) -> BetaTestersOfBetaGroupEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaTesterListOfBetaGroupEndpoint
+        :rtype: applaud.endpoints.BetaTestersOfBetaGroupEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -376,17 +396,17 @@ class BetaTesterListOfBetaGroupEndpoint(IDEndpoint):
         json = super()._perform_get()
         return BetaTestersResponse.parse_obj(json)
 
-class BuildListOfBetaGroupRelationshipsEndpoint(IDEndpoint):
+class BuildsLinkagesOfBetaGroupEndpoint(IDEndpoint):
     path = '/v1/betaGroups/{id}/relationships/builds'
 
-    def limit(self, number: int=None) -> BuildListOfBetaGroupRelationshipsEndpoint:
+    def limit(self, number: int=None) -> BuildsLinkagesOfBetaGroupEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildListOfBetaGroupRelationshipsEndpoint
+        :rtype: applaud.endpoints.BuildsLinkagesOfBetaGroupEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -427,29 +447,29 @@ class BuildListOfBetaGroupRelationshipsEndpoint(IDEndpoint):
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_delete(json)
 
-class BuildListOfBetaGroupEndpoint(IDEndpoint):
+class BuildsOfBetaGroupEndpoint(IDEndpoint):
     path = '/v1/betaGroups/{id}/builds'
 
-    def fields(self, *, build: Union[BuildField, list[BuildField]]=None) -> BuildListOfBetaGroupEndpoint:
+    def fields(self, *, build: Union[BuildField, list[BuildField]]=None) -> BuildsOfBetaGroupEndpoint:
         '''Fields to return for included related types.
 
         :param build: the fields to include for returned resources of type builds
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildListOfBetaGroupEndpoint
+        :rtype: applaud.endpoints.BuildsOfBetaGroupEndpoint
         '''
         if build: self._set_fields('builds',build if type(build) is list else [build])
         return self
         
-    def limit(self, number: int=None) -> BuildListOfBetaGroupEndpoint:
+    def limit(self, number: int=None) -> BuildsOfBetaGroupEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildListOfBetaGroupEndpoint
+        :rtype: applaud.endpoints.BuildsOfBetaGroupEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

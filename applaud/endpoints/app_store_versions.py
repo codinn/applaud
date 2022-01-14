@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppStoreVersionListEndpoint(Endpoint):
+class AppStoreVersionsEndpoint(Endpoint):
     path = '/v1/appStoreVersions'
 
     def create(self, request: AppStoreVersionCreateRequest) -> AppStoreVersionResponse:
@@ -28,6 +28,50 @@ class AppStoreVersionListEndpoint(Endpoint):
 class AppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}'
 
+    @endpoint('/v1/appStoreVersions/{id}/ageRatingDeclaration')
+    def age_rating_declaration(self) -> AgeRatingDeclarationOfAppStoreVersionEndpoint:
+        return AgeRatingDeclarationOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/appClipDefaultExperience')
+    def app_clip_default_experience(self) -> AppClipDefaultExperienceOfAppStoreVersionEndpoint:
+        return AppClipDefaultExperienceOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/appStoreReviewDetail')
+    def app_store_review_detail(self) -> AppStoreReviewDetailOfAppStoreVersionEndpoint:
+        return AppStoreReviewDetailOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/appStoreVersionLocalizations')
+    def app_store_version_localizations(self) -> AppStoreVersionLocalizationsOfAppStoreVersionEndpoint:
+        return AppStoreVersionLocalizationsOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/appStoreVersionPhasedRelease')
+    def app_store_version_phased_release(self) -> AppStoreVersionPhasedReleaseOfAppStoreVersionEndpoint:
+        return AppStoreVersionPhasedReleaseOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/appStoreVersionSubmission')
+    def app_store_version_submission(self) -> AppStoreVersionSubmissionOfAppStoreVersionEndpoint:
+        return AppStoreVersionSubmissionOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/build')
+    def build(self) -> BuildOfAppStoreVersionEndpoint:
+        return BuildOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/idfaDeclaration')
+    def idfa_declaration(self) -> IdfaDeclarationOfAppStoreVersionEndpoint:
+        return IdfaDeclarationOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/routingAppCoverage')
+    def routing_app_coverage(self) -> RoutingAppCoverageOfAppStoreVersionEndpoint:
+        return RoutingAppCoverageOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/relationships/appClipDefaultExperience')
+    def app_clip_default_experience_linkage(self) -> AppClipDefaultExperienceLinkageOfAppStoreVersionEndpoint:
+        return AppClipDefaultExperienceLinkageOfAppStoreVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersions/{id}/relationships/build')
+    def build_linkage(self) -> BuildLinkageOfAppStoreVersionEndpoint:
+        return BuildLinkageOfAppStoreVersionEndpoint(self.id, self.session)
+        
     def fields(self, *, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, app_store_version_submission: Union[AppStoreVersionSubmissionField, list[AppStoreVersionSubmissionField]]=None, age_rating_declaration: Union[AgeRatingDeclarationField, list[AgeRatingDeclarationField]]=None, app_store_review_detail: Union[AppStoreReviewDetailField, list[AppStoreReviewDetailField]]=None, idfa_declaration: Union[IdfaDeclarationField, list[IdfaDeclarationField]]=None, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None, routing_app_coverage: Union[RoutingAppCoverageField, list[RoutingAppCoverageField]]=None, app_store_version_phased_release: Union[AppStoreVersionPhasedReleaseField, list[AppStoreVersionPhasedReleaseField]]=None, build: Union[BuildField, list[BuildField]]=None, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None) -> AppStoreVersionEndpoint:
         '''Fields to return for included related types.
 
@@ -171,7 +215,7 @@ class AgeRatingDeclarationOfAppStoreVersionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AgeRatingDeclarationResponse.parse_obj(json)
 
-class AppClipDefaultExperienceOfAppStoreVersionRelationshipsEndpoint(IDEndpoint):
+class AppClipDefaultExperienceLinkageOfAppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}/relationships/appClipDefaultExperience'
 
     def get(self) -> AppStoreVersionAppClipDefaultExperienceLinkageResponse:
@@ -310,29 +354,29 @@ class AppStoreReviewDetailOfAppStoreVersionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppStoreReviewDetailResponse.parse_obj(json)
 
-class AppStoreVersionLocalizationListOfAppStoreVersionEndpoint(IDEndpoint):
+class AppStoreVersionLocalizationsOfAppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}/appStoreVersionLocalizations'
 
-    def fields(self, *, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None) -> AppStoreVersionLocalizationListOfAppStoreVersionEndpoint:
+    def fields(self, *, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None) -> AppStoreVersionLocalizationsOfAppStoreVersionEndpoint:
         '''Fields to return for included related types.
 
         :param app_store_version_localization: the fields to include for returned resources of type appStoreVersionLocalizations
         :type app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreVersionLocalizationListOfAppStoreVersionEndpoint
+        :rtype: applaud.endpoints.AppStoreVersionLocalizationsOfAppStoreVersionEndpoint
         '''
         if app_store_version_localization: self._set_fields('appStoreVersionLocalizations',app_store_version_localization if type(app_store_version_localization) is list else [app_store_version_localization])
         return self
         
-    def limit(self, number: int=None) -> AppStoreVersionLocalizationListOfAppStoreVersionEndpoint:
+    def limit(self, number: int=None) -> AppStoreVersionLocalizationsOfAppStoreVersionEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreVersionLocalizationListOfAppStoreVersionEndpoint
+        :rtype: applaud.endpoints.AppStoreVersionLocalizationsOfAppStoreVersionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -403,7 +447,7 @@ class AppStoreVersionSubmissionOfAppStoreVersionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppStoreVersionSubmissionResponse.parse_obj(json)
 
-class BuildOfAppStoreVersionRelationshipsEndpoint(IDEndpoint):
+class BuildLinkageOfAppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}/relationships/build'
 
     def get(self) -> AppStoreVersionBuildLinkageResponse:

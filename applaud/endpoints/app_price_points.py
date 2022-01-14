@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppPricePointListEndpoint(Endpoint):
+class AppPricePointsEndpoint(Endpoint):
     path = '/v1/appPricePoints'
 
-    def fields(self, *, app_price_point: Union[AppPricePointField, list[AppPricePointField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None) -> AppPricePointListEndpoint:
+    def fields(self, *, app_price_point: Union[AppPricePointField, list[AppPricePointField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None) -> AppPricePointsEndpoint:
         '''Fields to return for included related types.
 
         :param app_price_point: the fields to include for returned resources of type appPricePoints
@@ -21,7 +21,7 @@ class AppPricePointListEndpoint(Endpoint):
         :type territory: Union[TerritoryField, list[TerritoryField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPricePointListEndpoint
+        :rtype: applaud.endpoints.AppPricePointsEndpoint
         '''
         if app_price_point: self._set_fields('appPricePoints',app_price_point if type(app_price_point) is list else [app_price_point])
         if territory: self._set_fields('territories',territory if type(territory) is list else [territory])
@@ -31,7 +31,7 @@ class AppPricePointListEndpoint(Endpoint):
         PRICE_TIER = 'priceTier'
         TERRITORY = 'territory'
 
-    def filter(self, *, price_tier: Union[str, list[str]]=None, territory: Union[str, list[str]]=None) -> AppPricePointListEndpoint:
+    def filter(self, *, price_tier: Union[str, list[str]]=None, territory: Union[str, list[str]]=None) -> AppPricePointsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param price_tier: filter by id(s) of related 'priceTier'
@@ -41,7 +41,7 @@ class AppPricePointListEndpoint(Endpoint):
         :type territory: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPricePointListEndpoint
+        :rtype: applaud.endpoints.AppPricePointsEndpoint
         '''
         if price_tier: self._set_filter('priceTier', price_tier if type(price_tier) is list else [price_tier])
         
@@ -49,23 +49,23 @@ class AppPricePointListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppPricePointListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppPricePointsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppPricePointListEndpoint
+        :rtype: applaud.endpoints.AppPricePointsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None) -> AppPricePointListEndpoint:
+    def limit(self, number: int=None) -> AppPricePointsEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPricePointListEndpoint
+        :rtype: applaud.endpoints.AppPricePointsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -87,6 +87,10 @@ class AppPricePointListEndpoint(Endpoint):
 class AppPricePointEndpoint(IDEndpoint):
     path = '/v1/appPricePoints/{id}'
 
+    @endpoint('/v1/appPricePoints/{id}/territory')
+    def territory(self) -> TerritoryOfAppPricePointEndpoint:
+        return TerritoryOfAppPricePointEndpoint(self.id, self.session)
+        
     def fields(self, *, app_price_point: Union[AppPricePointField, list[AppPricePointField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None) -> AppPricePointEndpoint:
         '''Fields to return for included related types.
 

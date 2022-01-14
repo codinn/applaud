@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class CiXcodeVersionListEndpoint(Endpoint):
+class CiXcodeVersionsEndpoint(Endpoint):
     path = '/v1/ciXcodeVersions'
 
-    def fields(self, *, ci_xcode_version: Union[CiXcodeVersionField, list[CiXcodeVersionField]]=None, ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]]=None) -> CiXcodeVersionListEndpoint:
+    def fields(self, *, ci_xcode_version: Union[CiXcodeVersionField, list[CiXcodeVersionField]]=None, ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]]=None) -> CiXcodeVersionsEndpoint:
         '''Fields to return for included related types.
 
         :param ci_xcode_version: the fields to include for returned resources of type ciXcodeVersions
@@ -21,7 +21,7 @@ class CiXcodeVersionListEndpoint(Endpoint):
         :type ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.CiXcodeVersionListEndpoint
+        :rtype: applaud.endpoints.CiXcodeVersionsEndpoint
         '''
         if ci_xcode_version: self._set_fields('ciXcodeVersions',ci_xcode_version if type(ci_xcode_version) is list else [ci_xcode_version])
         if ci_mac_os_version: self._set_fields('ciMacOsVersions',ci_mac_os_version if type(ci_mac_os_version) is list else [ci_mac_os_version])
@@ -30,16 +30,16 @@ class CiXcodeVersionListEndpoint(Endpoint):
     class Include(StringEnum):
         MAC_OS_VERSIONS = 'macOsVersions'
 
-    def include(self, relationship: Union[Include, list[Include]]) -> CiXcodeVersionListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> CiXcodeVersionsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.CiXcodeVersionListEndpoint
+        :rtype: applaud.endpoints.CiXcodeVersionsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, mac_os_versions: int=None) -> CiXcodeVersionListEndpoint:
+    def limit(self, number: int=None, *, mac_os_versions: int=None) -> CiXcodeVersionsEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -49,7 +49,7 @@ class CiXcodeVersionListEndpoint(Endpoint):
         :type mac_os_versions: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.CiXcodeVersionListEndpoint
+        :rtype: applaud.endpoints.CiXcodeVersionsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -75,6 +75,10 @@ class CiXcodeVersionListEndpoint(Endpoint):
 class CiXcodeVersionEndpoint(IDEndpoint):
     path = '/v1/ciXcodeVersions/{id}'
 
+    @endpoint('/v1/ciXcodeVersions/{id}/macOsVersions')
+    def mac_os_versions(self) -> MacOsVersionsOfCiXcodeVersionEndpoint:
+        return MacOsVersionsOfCiXcodeVersionEndpoint(self.id, self.session)
+        
     def fields(self, *, ci_xcode_version: Union[CiXcodeVersionField, list[CiXcodeVersionField]]=None, ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]]=None) -> CiXcodeVersionEndpoint:
         '''Fields to return for included related types.
 
@@ -129,10 +133,10 @@ class CiXcodeVersionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return CiXcodeVersionResponse.parse_obj(json)
 
-class MacOsVersionListOfCiXcodeVersionEndpoint(IDEndpoint):
+class MacOsVersionsOfCiXcodeVersionEndpoint(IDEndpoint):
     path = '/v1/ciXcodeVersions/{id}/macOsVersions'
 
-    def fields(self, *, ci_xcode_version: Union[CiXcodeVersionField, list[CiXcodeVersionField]]=None, ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]]=None) -> MacOsVersionListOfCiXcodeVersionEndpoint:
+    def fields(self, *, ci_xcode_version: Union[CiXcodeVersionField, list[CiXcodeVersionField]]=None, ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]]=None) -> MacOsVersionsOfCiXcodeVersionEndpoint:
         '''Fields to return for included related types.
 
         :param ci_xcode_version: the fields to include for returned resources of type ciXcodeVersions
@@ -142,7 +146,7 @@ class MacOsVersionListOfCiXcodeVersionEndpoint(IDEndpoint):
         :type ci_mac_os_version: Union[CiMacOsVersionField, list[CiMacOsVersionField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.MacOsVersionListOfCiXcodeVersionEndpoint
+        :rtype: applaud.endpoints.MacOsVersionsOfCiXcodeVersionEndpoint
         '''
         if ci_xcode_version: self._set_fields('ciXcodeVersions',ci_xcode_version if type(ci_xcode_version) is list else [ci_xcode_version])
         if ci_mac_os_version: self._set_fields('ciMacOsVersions',ci_mac_os_version if type(ci_mac_os_version) is list else [ci_mac_os_version])
@@ -151,16 +155,16 @@ class MacOsVersionListOfCiXcodeVersionEndpoint(IDEndpoint):
     class Include(StringEnum):
         XCODE_VERSIONS = 'xcodeVersions'
 
-    def include(self, relationship: Union[Include, list[Include]]) -> MacOsVersionListOfCiXcodeVersionEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> MacOsVersionsOfCiXcodeVersionEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.MacOsVersionListOfCiXcodeVersionEndpoint
+        :rtype: applaud.endpoints.MacOsVersionsOfCiXcodeVersionEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, xcode_versions: int=None) -> MacOsVersionListOfCiXcodeVersionEndpoint:
+    def limit(self, number: int=None, *, xcode_versions: int=None) -> MacOsVersionsOfCiXcodeVersionEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -170,7 +174,7 @@ class MacOsVersionListOfCiXcodeVersionEndpoint(IDEndpoint):
         :type xcode_versions: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.MacOsVersionListOfCiXcodeVersionEndpoint
+        :rtype: applaud.endpoints.MacOsVersionsOfCiXcodeVersionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

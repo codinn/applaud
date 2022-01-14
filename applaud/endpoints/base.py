@@ -2,12 +2,24 @@ from enum import Enum, auto
 from typing import Any, Union, Optional
 import requests
 from ..schemas.responses import ErrorResponse
+import functools
 
 class SortOrder(Enum):
     ASC = auto()
     DESC = auto()
 
 ENDPOINT_BASE_URL = 'https://api.appstoreconnect.apple.com'
+
+def endpoint(path: str):
+    '''Mark a function as an endpoint'''
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            return func(*args, **kw)
+
+        return wrapper
+
+    return decorator
 
 class EndpointException(Exception):
     """ Base exception for endpoint. """
@@ -69,7 +81,7 @@ class Endpoint:
         if response.status_code == 200:
             # 200 is the only success code for a GET request
             return response.json()
-        elif response.status_code == [400, 403, 404, 409]:
+        elif response.status_code in [400, 403, 404, 409]:
             # Those are the error codes that we can expect to get from the API
             raise EndpointException(response)
         else:

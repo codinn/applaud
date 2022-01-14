@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,17 +8,17 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class LogListOfDiagnosticSignatureEndpoint(IDEndpoint):
+class LogsOfDiagnosticSignatureEndpoint(IDEndpoint):
     path = '/v1/diagnosticSignatures/{id}/logs'
 
-    def limit(self, number: int=None) -> LogListOfDiagnosticSignatureEndpoint:
+    def limit(self, number: int=None) -> LogsOfDiagnosticSignatureEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.LogListOfDiagnosticSignatureEndpoint
+        :rtype: applaud.endpoints.LogsOfDiagnosticSignatureEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -37,3 +37,10 @@ class LogListOfDiagnosticSignatureEndpoint(IDEndpoint):
         json = super()._perform_get()
         return DiagnosticLogsResponse.parse_obj(json)
 
+class DiagnosticSignatureEndpoint(IDEndpoint):
+    path = '/v1/diagnosticSignatures/{id}'
+
+    @endpoint('/v1/diagnosticSignatures/{id}/logs')
+    def logs(self) -> LogsOfDiagnosticSignatureEndpoint:
+        return LogsOfDiagnosticSignatureEndpoint(self.id, self.session)
+        

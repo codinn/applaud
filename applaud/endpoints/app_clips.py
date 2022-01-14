@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -11,6 +11,14 @@ from ..schemas.enums import *
 class AppClipEndpoint(IDEndpoint):
     path = '/v1/appClips/{id}'
 
+    @endpoint('/v1/appClips/{id}/appClipAdvancedExperiences')
+    def app_clip_advanced_experiences(self) -> AppClipAdvancedExperiencesOfAppClipEndpoint:
+        return AppClipAdvancedExperiencesOfAppClipEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appClips/{id}/appClipDefaultExperiences')
+    def app_clip_default_experiences(self) -> AppClipDefaultExperiencesOfAppClipEndpoint:
+        return AppClipDefaultExperiencesOfAppClipEndpoint(self.id, self.session)
+        
     def fields(self, *, app_clip: Union[AppClipField, list[AppClipField]]=None, app_clip_advanced_experience: Union[AppClipAdvancedExperienceField, list[AppClipAdvancedExperienceField]]=None, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None) -> AppClipEndpoint:
         '''Fields to return for included related types.
 
@@ -70,10 +78,10 @@ class AppClipEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppClipResponse.parse_obj(json)
 
-class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
+class AppClipAdvancedExperiencesOfAppClipEndpoint(IDEndpoint):
     path = '/v1/appClips/{id}/appClipAdvancedExperiences'
 
-    def fields(self, *, app_clip_advanced_experience: Union[AppClipAdvancedExperienceField, list[AppClipAdvancedExperienceField]]=None, app_clip_advanced_experience_localization: Union[AppClipAdvancedExperienceLocalizationField, list[AppClipAdvancedExperienceLocalizationField]]=None) -> AppClipAdvancedExperienceListOfAppClipEndpoint:
+    def fields(self, *, app_clip_advanced_experience: Union[AppClipAdvancedExperienceField, list[AppClipAdvancedExperienceField]]=None, app_clip_advanced_experience_localization: Union[AppClipAdvancedExperienceLocalizationField, list[AppClipAdvancedExperienceLocalizationField]]=None) -> AppClipAdvancedExperiencesOfAppClipEndpoint:
         '''Fields to return for included related types.
 
         :param app_clip_advanced_experience: the fields to include for returned resources of type appClipAdvancedExperiences
@@ -83,7 +91,7 @@ class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
         :type app_clip_advanced_experience_localization: Union[AppClipAdvancedExperienceLocalizationField, list[AppClipAdvancedExperienceLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipAdvancedExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipAdvancedExperiencesOfAppClipEndpoint
         '''
         if app_clip_advanced_experience: self._set_fields('appClipAdvancedExperiences',app_clip_advanced_experience if type(app_clip_advanced_experience) is list else [app_clip_advanced_experience])
         if app_clip_advanced_experience_localization: self._set_fields('appClipAdvancedExperienceLocalizations',app_clip_advanced_experience_localization if type(app_clip_advanced_experience_localization) is list else [app_clip_advanced_experience_localization])
@@ -92,7 +100,7 @@ class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
     class Include(StringEnum):
         LOCALIZATIONS = 'localizations'
 
-    def filter(self, *, action: Union[AppClipAction, list[AppClipAction]]=None, place_status: Union[AppClipAdvancedExperiencePlaceStatus, list[AppClipAdvancedExperiencePlaceStatus]]=None, status: Union[AppClipAdvancedExperienceStatus, list[AppClipAdvancedExperienceStatus]]=None) -> AppClipAdvancedExperienceListOfAppClipEndpoint:
+    def filter(self, *, action: Union[AppClipAction, list[AppClipAction]]=None, place_status: Union[AppClipAdvancedExperiencePlaceStatus, list[AppClipAdvancedExperiencePlaceStatus]]=None, status: Union[AppClipAdvancedExperienceStatus, list[AppClipAdvancedExperienceStatus]]=None) -> AppClipAdvancedExperiencesOfAppClipEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param action: filter by attribute 'action'
@@ -105,7 +113,7 @@ class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
         :type status: Union[AppClipAdvancedExperienceStatus, list[AppClipAdvancedExperienceStatus]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipAdvancedExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipAdvancedExperiencesOfAppClipEndpoint
         '''
         if action: self._set_filter('action', action if type(action) is list else [action])
         
@@ -115,16 +123,16 @@ class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppClipAdvancedExperienceListOfAppClipEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppClipAdvancedExperiencesOfAppClipEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipAdvancedExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipAdvancedExperiencesOfAppClipEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, localizations: int=None) -> AppClipAdvancedExperienceListOfAppClipEndpoint:
+    def limit(self, number: int=None, *, localizations: int=None) -> AppClipAdvancedExperiencesOfAppClipEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -134,7 +142,7 @@ class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
         :type localizations: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipAdvancedExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipAdvancedExperiencesOfAppClipEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -157,10 +165,10 @@ class AppClipAdvancedExperienceListOfAppClipEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppClipAdvancedExperiencesResponse.parse_obj(json)
 
-class AppClipDefaultExperienceListOfAppClipEndpoint(IDEndpoint):
+class AppClipDefaultExperiencesOfAppClipEndpoint(IDEndpoint):
     path = '/v1/appClips/{id}/appClipDefaultExperiences'
 
-    def fields(self, *, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None, app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]]=None) -> AppClipDefaultExperienceListOfAppClipEndpoint:
+    def fields(self, *, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None, app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]]=None) -> AppClipDefaultExperiencesOfAppClipEndpoint:
         '''Fields to return for included related types.
 
         :param app_clip_default_experience: the fields to include for returned resources of type appClipDefaultExperiences
@@ -170,7 +178,7 @@ class AppClipDefaultExperienceListOfAppClipEndpoint(IDEndpoint):
         :type app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperiencesOfAppClipEndpoint
         '''
         if app_clip_default_experience: self._set_fields('appClipDefaultExperiences',app_clip_default_experience if type(app_clip_default_experience) is list else [app_clip_default_experience])
         if app_clip_default_experience_localization: self._set_fields('appClipDefaultExperienceLocalizations',app_clip_default_experience_localization if type(app_clip_default_experience_localization) is list else [app_clip_default_experience_localization])
@@ -179,11 +187,11 @@ class AppClipDefaultExperienceListOfAppClipEndpoint(IDEndpoint):
     class Include(StringEnum):
         APP_CLIP_DEFAULT_EXPERIENCE_LOCALIZATIONS = 'appClipDefaultExperienceLocalizations'
 
-    def exists(self, *, release_with_app_store_version: bool=None) -> AppClipDefaultExperienceListOfAppClipEndpoint:
+    def exists(self, *, release_with_app_store_version: bool=None) -> AppClipDefaultExperiencesOfAppClipEndpoint:
         ''' Filter by existence or non-existence of related resource.
         
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperiencesOfAppClipEndpoint
         '''
         if release_with_app_store_version == None:
             return
@@ -191,16 +199,16 @@ class AppClipDefaultExperienceListOfAppClipEndpoint(IDEndpoint):
         self._set_exists('releaseWithAppStoreVersion', 'true' if release_with_app_store_version  else 'false')
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppClipDefaultExperienceListOfAppClipEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppClipDefaultExperiencesOfAppClipEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperiencesOfAppClipEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_clip_default_experience_localizations: int=None) -> AppClipDefaultExperienceListOfAppClipEndpoint:
+    def limit(self, number: int=None, *, app_clip_default_experience_localizations: int=None) -> AppClipDefaultExperiencesOfAppClipEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -210,7 +218,7 @@ class AppClipDefaultExperienceListOfAppClipEndpoint(IDEndpoint):
         :type app_clip_default_experience_localizations: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceListOfAppClipEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperiencesOfAppClipEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

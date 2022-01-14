@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class UserListEndpoint(Endpoint):
+class UsersEndpoint(Endpoint):
     path = '/v1/users'
 
-    def fields(self, *, user: Union[UserField, list[UserField]]=None, app: Union[AppField, list[AppField]]=None) -> UserListEndpoint:
+    def fields(self, *, user: Union[UserField, list[UserField]]=None, app: Union[AppField, list[AppField]]=None) -> UsersEndpoint:
         '''Fields to return for included related types.
 
         :param user: the fields to include for returned resources of type users
@@ -21,7 +21,7 @@ class UserListEndpoint(Endpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.UserListEndpoint
+        :rtype: applaud.endpoints.UsersEndpoint
         '''
         if user: self._set_fields('users',user if type(user) is list else [user])
         if app: self._set_fields('apps',app if type(app) is list else [app])
@@ -30,7 +30,7 @@ class UserListEndpoint(Endpoint):
     class Include(StringEnum):
         VISIBLE_APPS = 'visibleApps'
 
-    def filter(self, *, roles: Union[UserRole, list[UserRole]]=None, username: Union[str, list[str]]=None, visible_apps: Union[str, list[str]]=None) -> UserListEndpoint:
+    def filter(self, *, roles: Union[UserRole, list[UserRole]]=None, username: Union[str, list[str]]=None, visible_apps: Union[str, list[str]]=None) -> UsersEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param roles: filter by attribute 'roles'
@@ -43,7 +43,7 @@ class UserListEndpoint(Endpoint):
         :type visible_apps: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.UserListEndpoint
+        :rtype: applaud.endpoints.UsersEndpoint
         '''
         if roles: self._set_filter('roles', roles if type(roles) is list else [roles])
         
@@ -53,26 +53,26 @@ class UserListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> UserListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> UsersEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.UserListEndpoint
+        :rtype: applaud.endpoints.UsersEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, last_name: SortOrder=None, username: SortOrder=None) -> UserListEndpoint:
+    def sort(self, *, last_name: SortOrder=None, username: SortOrder=None) -> UsersEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.UserListEndpoint
+        :rtype: applaud.endpoints.UsersEndpoint
         '''
         if last_name: self.sort_expressions.append('lastName' if last_name == SortOrder.ASC else '-lastName')
         if username: self.sort_expressions.append('username' if username == SortOrder.ASC else '-username')
         return self
         
-    def limit(self, number: int=None, *, visible_apps: int=None) -> UserListEndpoint:
+    def limit(self, number: int=None, *, visible_apps: int=None) -> UsersEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -82,7 +82,7 @@ class UserListEndpoint(Endpoint):
         :type visible_apps: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.UserListEndpoint
+        :rtype: applaud.endpoints.UsersEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -108,6 +108,14 @@ class UserListEndpoint(Endpoint):
 class UserEndpoint(IDEndpoint):
     path = '/v1/users/{id}'
 
+    @endpoint('/v1/users/{id}/visibleApps')
+    def visible_apps(self) -> VisibleAppsOfUserEndpoint:
+        return VisibleAppsOfUserEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/users/{id}/relationships/visibleApps')
+    def visible_apps_linkages(self) -> VisibleAppsLinkagesOfUserEndpoint:
+        return VisibleAppsLinkagesOfUserEndpoint(self.id, self.session)
+        
     def fields(self, *, user: Union[UserField, list[UserField]]=None, app: Union[AppField, list[AppField]]=None) -> UserEndpoint:
         '''Fields to return for included related types.
 
@@ -183,17 +191,17 @@ class UserEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class VisibleAppListOfUserRelationshipsEndpoint(IDEndpoint):
+class VisibleAppsLinkagesOfUserEndpoint(IDEndpoint):
     path = '/v1/users/{id}/relationships/visibleApps'
 
-    def limit(self, number: int=None) -> VisibleAppListOfUserRelationshipsEndpoint:
+    def limit(self, number: int=None) -> VisibleAppsLinkagesOfUserEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.VisibleAppListOfUserRelationshipsEndpoint
+        :rtype: applaud.endpoints.VisibleAppsLinkagesOfUserEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -245,29 +253,29 @@ class VisibleAppListOfUserRelationshipsEndpoint(IDEndpoint):
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_delete(json)
 
-class VisibleAppListOfUserEndpoint(IDEndpoint):
+class VisibleAppsOfUserEndpoint(IDEndpoint):
     path = '/v1/users/{id}/visibleApps'
 
-    def fields(self, *, app: Union[AppField, list[AppField]]=None) -> VisibleAppListOfUserEndpoint:
+    def fields(self, *, app: Union[AppField, list[AppField]]=None) -> VisibleAppsOfUserEndpoint:
         '''Fields to return for included related types.
 
         :param app: the fields to include for returned resources of type apps
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.VisibleAppListOfUserEndpoint
+        :rtype: applaud.endpoints.VisibleAppsOfUserEndpoint
         '''
         if app: self._set_fields('apps',app if type(app) is list else [app])
         return self
         
-    def limit(self, number: int=None) -> VisibleAppListOfUserEndpoint:
+    def limit(self, number: int=None) -> VisibleAppsOfUserEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.VisibleAppListOfUserEndpoint
+        :rtype: applaud.endpoints.VisibleAppsOfUserEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

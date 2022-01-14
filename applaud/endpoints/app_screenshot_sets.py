@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppScreenshotSetListEndpoint(Endpoint):
+class AppScreenshotSetsEndpoint(Endpoint):
     path = '/v1/appScreenshotSets'
 
     def create(self, request: AppScreenshotSetCreateRequest) -> AppScreenshotSetResponse:
@@ -28,6 +28,14 @@ class AppScreenshotSetListEndpoint(Endpoint):
 class AppScreenshotSetEndpoint(IDEndpoint):
     path = '/v1/appScreenshotSets/{id}'
 
+    @endpoint('/v1/appScreenshotSets/{id}/appScreenshots')
+    def app_screenshots(self) -> AppScreenshotsOfAppScreenshotSetEndpoint:
+        return AppScreenshotsOfAppScreenshotSetEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appScreenshotSets/{id}/relationships/appScreenshots')
+    def app_screenshots_linkages(self) -> AppScreenshotsLinkagesOfAppScreenshotSetEndpoint:
+        return AppScreenshotsLinkagesOfAppScreenshotSetEndpoint(self.id, self.session)
+        
     def fields(self, *, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]]=None) -> AppScreenshotSetEndpoint:
         '''Fields to return for included related types.
 
@@ -90,17 +98,17 @@ class AppScreenshotSetEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class AppScreenshotListOfAppScreenshotSetRelationshipsEndpoint(IDEndpoint):
+class AppScreenshotsLinkagesOfAppScreenshotSetEndpoint(IDEndpoint):
     path = '/v1/appScreenshotSets/{id}/relationships/appScreenshots'
 
-    def limit(self, number: int=None) -> AppScreenshotListOfAppScreenshotSetRelationshipsEndpoint:
+    def limit(self, number: int=None) -> AppScreenshotsLinkagesOfAppScreenshotSetEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotListOfAppScreenshotSetRelationshipsEndpoint
+        :rtype: applaud.endpoints.AppScreenshotsLinkagesOfAppScreenshotSetEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -130,29 +138,29 @@ class AppScreenshotListOfAppScreenshotSetRelationshipsEndpoint(IDEndpoint):
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_patch(json)
 
-class AppScreenshotListOfAppScreenshotSetEndpoint(IDEndpoint):
+class AppScreenshotsOfAppScreenshotSetEndpoint(IDEndpoint):
     path = '/v1/appScreenshotSets/{id}/appScreenshots'
 
-    def fields(self, *, app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]]=None) -> AppScreenshotListOfAppScreenshotSetEndpoint:
+    def fields(self, *, app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]]=None) -> AppScreenshotsOfAppScreenshotSetEndpoint:
         '''Fields to return for included related types.
 
         :param app_screenshot: the fields to include for returned resources of type appScreenshots
         :type app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotListOfAppScreenshotSetEndpoint
+        :rtype: applaud.endpoints.AppScreenshotsOfAppScreenshotSetEndpoint
         '''
         if app_screenshot: self._set_fields('appScreenshots',app_screenshot if type(app_screenshot) is list else [app_screenshot])
         return self
         
-    def limit(self, number: int=None) -> AppScreenshotListOfAppScreenshotSetEndpoint:
+    def limit(self, number: int=None) -> AppScreenshotsOfAppScreenshotSetEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotListOfAppScreenshotSetEndpoint
+        :rtype: applaud.endpoints.AppScreenshotsOfAppScreenshotSetEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

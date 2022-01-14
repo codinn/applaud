@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "applaud"
-version = "0.5.0"
+version = "0.7.0"
 description = "The Python SDK to work with the App Store Connect API from Apple."
 authors = ["Yang.Y <yang@yangyubo.com>"]
 readme = "README.md"

@@ -22,9 +22,7 @@ class Connection:
         self.__gen_auth_header()
 
     def __gen_auth_header(self):
-        # Creates a token that lives for 20 minutes, which should be long enough
-        # to upload the app preview. In a long-running script, adjust the code to
-        # issue a new token periodically.
+        # Creates a token that lives for 20 minutes
         self._auth_header_timestamp = datetime.datetime.utcnow()
         expiry = datetime.datetime.utcnow() + datetime.timedelta(minutes=20)
 
@@ -58,741 +56,499 @@ class Connection:
 
     # Shortcuts for root endpoints
 
+    @endpoint('/v1/ageRatingDeclarations/{id}')
     def age_rating_declaration(self, id: str) -> AgeRatingDeclarationEndpoint:
         return AgeRatingDeclarationEndpoint(id, self.session)
     
-    def app_category_list(self) -> AppCategoryListEndpoint:
-        return AppCategoryListEndpoint(self.session)
+    @endpoint('/v1/appCategories')
+    def app_categories(self) -> AppCategoriesEndpoint:
+        return AppCategoriesEndpoint(self.session)
     
+    @endpoint('/v1/appCategories/{id}')
     def app_category(self, id: str) -> AppCategoryEndpoint:
         return AppCategoryEndpoint(id, self.session)
     
-    def app_clip_advanced_experience_image_list(self) -> AppClipAdvancedExperienceImageListEndpoint:
-        return AppClipAdvancedExperienceImageListEndpoint(self.session)
+    @endpoint('/v1/appClipAdvancedExperienceImages')
+    def app_clip_advanced_experience_images(self) -> AppClipAdvancedExperienceImagesEndpoint:
+        return AppClipAdvancedExperienceImagesEndpoint(self.session)
     
+    @endpoint('/v1/appClipAdvancedExperienceImages/{id}')
     def app_clip_advanced_experience_image(self, id: str) -> AppClipAdvancedExperienceImageEndpoint:
         return AppClipAdvancedExperienceImageEndpoint(id, self.session)
     
-    def app_clip_advanced_experience_list(self) -> AppClipAdvancedExperienceListEndpoint:
-        return AppClipAdvancedExperienceListEndpoint(self.session)
+    @endpoint('/v1/appClipAdvancedExperiences')
+    def app_clip_advanced_experiences(self) -> AppClipAdvancedExperiencesEndpoint:
+        return AppClipAdvancedExperiencesEndpoint(self.session)
     
+    @endpoint('/v1/appClipAdvancedExperiences/{id}')
     def app_clip_advanced_experience(self, id: str) -> AppClipAdvancedExperienceEndpoint:
         return AppClipAdvancedExperienceEndpoint(id, self.session)
     
-    def app_clip_app_store_review_detail_list(self) -> AppClipAppStoreReviewDetailListEndpoint:
-        return AppClipAppStoreReviewDetailListEndpoint(self.session)
+    @endpoint('/v1/appClipAppStoreReviewDetails')
+    def app_clip_app_store_review_details(self) -> AppClipAppStoreReviewDetailsEndpoint:
+        return AppClipAppStoreReviewDetailsEndpoint(self.session)
     
+    @endpoint('/v1/appClipAppStoreReviewDetails/{id}')
     def app_clip_app_store_review_detail(self, id: str) -> AppClipAppStoreReviewDetailEndpoint:
         return AppClipAppStoreReviewDetailEndpoint(id, self.session)
     
-    def app_clip_default_experience_localization_list(self) -> AppClipDefaultExperienceLocalizationListEndpoint:
-        return AppClipDefaultExperienceLocalizationListEndpoint(self.session)
+    @endpoint('/v1/appClipDefaultExperienceLocalizations')
+    def app_clip_default_experience_localizations(self) -> AppClipDefaultExperienceLocalizationsEndpoint:
+        return AppClipDefaultExperienceLocalizationsEndpoint(self.session)
     
+    @endpoint('/v1/appClipDefaultExperienceLocalizations/{id}')
     def app_clip_default_experience_localization(self, id: str) -> AppClipDefaultExperienceLocalizationEndpoint:
         return AppClipDefaultExperienceLocalizationEndpoint(id, self.session)
     
-    def app_clip_default_experience_list(self) -> AppClipDefaultExperienceListEndpoint:
-        return AppClipDefaultExperienceListEndpoint(self.session)
+    @endpoint('/v1/appClipDefaultExperiences')
+    def app_clip_default_experiences(self) -> AppClipDefaultExperiencesEndpoint:
+        return AppClipDefaultExperiencesEndpoint(self.session)
     
+    @endpoint('/v1/appClipDefaultExperiences/{id}')
     def app_clip_default_experience(self, id: str) -> AppClipDefaultExperienceEndpoint:
         return AppClipDefaultExperienceEndpoint(id, self.session)
     
-    def app_clip_header_image_list(self) -> AppClipHeaderImageListEndpoint:
-        return AppClipHeaderImageListEndpoint(self.session)
+    @endpoint('/v1/appClipHeaderImages')
+    def app_clip_header_images(self) -> AppClipHeaderImagesEndpoint:
+        return AppClipHeaderImagesEndpoint(self.session)
     
+    @endpoint('/v1/appClipHeaderImages/{id}')
     def app_clip_header_image(self, id: str) -> AppClipHeaderImageEndpoint:
         return AppClipHeaderImageEndpoint(id, self.session)
     
+    @endpoint('/v1/appClips/{id}')
     def app_clip(self, id: str) -> AppClipEndpoint:
         return AppClipEndpoint(id, self.session)
     
-    def app_encryption_declaration_list(self) -> AppEncryptionDeclarationListEndpoint:
-        return AppEncryptionDeclarationListEndpoint(self.session)
+    @endpoint('/v1/appEncryptionDeclarations')
+    def app_encryption_declarations(self) -> AppEncryptionDeclarationsEndpoint:
+        return AppEncryptionDeclarationsEndpoint(self.session)
     
+    @endpoint('/v1/appEncryptionDeclarations/{id}')
     def app_encryption_declaration(self, id: str) -> AppEncryptionDeclarationEndpoint:
         return AppEncryptionDeclarationEndpoint(id, self.session)
     
-    def app_info_localization_list(self) -> AppInfoLocalizationListEndpoint:
-        return AppInfoLocalizationListEndpoint(self.session)
+    @endpoint('/v1/appInfoLocalizations')
+    def app_info_localizations(self) -> AppInfoLocalizationsEndpoint:
+        return AppInfoLocalizationsEndpoint(self.session)
     
+    @endpoint('/v1/appInfoLocalizations/{id}')
     def app_info_localization(self, id: str) -> AppInfoLocalizationEndpoint:
         return AppInfoLocalizationEndpoint(id, self.session)
     
+    @endpoint('/v1/appInfos/{id}')
     def app_info(self, id: str) -> AppInfoEndpoint:
         return AppInfoEndpoint(id, self.session)
     
-    def app_pre_order_list(self) -> AppPreOrderListEndpoint:
-        return AppPreOrderListEndpoint(self.session)
+    @endpoint('/v1/appPreOrders')
+    def app_pre_orders(self) -> AppPreOrdersEndpoint:
+        return AppPreOrdersEndpoint(self.session)
     
+    @endpoint('/v1/appPreOrders/{id}')
     def app_pre_order(self, id: str) -> AppPreOrderEndpoint:
         return AppPreOrderEndpoint(id, self.session)
     
-    def app_preview_set_list(self) -> AppPreviewSetListEndpoint:
-        return AppPreviewSetListEndpoint(self.session)
+    @endpoint('/v1/appPreviewSets')
+    def app_preview_sets(self) -> AppPreviewSetsEndpoint:
+        return AppPreviewSetsEndpoint(self.session)
     
+    @endpoint('/v1/appPreviewSets/{id}')
     def app_preview_set(self, id: str) -> AppPreviewSetEndpoint:
         return AppPreviewSetEndpoint(id, self.session)
     
-    def app_preview_list(self) -> AppPreviewListEndpoint:
-        return AppPreviewListEndpoint(self.session)
+    @endpoint('/v1/appPreviews')
+    def app_previews(self) -> AppPreviewsEndpoint:
+        return AppPreviewsEndpoint(self.session)
     
+    @endpoint('/v1/appPreviews/{id}')
     def app_preview(self, id: str) -> AppPreviewEndpoint:
         return AppPreviewEndpoint(id, self.session)
     
-    def app_price_point_list(self) -> AppPricePointListEndpoint:
-        return AppPricePointListEndpoint(self.session)
+    @endpoint('/v1/appPricePoints')
+    def app_price_points(self) -> AppPricePointsEndpoint:
+        return AppPricePointsEndpoint(self.session)
     
+    @endpoint('/v1/appPricePoints/{id}')
     def app_price_point(self, id: str) -> AppPricePointEndpoint:
         return AppPricePointEndpoint(id, self.session)
     
-    def app_price_tier_list(self) -> AppPriceTierListEndpoint:
-        return AppPriceTierListEndpoint(self.session)
+    @endpoint('/v1/appPriceTiers')
+    def app_price_tiers(self) -> AppPriceTiersEndpoint:
+        return AppPriceTiersEndpoint(self.session)
     
+    @endpoint('/v1/appPriceTiers/{id}')
     def app_price_tier(self, id: str) -> AppPriceTierEndpoint:
         return AppPriceTierEndpoint(id, self.session)
     
+    @endpoint('/v1/appPrices/{id}')
     def app_price(self, id: str) -> AppPriceEndpoint:
         return AppPriceEndpoint(id, self.session)
     
-    def app_screenshot_set_list(self) -> AppScreenshotSetListEndpoint:
-        return AppScreenshotSetListEndpoint(self.session)
+    @endpoint('/v1/appScreenshotSets')
+    def app_screenshot_sets(self) -> AppScreenshotSetsEndpoint:
+        return AppScreenshotSetsEndpoint(self.session)
     
+    @endpoint('/v1/appScreenshotSets/{id}')
     def app_screenshot_set(self, id: str) -> AppScreenshotSetEndpoint:
         return AppScreenshotSetEndpoint(id, self.session)
     
-    def app_screenshot_list(self) -> AppScreenshotListEndpoint:
-        return AppScreenshotListEndpoint(self.session)
+    @endpoint('/v1/appScreenshots')
+    def app_screenshots(self) -> AppScreenshotsEndpoint:
+        return AppScreenshotsEndpoint(self.session)
     
+    @endpoint('/v1/appScreenshots/{id}')
     def app_screenshot(self, id: str) -> AppScreenshotEndpoint:
         return AppScreenshotEndpoint(id, self.session)
     
-    def app_store_review_attachment_list(self) -> AppStoreReviewAttachmentListEndpoint:
-        return AppStoreReviewAttachmentListEndpoint(self.session)
+    @endpoint('/v1/appStoreReviewAttachments')
+    def app_store_review_attachments(self) -> AppStoreReviewAttachmentsEndpoint:
+        return AppStoreReviewAttachmentsEndpoint(self.session)
     
+    @endpoint('/v1/appStoreReviewAttachments/{id}')
     def app_store_review_attachment(self, id: str) -> AppStoreReviewAttachmentEndpoint:
         return AppStoreReviewAttachmentEndpoint(id, self.session)
     
-    def app_store_review_detail_list(self) -> AppStoreReviewDetailListEndpoint:
-        return AppStoreReviewDetailListEndpoint(self.session)
+    @endpoint('/v1/appStoreReviewDetails')
+    def app_store_review_details(self) -> AppStoreReviewDetailsEndpoint:
+        return AppStoreReviewDetailsEndpoint(self.session)
     
+    @endpoint('/v1/appStoreReviewDetails/{id}')
     def app_store_review_detail(self, id: str) -> AppStoreReviewDetailEndpoint:
         return AppStoreReviewDetailEndpoint(id, self.session)
     
-    def app_store_version_localization_list(self) -> AppStoreVersionLocalizationListEndpoint:
-        return AppStoreVersionLocalizationListEndpoint(self.session)
+    @endpoint('/v1/appStoreVersionLocalizations')
+    def app_store_version_localizations(self) -> AppStoreVersionLocalizationsEndpoint:
+        return AppStoreVersionLocalizationsEndpoint(self.session)
     
+    @endpoint('/v1/appStoreVersionLocalizations/{id}')
     def app_store_version_localization(self, id: str) -> AppStoreVersionLocalizationEndpoint:
         return AppStoreVersionLocalizationEndpoint(id, self.session)
     
-    def app_store_version_phased_release_list(self) -> AppStoreVersionPhasedReleaseListEndpoint:
-        return AppStoreVersionPhasedReleaseListEndpoint(self.session)
+    @endpoint('/v1/appStoreVersionPhasedReleases')
+    def app_store_version_phased_releases(self) -> AppStoreVersionPhasedReleasesEndpoint:
+        return AppStoreVersionPhasedReleasesEndpoint(self.session)
     
+    @endpoint('/v1/appStoreVersionPhasedReleases/{id}')
     def app_store_version_phased_release(self, id: str) -> AppStoreVersionPhasedReleaseEndpoint:
         return AppStoreVersionPhasedReleaseEndpoint(id, self.session)
     
-    def app_store_version_release_request_list(self) -> AppStoreVersionReleaseRequestListEndpoint:
-        return AppStoreVersionReleaseRequestListEndpoint(self.session)
+    @endpoint('/v1/appStoreVersionReleaseRequests')
+    def app_store_version_release_requests(self) -> AppStoreVersionReleaseRequestsEndpoint:
+        return AppStoreVersionReleaseRequestsEndpoint(self.session)
     
-    def app_store_version_submission_list(self) -> AppStoreVersionSubmissionListEndpoint:
-        return AppStoreVersionSubmissionListEndpoint(self.session)
+    @endpoint('/v1/appStoreVersionSubmissions')
+    def app_store_version_submissions(self) -> AppStoreVersionSubmissionsEndpoint:
+        return AppStoreVersionSubmissionsEndpoint(self.session)
     
+    @endpoint('/v1/appStoreVersionSubmissions/{id}')
     def app_store_version_submission(self, id: str) -> AppStoreVersionSubmissionEndpoint:
         return AppStoreVersionSubmissionEndpoint(id, self.session)
     
-    def app_store_version_list(self) -> AppStoreVersionListEndpoint:
-        return AppStoreVersionListEndpoint(self.session)
+    @endpoint('/v1/appStoreVersions')
+    def app_store_versions(self) -> AppStoreVersionsEndpoint:
+        return AppStoreVersionsEndpoint(self.session)
     
+    @endpoint('/v1/appStoreVersions/{id}')
     def app_store_version(self, id: str) -> AppStoreVersionEndpoint:
         return AppStoreVersionEndpoint(id, self.session)
     
-    def app_list(self) -> AppListEndpoint:
-        return AppListEndpoint(self.session)
+    @endpoint('/v1/apps')
+    def apps(self) -> AppsEndpoint:
+        return AppsEndpoint(self.session)
     
+    @endpoint('/v1/apps/{id}')
     def app(self, id: str) -> AppEndpoint:
         return AppEndpoint(id, self.session)
     
-    def beta_app_clip_invocation_localization_list(self) -> BetaAppClipInvocationLocalizationListEndpoint:
-        return BetaAppClipInvocationLocalizationListEndpoint(self.session)
+    @endpoint('/v1/betaAppClipInvocationLocalizations')
+    def beta_app_clip_invocation_localizations(self) -> BetaAppClipInvocationLocalizationsEndpoint:
+        return BetaAppClipInvocationLocalizationsEndpoint(self.session)
     
+    @endpoint('/v1/betaAppClipInvocationLocalizations/{id}')
     def beta_app_clip_invocation_localization(self, id: str) -> BetaAppClipInvocationLocalizationEndpoint:
         return BetaAppClipInvocationLocalizationEndpoint(id, self.session)
     
-    def beta_app_clip_invocation_list(self) -> BetaAppClipInvocationListEndpoint:
-        return BetaAppClipInvocationListEndpoint(self.session)
+    @endpoint('/v1/betaAppClipInvocations')
+    def beta_app_clip_invocations(self) -> BetaAppClipInvocationsEndpoint:
+        return BetaAppClipInvocationsEndpoint(self.session)
     
+    @endpoint('/v1/betaAppClipInvocations/{id}')
     def beta_app_clip_invocation(self, id: str) -> BetaAppClipInvocationEndpoint:
         return BetaAppClipInvocationEndpoint(id, self.session)
     
-    def beta_app_localization_list(self) -> BetaAppLocalizationListEndpoint:
-        return BetaAppLocalizationListEndpoint(self.session)
+    @endpoint('/v1/betaAppLocalizations')
+    def beta_app_localizations(self) -> BetaAppLocalizationsEndpoint:
+        return BetaAppLocalizationsEndpoint(self.session)
     
+    @endpoint('/v1/betaAppLocalizations/{id}')
     def beta_app_localization(self, id: str) -> BetaAppLocalizationEndpoint:
         return BetaAppLocalizationEndpoint(id, self.session)
     
-    def beta_app_review_detail_list(self) -> BetaAppReviewDetailListEndpoint:
-        return BetaAppReviewDetailListEndpoint(self.session)
+    @endpoint('/v1/betaAppReviewDetails')
+    def beta_app_review_details(self) -> BetaAppReviewDetailsEndpoint:
+        return BetaAppReviewDetailsEndpoint(self.session)
     
+    @endpoint('/v1/betaAppReviewDetails/{id}')
     def beta_app_review_detail(self, id: str) -> BetaAppReviewDetailEndpoint:
         return BetaAppReviewDetailEndpoint(id, self.session)
     
-    def beta_app_review_submission_list(self) -> BetaAppReviewSubmissionListEndpoint:
-        return BetaAppReviewSubmissionListEndpoint(self.session)
+    @endpoint('/v1/betaAppReviewSubmissions')
+    def beta_app_review_submissions(self) -> BetaAppReviewSubmissionsEndpoint:
+        return BetaAppReviewSubmissionsEndpoint(self.session)
     
+    @endpoint('/v1/betaAppReviewSubmissions/{id}')
     def beta_app_review_submission(self, id: str) -> BetaAppReviewSubmissionEndpoint:
         return BetaAppReviewSubmissionEndpoint(id, self.session)
     
-    def beta_build_localization_list(self) -> BetaBuildLocalizationListEndpoint:
-        return BetaBuildLocalizationListEndpoint(self.session)
+    @endpoint('/v1/betaBuildLocalizations')
+    def beta_build_localizations(self) -> BetaBuildLocalizationsEndpoint:
+        return BetaBuildLocalizationsEndpoint(self.session)
     
+    @endpoint('/v1/betaBuildLocalizations/{id}')
     def beta_build_localization(self, id: str) -> BetaBuildLocalizationEndpoint:
         return BetaBuildLocalizationEndpoint(id, self.session)
     
-    def beta_group_list(self) -> BetaGroupListEndpoint:
-        return BetaGroupListEndpoint(self.session)
+    @endpoint('/v1/betaGroups')
+    def beta_groups(self) -> BetaGroupsEndpoint:
+        return BetaGroupsEndpoint(self.session)
     
+    @endpoint('/v1/betaGroups/{id}')
     def beta_group(self, id: str) -> BetaGroupEndpoint:
         return BetaGroupEndpoint(id, self.session)
     
-    def beta_license_agreement_list(self) -> BetaLicenseAgreementListEndpoint:
-        return BetaLicenseAgreementListEndpoint(self.session)
+    @endpoint('/v1/betaLicenseAgreements')
+    def beta_license_agreements(self) -> BetaLicenseAgreementsEndpoint:
+        return BetaLicenseAgreementsEndpoint(self.session)
     
+    @endpoint('/v1/betaLicenseAgreements/{id}')
     def beta_license_agreement(self, id: str) -> BetaLicenseAgreementEndpoint:
         return BetaLicenseAgreementEndpoint(id, self.session)
     
-    def beta_tester_invitation_list(self) -> BetaTesterInvitationListEndpoint:
-        return BetaTesterInvitationListEndpoint(self.session)
+    @endpoint('/v1/betaTesterInvitations')
+    def beta_tester_invitations(self) -> BetaTesterInvitationsEndpoint:
+        return BetaTesterInvitationsEndpoint(self.session)
     
-    def beta_tester_list(self) -> BetaTesterListEndpoint:
-        return BetaTesterListEndpoint(self.session)
+    @endpoint('/v1/betaTesters')
+    def beta_testers(self) -> BetaTestersEndpoint:
+        return BetaTestersEndpoint(self.session)
     
+    @endpoint('/v1/betaTesters/{id}')
     def beta_tester(self, id: str) -> BetaTesterEndpoint:
         return BetaTesterEndpoint(id, self.session)
     
-    def build_beta_detail_list(self) -> BuildBetaDetailListEndpoint:
-        return BuildBetaDetailListEndpoint(self.session)
+    @endpoint('/v1/buildBetaDetails')
+    def build_beta_details(self) -> BuildBetaDetailsEndpoint:
+        return BuildBetaDetailsEndpoint(self.session)
     
+    @endpoint('/v1/buildBetaDetails/{id}')
     def build_beta_detail(self, id: str) -> BuildBetaDetailEndpoint:
         return BuildBetaDetailEndpoint(id, self.session)
     
-    def build_beta_notification_list(self) -> BuildBetaNotificationListEndpoint:
-        return BuildBetaNotificationListEndpoint(self.session)
+    @endpoint('/v1/buildBetaNotifications')
+    def build_beta_notifications(self) -> BuildBetaNotificationsEndpoint:
+        return BuildBetaNotificationsEndpoint(self.session)
     
-    def build_list(self) -> BuildListEndpoint:
-        return BuildListEndpoint(self.session)
+    @endpoint('/v1/builds')
+    def builds(self) -> BuildsEndpoint:
+        return BuildsEndpoint(self.session)
     
+    @endpoint('/v1/builds/{id}')
     def build(self, id: str) -> BuildEndpoint:
         return BuildEndpoint(id, self.session)
     
-    def bundle_id_capability_list(self) -> BundleIdCapabilityListEndpoint:
-        return BundleIdCapabilityListEndpoint(self.session)
+    @endpoint('/v1/bundleIdCapabilities')
+    def bundle_id_capabilities(self) -> BundleIdCapabilitiesEndpoint:
+        return BundleIdCapabilitiesEndpoint(self.session)
     
+    @endpoint('/v1/bundleIdCapabilities/{id}')
     def bundle_id_capability(self, id: str) -> BundleIdCapabilityEndpoint:
         return BundleIdCapabilityEndpoint(id, self.session)
     
-    def bundle_id_list(self) -> BundleIdListEndpoint:
-        return BundleIdListEndpoint(self.session)
+    @endpoint('/v1/bundleIds')
+    def bundle_ids(self) -> BundleIdsEndpoint:
+        return BundleIdsEndpoint(self.session)
     
+    @endpoint('/v1/bundleIds/{id}')
     def bundle_id(self, id: str) -> BundleIdEndpoint:
         return BundleIdEndpoint(id, self.session)
     
-    def certificate_list(self) -> CertificateListEndpoint:
-        return CertificateListEndpoint(self.session)
+    @endpoint('/v1/certificates')
+    def certificates(self) -> CertificatesEndpoint:
+        return CertificatesEndpoint(self.session)
     
+    @endpoint('/v1/certificates/{id}')
     def certificate(self, id: str) -> CertificateEndpoint:
         return CertificateEndpoint(id, self.session)
     
+    @endpoint('/v1/ciArtifacts/{id}')
     def ci_artifact(self, id: str) -> CiArtifactEndpoint:
         return CiArtifactEndpoint(id, self.session)
     
+    @endpoint('/v1/ciBuildActions/{id}')
     def ci_build_action(self, id: str) -> CiBuildActionEndpoint:
         return CiBuildActionEndpoint(id, self.session)
     
-    def ci_build_run_list(self) -> CiBuildRunListEndpoint:
-        return CiBuildRunListEndpoint(self.session)
+    @endpoint('/v1/ciBuildRuns')
+    def ci_build_runs(self) -> CiBuildRunsEndpoint:
+        return CiBuildRunsEndpoint(self.session)
     
+    @endpoint('/v1/ciBuildRuns/{id}')
     def ci_build_run(self, id: str) -> CiBuildRunEndpoint:
         return CiBuildRunEndpoint(id, self.session)
     
+    @endpoint('/v1/ciIssues/{id}')
     def ci_issue(self, id: str) -> CiIssueEndpoint:
         return CiIssueEndpoint(id, self.session)
     
-    def ci_mac_os_version_list(self) -> CiMacOsVersionListEndpoint:
-        return CiMacOsVersionListEndpoint(self.session)
+    @endpoint('/v1/ciMacOsVersions')
+    def ci_mac_os_versions(self) -> CiMacOsVersionsEndpoint:
+        return CiMacOsVersionsEndpoint(self.session)
     
+    @endpoint('/v1/ciMacOsVersions/{id}')
     def ci_mac_os_version(self, id: str) -> CiMacOsVersionEndpoint:
         return CiMacOsVersionEndpoint(id, self.session)
     
-    def ci_product_list(self) -> CiProductListEndpoint:
-        return CiProductListEndpoint(self.session)
+    @endpoint('/v1/ciProducts')
+    def ci_products(self) -> CiProductsEndpoint:
+        return CiProductsEndpoint(self.session)
     
+    @endpoint('/v1/ciProducts/{id}')
     def ci_product(self, id: str) -> CiProductEndpoint:
         return CiProductEndpoint(id, self.session)
     
+    @endpoint('/v1/ciTestResults/{id}')
     def ci_test_result(self, id: str) -> CiTestResultEndpoint:
         return CiTestResultEndpoint(id, self.session)
     
-    def ci_workflow_list(self) -> CiWorkflowListEndpoint:
-        return CiWorkflowListEndpoint(self.session)
+    @endpoint('/v1/ciWorkflows')
+    def ci_workflows(self) -> CiWorkflowsEndpoint:
+        return CiWorkflowsEndpoint(self.session)
     
+    @endpoint('/v1/ciWorkflows/{id}')
     def ci_workflow(self, id: str) -> CiWorkflowEndpoint:
         return CiWorkflowEndpoint(id, self.session)
     
-    def ci_xcode_version_list(self) -> CiXcodeVersionListEndpoint:
-        return CiXcodeVersionListEndpoint(self.session)
+    @endpoint('/v1/ciXcodeVersions')
+    def ci_xcode_versions(self) -> CiXcodeVersionsEndpoint:
+        return CiXcodeVersionsEndpoint(self.session)
     
+    @endpoint('/v1/ciXcodeVersions/{id}')
     def ci_xcode_version(self, id: str) -> CiXcodeVersionEndpoint:
         return CiXcodeVersionEndpoint(id, self.session)
     
-    def device_list(self) -> DeviceListEndpoint:
-        return DeviceListEndpoint(self.session)
+    @endpoint('/v1/devices')
+    def devices(self) -> DevicesEndpoint:
+        return DevicesEndpoint(self.session)
     
+    @endpoint('/v1/devices/{id}')
     def device(self, id: str) -> DeviceEndpoint:
         return DeviceEndpoint(id, self.session)
     
-    def end_user_license_agreement_list(self) -> EndUserLicenseAgreementListEndpoint:
-        return EndUserLicenseAgreementListEndpoint(self.session)
+    @endpoint('/v1/endUserLicenseAgreements')
+    def end_user_license_agreements(self) -> EndUserLicenseAgreementsEndpoint:
+        return EndUserLicenseAgreementsEndpoint(self.session)
     
+    @endpoint('/v1/endUserLicenseAgreements/{id}')
     def end_user_license_agreement(self, id: str) -> EndUserLicenseAgreementEndpoint:
         return EndUserLicenseAgreementEndpoint(id, self.session)
     
-    def finance_report_list(self) -> FinanceReportListEndpoint:
-        return FinanceReportListEndpoint(self.session)
+    @endpoint('/v1/financeReports')
+    def finance_reports(self) -> FinanceReportsEndpoint:
+        return FinanceReportsEndpoint(self.session)
     
-    def idfa_declaration_list(self) -> IdfaDeclarationListEndpoint:
-        return IdfaDeclarationListEndpoint(self.session)
+    @endpoint('/v1/idfaDeclarations')
+    def idfa_declarations(self) -> IdfaDeclarationsEndpoint:
+        return IdfaDeclarationsEndpoint(self.session)
     
+    @endpoint('/v1/idfaDeclarations/{id}')
     def idfa_declaration(self, id: str) -> IdfaDeclarationEndpoint:
         return IdfaDeclarationEndpoint(id, self.session)
     
+    @endpoint('/v1/inAppPurchases/{id}')
     def in_app_purchase(self, id: str) -> InAppPurchaseEndpoint:
         return InAppPurchaseEndpoint(id, self.session)
     
-    def pre_release_version_list(self) -> PreReleaseVersionListEndpoint:
-        return PreReleaseVersionListEndpoint(self.session)
+    @endpoint('/v1/preReleaseVersions')
+    def pre_release_versions(self) -> PreReleaseVersionsEndpoint:
+        return PreReleaseVersionsEndpoint(self.session)
     
+    @endpoint('/v1/preReleaseVersions/{id}')
     def pre_release_version(self, id: str) -> PreReleaseVersionEndpoint:
         return PreReleaseVersionEndpoint(id, self.session)
     
-    def profile_list(self) -> ProfileListEndpoint:
-        return ProfileListEndpoint(self.session)
+    @endpoint('/v1/profiles')
+    def profiles(self) -> ProfilesEndpoint:
+        return ProfilesEndpoint(self.session)
     
+    @endpoint('/v1/profiles/{id}')
     def profile(self, id: str) -> ProfileEndpoint:
         return ProfileEndpoint(id, self.session)
     
-    def routing_app_coverage_list(self) -> RoutingAppCoverageListEndpoint:
-        return RoutingAppCoverageListEndpoint(self.session)
+    @endpoint('/v1/routingAppCoverages')
+    def routing_app_coverages(self) -> RoutingAppCoveragesEndpoint:
+        return RoutingAppCoveragesEndpoint(self.session)
     
+    @endpoint('/v1/routingAppCoverages/{id}')
     def routing_app_coverage(self, id: str) -> RoutingAppCoverageEndpoint:
         return RoutingAppCoverageEndpoint(id, self.session)
     
-    def sales_report_list(self) -> SalesReportListEndpoint:
-        return SalesReportListEndpoint(self.session)
+    @endpoint('/v1/salesReports')
+    def sales_reports(self) -> SalesReportsEndpoint:
+        return SalesReportsEndpoint(self.session)
     
+    @endpoint('/v1/scmGitReferences/{id}')
     def scm_git_reference(self, id: str) -> ScmGitReferenceEndpoint:
         return ScmGitReferenceEndpoint(id, self.session)
     
-    def scm_provider_list(self) -> ScmProviderListEndpoint:
-        return ScmProviderListEndpoint(self.session)
+    @endpoint('/v1/scmProviders')
+    def scm_providers(self) -> ScmProvidersEndpoint:
+        return ScmProvidersEndpoint(self.session)
     
+    @endpoint('/v1/scmProviders/{id}')
     def scm_provider(self, id: str) -> ScmProviderEndpoint:
         return ScmProviderEndpoint(id, self.session)
     
+    @endpoint('/v1/scmPullRequests/{id}')
     def scm_pull_request(self, id: str) -> ScmPullRequestEndpoint:
         return ScmPullRequestEndpoint(id, self.session)
     
-    def scm_repository_list(self) -> ScmRepositoryListEndpoint:
-        return ScmRepositoryListEndpoint(self.session)
+    @endpoint('/v1/scmRepositories')
+    def scm_repositories(self) -> ScmRepositoriesEndpoint:
+        return ScmRepositoriesEndpoint(self.session)
     
+    @endpoint('/v1/scmRepositories/{id}')
     def scm_repository(self, id: str) -> ScmRepositoryEndpoint:
         return ScmRepositoryEndpoint(id, self.session)
     
-    def territory_list(self) -> TerritoryListEndpoint:
-        return TerritoryListEndpoint(self.session)
+    @endpoint('/v1/territories')
+    def territories(self) -> TerritoriesEndpoint:
+        return TerritoriesEndpoint(self.session)
     
-    def user_invitation_list(self) -> UserInvitationListEndpoint:
-        return UserInvitationListEndpoint(self.session)
+    @endpoint('/v1/userInvitations')
+    def user_invitations(self) -> UserInvitationsEndpoint:
+        return UserInvitationsEndpoint(self.session)
     
+    @endpoint('/v1/userInvitations/{id}')
     def user_invitation(self, id: str) -> UserInvitationEndpoint:
         return UserInvitationEndpoint(id, self.session)
     
-    def user_list(self) -> UserListEndpoint:
-        return UserListEndpoint(self.session)
+    @endpoint('/v1/users')
+    def users(self) -> UsersEndpoint:
+        return UsersEndpoint(self.session)
     
+    @endpoint('/v1/users/{id}')
     def user(self, id: str) -> UserEndpoint:
         return UserEndpoint(id, self.session)
     
-    def parent_of_app_category(self, id: str) -> ParentOfAppCategoryEndpoint:
-        return ParentOfAppCategoryEndpoint(id, self.session)
-    
-    def subcategory_list_of_app_category(self, id: str) -> SubcategoryListOfAppCategoryEndpoint:
-        return SubcategoryListOfAppCategoryEndpoint(id, self.session)
-    
-    def app_clip_header_image_of_app_clip_default_experience_localization(self, id: str) -> AppClipHeaderImageOfAppClipDefaultExperienceLocalizationEndpoint:
-        return AppClipHeaderImageOfAppClipDefaultExperienceLocalizationEndpoint(id, self.session)
-    
-    def app_clip_app_store_review_detail_of_app_clip_default_experience(self, id: str) -> AppClipAppStoreReviewDetailOfAppClipDefaultExperienceEndpoint:
-        return AppClipAppStoreReviewDetailOfAppClipDefaultExperienceEndpoint(id, self.session)
-    
-    def app_clip_default_experience_localization_list_of_app_clip_default_experience(self, id: str) -> AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint:
-        return AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint(id, self.session)
-    
-    def release_with_app_store_version_of_app_clip_default_experience_relationship(self, id: str) -> ReleaseWithAppStoreVersionOfAppClipDefaultExperienceRelationshipsEndpoint:
-        return ReleaseWithAppStoreVersionOfAppClipDefaultExperienceRelationshipsEndpoint(id, self.session)
-    
-    def release_with_app_store_version_of_app_clip_default_experience(self, id: str) -> ReleaseWithAppStoreVersionOfAppClipDefaultExperienceEndpoint:
-        return ReleaseWithAppStoreVersionOfAppClipDefaultExperienceEndpoint(id, self.session)
-    
-    def app_clip_advanced_experience_list_of_app_clip(self, id: str) -> AppClipAdvancedExperienceListOfAppClipEndpoint:
-        return AppClipAdvancedExperienceListOfAppClipEndpoint(id, self.session)
-    
-    def app_clip_default_experience_list_of_app_clip(self, id: str) -> AppClipDefaultExperienceListOfAppClipEndpoint:
-        return AppClipDefaultExperienceListOfAppClipEndpoint(id, self.session)
-    
-    def app_of_app_encryption_declaration(self, id: str) -> AppOfAppEncryptionDeclarationEndpoint:
-        return AppOfAppEncryptionDeclarationEndpoint(id, self.session)
-    
-    def build_list_of_app_encryption_declaration_relationship(self, id: str) -> BuildListOfAppEncryptionDeclarationRelationshipsEndpoint:
-        return BuildListOfAppEncryptionDeclarationRelationshipsEndpoint(id, self.session)
-    
-    def age_rating_declaration_of_app_info(self, id: str) -> AgeRatingDeclarationOfAppInfoEndpoint:
-        return AgeRatingDeclarationOfAppInfoEndpoint(id, self.session)
-    
-    def app_info_localization_list_of_app_info(self, id: str) -> AppInfoLocalizationListOfAppInfoEndpoint:
-        return AppInfoLocalizationListOfAppInfoEndpoint(id, self.session)
-    
-    def primary_category_of_app_info(self, id: str) -> PrimaryCategoryOfAppInfoEndpoint:
-        return PrimaryCategoryOfAppInfoEndpoint(id, self.session)
-    
-    def primary_subcategory_one_of_app_info(self, id: str) -> PrimarySubcategoryOneOfAppInfoEndpoint:
-        return PrimarySubcategoryOneOfAppInfoEndpoint(id, self.session)
-    
-    def primary_subcategory_two_of_app_info(self, id: str) -> PrimarySubcategoryTwoOfAppInfoEndpoint:
-        return PrimarySubcategoryTwoOfAppInfoEndpoint(id, self.session)
-    
-    def secondary_category_of_app_info(self, id: str) -> SecondaryCategoryOfAppInfoEndpoint:
-        return SecondaryCategoryOfAppInfoEndpoint(id, self.session)
-    
-    def secondary_subcategory_one_of_app_info(self, id: str) -> SecondarySubcategoryOneOfAppInfoEndpoint:
-        return SecondarySubcategoryOneOfAppInfoEndpoint(id, self.session)
-    
-    def secondary_subcategory_two_of_app_info(self, id: str) -> SecondarySubcategoryTwoOfAppInfoEndpoint:
-        return SecondarySubcategoryTwoOfAppInfoEndpoint(id, self.session)
-    
-    def app_preview_list_of_app_preview_set_relationship(self, id: str) -> AppPreviewListOfAppPreviewSetRelationshipsEndpoint:
-        return AppPreviewListOfAppPreviewSetRelationshipsEndpoint(id, self.session)
-    
-    def app_preview_list_of_app_preview_set(self, id: str) -> AppPreviewListOfAppPreviewSetEndpoint:
-        return AppPreviewListOfAppPreviewSetEndpoint(id, self.session)
-    
-    def territory_of_app_price_point(self, id: str) -> TerritoryOfAppPricePointEndpoint:
-        return TerritoryOfAppPricePointEndpoint(id, self.session)
-    
-    def price_point_list_of_app_price_tier(self, id: str) -> PricePointListOfAppPriceTierEndpoint:
-        return PricePointListOfAppPriceTierEndpoint(id, self.session)
-    
-    def app_screenshot_list_of_app_screenshot_set_relationship(self, id: str) -> AppScreenshotListOfAppScreenshotSetRelationshipsEndpoint:
-        return AppScreenshotListOfAppScreenshotSetRelationshipsEndpoint(id, self.session)
-    
-    def app_screenshot_list_of_app_screenshot_set(self, id: str) -> AppScreenshotListOfAppScreenshotSetEndpoint:
-        return AppScreenshotListOfAppScreenshotSetEndpoint(id, self.session)
-    
-    def app_store_review_attachment_list_of_app_store_review_detail(self, id: str) -> AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint:
-        return AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint(id, self.session)
-    
-    def app_preview_set_list_of_app_store_version_localization(self, id: str) -> AppPreviewSetListOfAppStoreVersionLocalizationEndpoint:
-        return AppPreviewSetListOfAppStoreVersionLocalizationEndpoint(id, self.session)
-    
-    def app_screenshot_set_list_of_app_store_version_localization(self, id: str) -> AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint:
-        return AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint(id, self.session)
-    
-    def age_rating_declaration_of_app_store_version(self, id: str) -> AgeRatingDeclarationOfAppStoreVersionEndpoint:
-        return AgeRatingDeclarationOfAppStoreVersionEndpoint(id, self.session)
-    
-    def app_clip_default_experience_of_app_store_version_relationship(self, id: str) -> AppClipDefaultExperienceOfAppStoreVersionRelationshipsEndpoint:
-        return AppClipDefaultExperienceOfAppStoreVersionRelationshipsEndpoint(id, self.session)
-    
-    def app_clip_default_experience_of_app_store_version(self, id: str) -> AppClipDefaultExperienceOfAppStoreVersionEndpoint:
-        return AppClipDefaultExperienceOfAppStoreVersionEndpoint(id, self.session)
-    
-    def app_store_review_detail_of_app_store_version(self, id: str) -> AppStoreReviewDetailOfAppStoreVersionEndpoint:
-        return AppStoreReviewDetailOfAppStoreVersionEndpoint(id, self.session)
-    
-    def app_store_version_localization_list_of_app_store_version(self, id: str) -> AppStoreVersionLocalizationListOfAppStoreVersionEndpoint:
-        return AppStoreVersionLocalizationListOfAppStoreVersionEndpoint(id, self.session)
-    
-    def app_store_version_phased_release_of_app_store_version(self, id: str) -> AppStoreVersionPhasedReleaseOfAppStoreVersionEndpoint:
-        return AppStoreVersionPhasedReleaseOfAppStoreVersionEndpoint(id, self.session)
-    
-    def app_store_version_submission_of_app_store_version(self, id: str) -> AppStoreVersionSubmissionOfAppStoreVersionEndpoint:
-        return AppStoreVersionSubmissionOfAppStoreVersionEndpoint(id, self.session)
-    
-    def build_of_app_store_version_relationship(self, id: str) -> BuildOfAppStoreVersionRelationshipsEndpoint:
-        return BuildOfAppStoreVersionRelationshipsEndpoint(id, self.session)
-    
-    def build_of_app_store_version(self, id: str) -> BuildOfAppStoreVersionEndpoint:
-        return BuildOfAppStoreVersionEndpoint(id, self.session)
-    
-    def idfa_declaration_of_app_store_version(self, id: str) -> IdfaDeclarationOfAppStoreVersionEndpoint:
-        return IdfaDeclarationOfAppStoreVersionEndpoint(id, self.session)
-    
-    def routing_app_coverage_of_app_store_version(self, id: str) -> RoutingAppCoverageOfAppStoreVersionEndpoint:
-        return RoutingAppCoverageOfAppStoreVersionEndpoint(id, self.session)
-    
-    def app_clip_list_of_app(self, id: str) -> AppClipListOfAppEndpoint:
-        return AppClipListOfAppEndpoint(id, self.session)
-    
-    def app_info_list_of_app(self, id: str) -> AppInfoListOfAppEndpoint:
-        return AppInfoListOfAppEndpoint(id, self.session)
-    
-    def app_store_version_list_of_app(self, id: str) -> AppStoreVersionListOfAppEndpoint:
-        return AppStoreVersionListOfAppEndpoint(id, self.session)
-    
-    def available_territory_list_of_app(self, id: str) -> AvailableTerritoryListOfAppEndpoint:
-        return AvailableTerritoryListOfAppEndpoint(id, self.session)
-    
-    def beta_app_localization_list_of_app(self, id: str) -> BetaAppLocalizationListOfAppEndpoint:
-        return BetaAppLocalizationListOfAppEndpoint(id, self.session)
-    
-    def beta_app_review_detail_of_app(self, id: str) -> BetaAppReviewDetailOfAppEndpoint:
-        return BetaAppReviewDetailOfAppEndpoint(id, self.session)
-    
-    def beta_group_list_of_app(self, id: str) -> BetaGroupListOfAppEndpoint:
-        return BetaGroupListOfAppEndpoint(id, self.session)
-    
-    def beta_license_agreement_of_app(self, id: str) -> BetaLicenseAgreementOfAppEndpoint:
-        return BetaLicenseAgreementOfAppEndpoint(id, self.session)
-    
-    def beta_tester_list_of_app_relationship(self, id: str) -> BetaTesterListOfAppRelationshipsEndpoint:
-        return BetaTesterListOfAppRelationshipsEndpoint(id, self.session)
-    
-    def build_list_of_app(self, id: str) -> BuildListOfAppEndpoint:
-        return BuildListOfAppEndpoint(id, self.session)
-    
-    def ci_product_of_app(self, id: str) -> CiProductOfAppEndpoint:
-        return CiProductOfAppEndpoint(id, self.session)
-    
-    def end_user_license_agreement_of_app(self, id: str) -> EndUserLicenseAgreementOfAppEndpoint:
-        return EndUserLicenseAgreementOfAppEndpoint(id, self.session)
-    
-    def game_center_enabled_version_list_of_app(self, id: str) -> GameCenterEnabledVersionListOfAppEndpoint:
-        return GameCenterEnabledVersionListOfAppEndpoint(id, self.session)
-    
-    def in_app_purchase_list_of_app(self, id: str) -> InAppPurchaseListOfAppEndpoint:
-        return InAppPurchaseListOfAppEndpoint(id, self.session)
-    
-    def perf_power_metric_list_of_app(self, id: str) -> PerfPowerMetricListOfAppEndpoint:
-        return PerfPowerMetricListOfAppEndpoint(id, self.session)
-    
-    def pre_order_of_app(self, id: str) -> PreOrderOfAppEndpoint:
-        return PreOrderOfAppEndpoint(id, self.session)
-    
-    def pre_release_version_list_of_app(self, id: str) -> PreReleaseVersionListOfAppEndpoint:
-        return PreReleaseVersionListOfAppEndpoint(id, self.session)
-    
-    def price_list_of_app(self, id: str) -> PriceListOfAppEndpoint:
-        return PriceListOfAppEndpoint(id, self.session)
-    
-    def app_of_beta_app_localization(self, id: str) -> AppOfBetaAppLocalizationEndpoint:
-        return AppOfBetaAppLocalizationEndpoint(id, self.session)
-    
-    def app_of_beta_app_review_detail(self, id: str) -> AppOfBetaAppReviewDetailEndpoint:
-        return AppOfBetaAppReviewDetailEndpoint(id, self.session)
-    
-    def build_of_beta_app_review_submission(self, id: str) -> BuildOfBetaAppReviewSubmissionEndpoint:
-        return BuildOfBetaAppReviewSubmissionEndpoint(id, self.session)
-    
-    def build_of_beta_build_localization(self, id: str) -> BuildOfBetaBuildLocalizationEndpoint:
-        return BuildOfBetaBuildLocalizationEndpoint(id, self.session)
-    
-    def app_of_beta_group(self, id: str) -> AppOfBetaGroupEndpoint:
-        return AppOfBetaGroupEndpoint(id, self.session)
-    
-    def beta_tester_list_of_beta_group_relationship(self, id: str) -> BetaTesterListOfBetaGroupRelationshipsEndpoint:
-        return BetaTesterListOfBetaGroupRelationshipsEndpoint(id, self.session)
-    
-    def beta_tester_list_of_beta_group(self, id: str) -> BetaTesterListOfBetaGroupEndpoint:
-        return BetaTesterListOfBetaGroupEndpoint(id, self.session)
-    
-    def build_list_of_beta_group_relationship(self, id: str) -> BuildListOfBetaGroupRelationshipsEndpoint:
-        return BuildListOfBetaGroupRelationshipsEndpoint(id, self.session)
-    
-    def build_list_of_beta_group(self, id: str) -> BuildListOfBetaGroupEndpoint:
-        return BuildListOfBetaGroupEndpoint(id, self.session)
-    
-    def app_of_beta_license_agreement(self, id: str) -> AppOfBetaLicenseAgreementEndpoint:
-        return AppOfBetaLicenseAgreementEndpoint(id, self.session)
-    
-    def app_list_of_beta_tester_relationship(self, id: str) -> AppListOfBetaTesterRelationshipsEndpoint:
-        return AppListOfBetaTesterRelationshipsEndpoint(id, self.session)
-    
-    def app_list_of_beta_tester(self, id: str) -> AppListOfBetaTesterEndpoint:
-        return AppListOfBetaTesterEndpoint(id, self.session)
-    
-    def beta_group_list_of_beta_tester_relationship(self, id: str) -> BetaGroupListOfBetaTesterRelationshipsEndpoint:
-        return BetaGroupListOfBetaTesterRelationshipsEndpoint(id, self.session)
-    
-    def beta_group_list_of_beta_tester(self, id: str) -> BetaGroupListOfBetaTesterEndpoint:
-        return BetaGroupListOfBetaTesterEndpoint(id, self.session)
-    
-    def build_list_of_beta_tester_relationship(self, id: str) -> BuildListOfBetaTesterRelationshipsEndpoint:
-        return BuildListOfBetaTesterRelationshipsEndpoint(id, self.session)
-    
-    def build_list_of_beta_tester(self, id: str) -> BuildListOfBetaTesterEndpoint:
-        return BuildListOfBetaTesterEndpoint(id, self.session)
-    
-    def build_of_build_beta_detail(self, id: str) -> BuildOfBuildBetaDetailEndpoint:
-        return BuildOfBuildBetaDetailEndpoint(id, self.session)
-    
-    def app_clip_domain_cache_statu_list_of_build_bundle(self, id: str) -> AppClipDomainCacheStatuListOfBuildBundleEndpoint:
-        return AppClipDomainCacheStatuListOfBuildBundleEndpoint(id, self.session)
-    
-    def app_clip_domain_debug_statu_list_of_build_bundle(self, id: str) -> AppClipDomainDebugStatuListOfBuildBundleEndpoint:
-        return AppClipDomainDebugStatuListOfBuildBundleEndpoint(id, self.session)
-    
-    def beta_app_clip_invocation_list_of_build_bundle(self, id: str) -> BetaAppClipInvocationListOfBuildBundleEndpoint:
-        return BetaAppClipInvocationListOfBuildBundleEndpoint(id, self.session)
-    
-    def build_bundle_file_size_list_of_build_bundle(self, id: str) -> BuildBundleFileSizeListOfBuildBundleEndpoint:
-        return BuildBundleFileSizeListOfBuildBundleEndpoint(id, self.session)
-    
-    def app_of_build(self, id: str) -> AppOfBuildEndpoint:
-        return AppOfBuildEndpoint(id, self.session)
-    
-    def app_encryption_declaration_of_build_relationship(self, id: str) -> AppEncryptionDeclarationOfBuildRelationshipsEndpoint:
-        return AppEncryptionDeclarationOfBuildRelationshipsEndpoint(id, self.session)
-    
-    def app_encryption_declaration_of_build(self, id: str) -> AppEncryptionDeclarationOfBuildEndpoint:
-        return AppEncryptionDeclarationOfBuildEndpoint(id, self.session)
-    
-    def app_store_version_of_build(self, id: str) -> AppStoreVersionOfBuildEndpoint:
-        return AppStoreVersionOfBuildEndpoint(id, self.session)
-    
-    def beta_app_review_submission_of_build(self, id: str) -> BetaAppReviewSubmissionOfBuildEndpoint:
-        return BetaAppReviewSubmissionOfBuildEndpoint(id, self.session)
-    
-    def beta_build_localization_list_of_build(self, id: str) -> BetaBuildLocalizationListOfBuildEndpoint:
-        return BetaBuildLocalizationListOfBuildEndpoint(id, self.session)
-    
-    def beta_group_list_of_build_relationship(self, id: str) -> BetaGroupListOfBuildRelationshipsEndpoint:
-        return BetaGroupListOfBuildRelationshipsEndpoint(id, self.session)
-    
-    def build_beta_detail_of_build(self, id: str) -> BuildBetaDetailOfBuildEndpoint:
-        return BuildBetaDetailOfBuildEndpoint(id, self.session)
-    
-    def diagnostic_signature_list_of_build(self, id: str) -> DiagnosticSignatureListOfBuildEndpoint:
-        return DiagnosticSignatureListOfBuildEndpoint(id, self.session)
-    
-    def icon_list_of_build(self, id: str) -> IconListOfBuildEndpoint:
-        return IconListOfBuildEndpoint(id, self.session)
-    
-    def individual_tester_list_of_build_relationship(self, id: str) -> IndividualTesterListOfBuildRelationshipsEndpoint:
-        return IndividualTesterListOfBuildRelationshipsEndpoint(id, self.session)
-    
-    def individual_tester_list_of_build(self, id: str) -> IndividualTesterListOfBuildEndpoint:
-        return IndividualTesterListOfBuildEndpoint(id, self.session)
-    
-    def perf_power_metric_list_of_build(self, id: str) -> PerfPowerMetricListOfBuildEndpoint:
-        return PerfPowerMetricListOfBuildEndpoint(id, self.session)
-    
-    def pre_release_version_of_build(self, id: str) -> PreReleaseVersionOfBuildEndpoint:
-        return PreReleaseVersionOfBuildEndpoint(id, self.session)
-    
-    def app_of_bundle_id(self, id: str) -> AppOfBundleIdEndpoint:
-        return AppOfBundleIdEndpoint(id, self.session)
-    
-    def bundle_id_capability_list_of_bundle_id(self, id: str) -> BundleIdCapabilityListOfBundleIdEndpoint:
-        return BundleIdCapabilityListOfBundleIdEndpoint(id, self.session)
-    
-    def profile_list_of_bundle_id(self, id: str) -> ProfileListOfBundleIdEndpoint:
-        return ProfileListOfBundleIdEndpoint(id, self.session)
-    
-    def artifact_list_of_ci_build_action(self, id: str) -> ArtifactListOfCiBuildActionEndpoint:
-        return ArtifactListOfCiBuildActionEndpoint(id, self.session)
-    
-    def build_run_of_ci_build_action(self, id: str) -> BuildRunOfCiBuildActionEndpoint:
-        return BuildRunOfCiBuildActionEndpoint(id, self.session)
-    
-    def issue_list_of_ci_build_action(self, id: str) -> IssueListOfCiBuildActionEndpoint:
-        return IssueListOfCiBuildActionEndpoint(id, self.session)
-    
-    def test_result_list_of_ci_build_action(self, id: str) -> TestResultListOfCiBuildActionEndpoint:
-        return TestResultListOfCiBuildActionEndpoint(id, self.session)
-    
-    def action_list_of_ci_build_run(self, id: str) -> ActionListOfCiBuildRunEndpoint:
-        return ActionListOfCiBuildRunEndpoint(id, self.session)
-    
-    def build_list_of_ci_build_run(self, id: str) -> BuildListOfCiBuildRunEndpoint:
-        return BuildListOfCiBuildRunEndpoint(id, self.session)
-    
-    def xcode_version_list_of_ci_mac_os_version(self, id: str) -> XcodeVersionListOfCiMacOsVersionEndpoint:
-        return XcodeVersionListOfCiMacOsVersionEndpoint(id, self.session)
-    
-    def additional_repository_list_of_ci_product(self, id: str) -> AdditionalRepositoryListOfCiProductEndpoint:
-        return AdditionalRepositoryListOfCiProductEndpoint(id, self.session)
-    
-    def app_of_ci_product(self, id: str) -> AppOfCiProductEndpoint:
-        return AppOfCiProductEndpoint(id, self.session)
-    
-    def build_run_list_of_ci_product(self, id: str) -> BuildRunListOfCiProductEndpoint:
-        return BuildRunListOfCiProductEndpoint(id, self.session)
-    
-    def primary_repository_list_of_ci_product(self, id: str) -> PrimaryRepositoryListOfCiProductEndpoint:
-        return PrimaryRepositoryListOfCiProductEndpoint(id, self.session)
-    
-    def workflow_list_of_ci_product(self, id: str) -> WorkflowListOfCiProductEndpoint:
-        return WorkflowListOfCiProductEndpoint(id, self.session)
-    
-    def build_run_list_of_ci_workflow(self, id: str) -> BuildRunListOfCiWorkflowEndpoint:
-        return BuildRunListOfCiWorkflowEndpoint(id, self.session)
-    
-    def repository_of_ci_workflow(self, id: str) -> RepositoryOfCiWorkflowEndpoint:
-        return RepositoryOfCiWorkflowEndpoint(id, self.session)
-    
-    def mac_os_version_list_of_ci_xcode_version(self, id: str) -> MacOsVersionListOfCiXcodeVersionEndpoint:
-        return MacOsVersionListOfCiXcodeVersionEndpoint(id, self.session)
-    
-    def log_list_of_diagnostic_signature(self, id: str) -> LogListOfDiagnosticSignatureEndpoint:
-        return LogListOfDiagnosticSignatureEndpoint(id, self.session)
-    
-    def territory_list_of_end_user_license_agreement(self, id: str) -> TerritoryListOfEndUserLicenseAgreementEndpoint:
-        return TerritoryListOfEndUserLicenseAgreementEndpoint(id, self.session)
-    
-    def compatible_version_list_of_game_center_enabled_version_relationship(self, id: str) -> CompatibleVersionListOfGameCenterEnabledVersionRelationshipsEndpoint:
-        return CompatibleVersionListOfGameCenterEnabledVersionRelationshipsEndpoint(id, self.session)
-    
-    def compatible_version_list_of_game_center_enabled_version(self, id: str) -> CompatibleVersionListOfGameCenterEnabledVersionEndpoint:
-        return CompatibleVersionListOfGameCenterEnabledVersionEndpoint(id, self.session)
-    
-    def app_of_pre_release_version(self, id: str) -> AppOfPreReleaseVersionEndpoint:
-        return AppOfPreReleaseVersionEndpoint(id, self.session)
-    
-    def build_list_of_pre_release_version(self, id: str) -> BuildListOfPreReleaseVersionEndpoint:
-        return BuildListOfPreReleaseVersionEndpoint(id, self.session)
-    
-    def bundle_id_of_profile(self, id: str) -> BundleIdOfProfileEndpoint:
-        return BundleIdOfProfileEndpoint(id, self.session)
-    
-    def certificate_list_of_profile(self, id: str) -> CertificateListOfProfileEndpoint:
-        return CertificateListOfProfileEndpoint(id, self.session)
-    
-    def device_list_of_profile(self, id: str) -> DeviceListOfProfileEndpoint:
-        return DeviceListOfProfileEndpoint(id, self.session)
-    
-    def repository_list_of_scm_provider(self, id: str) -> RepositoryListOfScmProviderEndpoint:
-        return RepositoryListOfScmProviderEndpoint(id, self.session)
-    
-    def git_reference_list_of_scm_repository(self, id: str) -> GitReferenceListOfScmRepositoryEndpoint:
-        return GitReferenceListOfScmRepositoryEndpoint(id, self.session)
-    
-    def pull_request_list_of_scm_repository(self, id: str) -> PullRequestListOfScmRepositoryEndpoint:
-        return PullRequestListOfScmRepositoryEndpoint(id, self.session)
-    
-    def visible_app_list_of_user_invitation(self, id: str) -> VisibleAppListOfUserInvitationEndpoint:
-        return VisibleAppListOfUserInvitationEndpoint(id, self.session)
-    
-    def visible_app_list_of_user_relationship(self, id: str) -> VisibleAppListOfUserRelationshipsEndpoint:
-        return VisibleAppListOfUserRelationshipsEndpoint(id, self.session)
-    
-    def visible_app_list_of_user(self, id: str) -> VisibleAppListOfUserEndpoint:
-        return VisibleAppListOfUserEndpoint(id, self.session)
+    @endpoint('/v1/buildBundles/{id}')
+    def build_bundle(self, id: str) -> BuildBundleEndpoint:
+        return BuildBundleEndpoint(id, self.session)
+    
+    @endpoint('/v1/diagnosticSignatures/{id}')
+    def diagnostic_signature(self, id: str) -> DiagnosticSignatureEndpoint:
+        return DiagnosticSignatureEndpoint(id, self.session)
+    
+    @endpoint('/v1/gameCenterEnabledVersions/{id}')
+    def game_center_enabled_version(self, id: str) -> GameCenterEnabledVersionEndpoint:
+        return GameCenterEnabledVersionEndpoint(id, self.session)
     

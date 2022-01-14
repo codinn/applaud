@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class BetaAppLocalizationListEndpoint(Endpoint):
+class BetaAppLocalizationsEndpoint(Endpoint):
     path = '/v1/betaAppLocalizations'
 
-    def fields(self, *, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None, app: Union[AppField, list[AppField]]=None) -> BetaAppLocalizationListEndpoint:
+    def fields(self, *, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None, app: Union[AppField, list[AppField]]=None) -> BetaAppLocalizationsEndpoint:
         '''Fields to return for included related types.
 
         :param beta_app_localization: the fields to include for returned resources of type betaAppLocalizations
@@ -21,7 +21,7 @@ class BetaAppLocalizationListEndpoint(Endpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaAppLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaAppLocalizationsEndpoint
         '''
         if beta_app_localization: self._set_fields('betaAppLocalizations',beta_app_localization if type(beta_app_localization) is list else [beta_app_localization])
         if app: self._set_fields('apps',app if type(app) is list else [app])
@@ -30,7 +30,7 @@ class BetaAppLocalizationListEndpoint(Endpoint):
     class Include(StringEnum):
         APP = 'app'
 
-    def filter(self, *, locale: Union[str, list[str]]=None, app: Union[str, list[str]]=None) -> BetaAppLocalizationListEndpoint:
+    def filter(self, *, locale: Union[str, list[str]]=None, app: Union[str, list[str]]=None) -> BetaAppLocalizationsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param locale: filter by attribute 'locale'
@@ -40,7 +40,7 @@ class BetaAppLocalizationListEndpoint(Endpoint):
         :type app: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaAppLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaAppLocalizationsEndpoint
         '''
         if locale: self._set_filter('locale', locale if type(locale) is list else [locale])
         
@@ -48,23 +48,23 @@ class BetaAppLocalizationListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BetaAppLocalizationListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BetaAppLocalizationsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BetaAppLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaAppLocalizationsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None) -> BetaAppLocalizationListEndpoint:
+    def limit(self, number: int=None) -> BetaAppLocalizationsEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaAppLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaAppLocalizationsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -100,6 +100,10 @@ class BetaAppLocalizationListEndpoint(Endpoint):
 class BetaAppLocalizationEndpoint(IDEndpoint):
     path = '/v1/betaAppLocalizations/{id}'
 
+    @endpoint('/v1/betaAppLocalizations/{id}/app')
+    def app(self) -> AppOfBetaAppLocalizationEndpoint:
+        return AppOfBetaAppLocalizationEndpoint(self.id, self.session)
+        
     def fields(self, *, beta_app_localization: Union[BetaAppLocalizationField, list[BetaAppLocalizationField]]=None, app: Union[AppField, list[AppField]]=None) -> BetaAppLocalizationEndpoint:
         '''Fields to return for included related types.
 

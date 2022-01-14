@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class BetaBuildLocalizationListEndpoint(Endpoint):
+class BetaBuildLocalizationsEndpoint(Endpoint):
     path = '/v1/betaBuildLocalizations'
 
-    def fields(self, *, beta_build_localization: Union[BetaBuildLocalizationField, list[BetaBuildLocalizationField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BetaBuildLocalizationListEndpoint:
+    def fields(self, *, beta_build_localization: Union[BetaBuildLocalizationField, list[BetaBuildLocalizationField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BetaBuildLocalizationsEndpoint:
         '''Fields to return for included related types.
 
         :param beta_build_localization: the fields to include for returned resources of type betaBuildLocalizations
@@ -21,7 +21,7 @@ class BetaBuildLocalizationListEndpoint(Endpoint):
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaBuildLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaBuildLocalizationsEndpoint
         '''
         if beta_build_localization: self._set_fields('betaBuildLocalizations',beta_build_localization if type(beta_build_localization) is list else [beta_build_localization])
         if build: self._set_fields('builds',build if type(build) is list else [build])
@@ -30,7 +30,7 @@ class BetaBuildLocalizationListEndpoint(Endpoint):
     class Include(StringEnum):
         BUILD = 'build'
 
-    def filter(self, *, locale: Union[str, list[str]]=None, build: Union[str, list[str]]=None) -> BetaBuildLocalizationListEndpoint:
+    def filter(self, *, locale: Union[str, list[str]]=None, build: Union[str, list[str]]=None) -> BetaBuildLocalizationsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param locale: filter by attribute 'locale'
@@ -40,7 +40,7 @@ class BetaBuildLocalizationListEndpoint(Endpoint):
         :type build: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaBuildLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaBuildLocalizationsEndpoint
         '''
         if locale: self._set_filter('locale', locale if type(locale) is list else [locale])
         
@@ -48,23 +48,23 @@ class BetaBuildLocalizationListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BetaBuildLocalizationListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BetaBuildLocalizationsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BetaBuildLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaBuildLocalizationsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None) -> BetaBuildLocalizationListEndpoint:
+    def limit(self, number: int=None) -> BetaBuildLocalizationsEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaBuildLocalizationListEndpoint
+        :rtype: applaud.endpoints.BetaBuildLocalizationsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -100,6 +100,10 @@ class BetaBuildLocalizationListEndpoint(Endpoint):
 class BetaBuildLocalizationEndpoint(IDEndpoint):
     path = '/v1/betaBuildLocalizations/{id}'
 
+    @endpoint('/v1/betaBuildLocalizations/{id}/build')
+    def build(self) -> BuildOfBetaBuildLocalizationEndpoint:
+        return BuildOfBetaBuildLocalizationEndpoint(self.id, self.session)
+        
     def fields(self, *, beta_build_localization: Union[BetaBuildLocalizationField, list[BetaBuildLocalizationField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BetaBuildLocalizationEndpoint:
         '''Fields to return for included related types.
 

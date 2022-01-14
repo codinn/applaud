@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppPreviewSetListEndpoint(Endpoint):
+class AppPreviewSetsEndpoint(Endpoint):
     path = '/v1/appPreviewSets'
 
     def create(self, request: AppPreviewSetCreateRequest) -> AppPreviewSetResponse:
@@ -28,6 +28,14 @@ class AppPreviewSetListEndpoint(Endpoint):
 class AppPreviewSetEndpoint(IDEndpoint):
     path = '/v1/appPreviewSets/{id}'
 
+    @endpoint('/v1/appPreviewSets/{id}/appPreviews')
+    def app_previews(self) -> AppPreviewsOfAppPreviewSetEndpoint:
+        return AppPreviewsOfAppPreviewSetEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appPreviewSets/{id}/relationships/appPreviews')
+    def app_previews_linkages(self) -> AppPreviewsLinkagesOfAppPreviewSetEndpoint:
+        return AppPreviewsLinkagesOfAppPreviewSetEndpoint(self.id, self.session)
+        
     def fields(self, *, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None, app_preview: Union[AppPreviewField, list[AppPreviewField]]=None) -> AppPreviewSetEndpoint:
         '''Fields to return for included related types.
 
@@ -90,17 +98,17 @@ class AppPreviewSetEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class AppPreviewListOfAppPreviewSetRelationshipsEndpoint(IDEndpoint):
+class AppPreviewsLinkagesOfAppPreviewSetEndpoint(IDEndpoint):
     path = '/v1/appPreviewSets/{id}/relationships/appPreviews'
 
-    def limit(self, number: int=None) -> AppPreviewListOfAppPreviewSetRelationshipsEndpoint:
+    def limit(self, number: int=None) -> AppPreviewsLinkagesOfAppPreviewSetEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewListOfAppPreviewSetRelationshipsEndpoint
+        :rtype: applaud.endpoints.AppPreviewsLinkagesOfAppPreviewSetEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -130,29 +138,29 @@ class AppPreviewListOfAppPreviewSetRelationshipsEndpoint(IDEndpoint):
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_patch(json)
 
-class AppPreviewListOfAppPreviewSetEndpoint(IDEndpoint):
+class AppPreviewsOfAppPreviewSetEndpoint(IDEndpoint):
     path = '/v1/appPreviewSets/{id}/appPreviews'
 
-    def fields(self, *, app_preview: Union[AppPreviewField, list[AppPreviewField]]=None) -> AppPreviewListOfAppPreviewSetEndpoint:
+    def fields(self, *, app_preview: Union[AppPreviewField, list[AppPreviewField]]=None) -> AppPreviewsOfAppPreviewSetEndpoint:
         '''Fields to return for included related types.
 
         :param app_preview: the fields to include for returned resources of type appPreviews
         :type app_preview: Union[AppPreviewField, list[AppPreviewField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewListOfAppPreviewSetEndpoint
+        :rtype: applaud.endpoints.AppPreviewsOfAppPreviewSetEndpoint
         '''
         if app_preview: self._set_fields('appPreviews',app_preview if type(app_preview) is list else [app_preview])
         return self
         
-    def limit(self, number: int=None) -> AppPreviewListOfAppPreviewSetEndpoint:
+    def limit(self, number: int=None) -> AppPreviewsOfAppPreviewSetEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewListOfAppPreviewSetEndpoint
+        :rtype: applaud.endpoints.AppPreviewsOfAppPreviewSetEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

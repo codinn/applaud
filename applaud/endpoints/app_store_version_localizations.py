@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppStoreVersionLocalizationListEndpoint(Endpoint):
+class AppStoreVersionLocalizationsEndpoint(Endpoint):
     path = '/v1/appStoreVersionLocalizations'
 
     def create(self, request: AppStoreVersionLocalizationCreateRequest) -> AppStoreVersionLocalizationResponse:
@@ -28,6 +28,14 @@ class AppStoreVersionLocalizationListEndpoint(Endpoint):
 class AppStoreVersionLocalizationEndpoint(IDEndpoint):
     path = '/v1/appStoreVersionLocalizations/{id}'
 
+    @endpoint('/v1/appStoreVersionLocalizations/{id}/appPreviewSets')
+    def app_preview_sets(self) -> AppPreviewSetsOfAppStoreVersionLocalizationEndpoint:
+        return AppPreviewSetsOfAppStoreVersionLocalizationEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appStoreVersionLocalizations/{id}/appScreenshotSets')
+    def app_screenshot_sets(self) -> AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint:
+        return AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint(self.id, self.session)
+        
     def fields(self, *, app_store_version_localization: Union[AppStoreVersionLocalizationField, list[AppStoreVersionLocalizationField]]=None, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None) -> AppStoreVersionLocalizationEndpoint:
         '''Fields to return for included related types.
 
@@ -116,10 +124,10 @@ class AppStoreVersionLocalizationEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class AppPreviewSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
+class AppPreviewSetsOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
     path = '/v1/appStoreVersionLocalizations/{id}/appPreviewSets'
 
-    def fields(self, *, app_preview: Union[AppPreviewField, list[AppPreviewField]]=None, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None) -> AppPreviewSetListOfAppStoreVersionLocalizationEndpoint:
+    def fields(self, *, app_preview: Union[AppPreviewField, list[AppPreviewField]]=None, app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]]=None) -> AppPreviewSetsOfAppStoreVersionLocalizationEndpoint:
         '''Fields to return for included related types.
 
         :param app_preview: the fields to include for returned resources of type appPreviews
@@ -129,7 +137,7 @@ class AppPreviewSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         :type app_preview_set: Union[AppPreviewSetField, list[AppPreviewSetField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppPreviewSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if app_preview: self._set_fields('appPreviews',app_preview if type(app_preview) is list else [app_preview])
         if app_preview_set: self._set_fields('appPreviewSets',app_preview_set if type(app_preview_set) is list else [app_preview_set])
@@ -138,29 +146,29 @@ class AppPreviewSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
     class Include(StringEnum):
         APP_PREVIEWS = 'appPreviews'
 
-    def filter(self, *, preview_type: Union[PreviewType, list[PreviewType]]=None) -> AppPreviewSetListOfAppStoreVersionLocalizationEndpoint:
+    def filter(self, *, preview_type: Union[PreviewType, list[PreviewType]]=None) -> AppPreviewSetsOfAppStoreVersionLocalizationEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param preview_type: filter by attribute 'previewType'
         :type preview_type: Union[PreviewType, list[PreviewType]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppPreviewSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if preview_type: self._set_filter('previewType', preview_type if type(preview_type) is list else [preview_type])
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppPreviewSetListOfAppStoreVersionLocalizationEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppPreviewSetsOfAppStoreVersionLocalizationEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppPreviewSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_previews: int=None) -> AppPreviewSetListOfAppStoreVersionLocalizationEndpoint:
+    def limit(self, number: int=None, *, app_previews: int=None) -> AppPreviewSetsOfAppStoreVersionLocalizationEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -170,7 +178,7 @@ class AppPreviewSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         :type app_previews: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppPreviewSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppPreviewSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -193,10 +201,10 @@ class AppPreviewSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppPreviewSetsResponse.parse_obj(json)
 
-class AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
+class AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
     path = '/v1/appStoreVersionLocalizations/{id}/appScreenshotSets'
 
-    def fields(self, *, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]]=None) -> AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint:
+    def fields(self, *, app_screenshot_set: Union[AppScreenshotSetField, list[AppScreenshotSetField]]=None, app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]]=None) -> AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint:
         '''Fields to return for included related types.
 
         :param app_screenshot_set: the fields to include for returned resources of type appScreenshotSets
@@ -206,7 +214,7 @@ class AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         :type app_screenshot: Union[AppScreenshotField, list[AppScreenshotField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if app_screenshot_set: self._set_fields('appScreenshotSets',app_screenshot_set if type(app_screenshot_set) is list else [app_screenshot_set])
         if app_screenshot: self._set_fields('appScreenshots',app_screenshot if type(app_screenshot) is list else [app_screenshot])
@@ -215,29 +223,29 @@ class AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
     class Include(StringEnum):
         APP_SCREENSHOTS = 'appScreenshots'
 
-    def filter(self, *, screenshot_display_type: Union[ScreenshotDisplayType, list[ScreenshotDisplayType]]=None) -> AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint:
+    def filter(self, *, screenshot_display_type: Union[ScreenshotDisplayType, list[ScreenshotDisplayType]]=None) -> AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param screenshot_display_type: filter by attribute 'screenshotDisplayType'
         :type screenshot_display_type: Union[ScreenshotDisplayType, list[ScreenshotDisplayType]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if screenshot_display_type: self._set_filter('screenshotDisplayType', screenshot_display_type if type(screenshot_display_type) is list else [screenshot_display_type])
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, app_screenshots: int=None) -> AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint:
+    def limit(self, number: int=None, *, app_screenshots: int=None) -> AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -247,7 +255,7 @@ class AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         :type app_screenshots: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppScreenshotSetListOfAppStoreVersionLocalizationEndpoint
+        :rtype: applaud.endpoints.AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

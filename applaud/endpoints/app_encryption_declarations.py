@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppEncryptionDeclarationListEndpoint(Endpoint):
+class AppEncryptionDeclarationsEndpoint(Endpoint):
     path = '/v1/appEncryptionDeclarations'
 
-    def fields(self, *, app_encryption_declaration: Union[AppEncryptionDeclarationField, list[AppEncryptionDeclarationField]]=None, app: Union[AppField, list[AppField]]=None) -> AppEncryptionDeclarationListEndpoint:
+    def fields(self, *, app_encryption_declaration: Union[AppEncryptionDeclarationField, list[AppEncryptionDeclarationField]]=None, app: Union[AppField, list[AppField]]=None) -> AppEncryptionDeclarationsEndpoint:
         '''Fields to return for included related types.
 
         :param app_encryption_declaration: the fields to include for returned resources of type appEncryptionDeclarations
@@ -21,7 +21,7 @@ class AppEncryptionDeclarationListEndpoint(Endpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppEncryptionDeclarationListEndpoint
+        :rtype: applaud.endpoints.AppEncryptionDeclarationsEndpoint
         '''
         if app_encryption_declaration: self._set_fields('appEncryptionDeclarations',app_encryption_declaration if type(app_encryption_declaration) is list else [app_encryption_declaration])
         if app: self._set_fields('apps',app if type(app) is list else [app])
@@ -30,7 +30,7 @@ class AppEncryptionDeclarationListEndpoint(Endpoint):
     class Include(StringEnum):
         APP = 'app'
 
-    def filter(self, *, platform: Union[Platform, list[Platform]]=None, app: Union[str, list[str]]=None, builds: Union[str, list[str]]=None) -> AppEncryptionDeclarationListEndpoint:
+    def filter(self, *, platform: Union[Platform, list[Platform]]=None, app: Union[str, list[str]]=None, builds: Union[str, list[str]]=None) -> AppEncryptionDeclarationsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param platform: filter by attribute 'platform'
@@ -43,7 +43,7 @@ class AppEncryptionDeclarationListEndpoint(Endpoint):
         :type builds: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppEncryptionDeclarationListEndpoint
+        :rtype: applaud.endpoints.AppEncryptionDeclarationsEndpoint
         '''
         if platform: self._set_filter('platform', platform if type(platform) is list else [platform])
         
@@ -53,23 +53,23 @@ class AppEncryptionDeclarationListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> AppEncryptionDeclarationListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> AppEncryptionDeclarationsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.AppEncryptionDeclarationListEndpoint
+        :rtype: applaud.endpoints.AppEncryptionDeclarationsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None) -> AppEncryptionDeclarationListEndpoint:
+    def limit(self, number: int=None) -> AppEncryptionDeclarationsEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppEncryptionDeclarationListEndpoint
+        :rtype: applaud.endpoints.AppEncryptionDeclarationsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -91,6 +91,14 @@ class AppEncryptionDeclarationListEndpoint(Endpoint):
 class AppEncryptionDeclarationEndpoint(IDEndpoint):
     path = '/v1/appEncryptionDeclarations/{id}'
 
+    @endpoint('/v1/appEncryptionDeclarations/{id}/app')
+    def app(self) -> AppOfAppEncryptionDeclarationEndpoint:
+        return AppOfAppEncryptionDeclarationEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appEncryptionDeclarations/{id}/relationships/builds')
+    def builds_linkages(self) -> BuildsLinkagesOfAppEncryptionDeclarationEndpoint:
+        return BuildsLinkagesOfAppEncryptionDeclarationEndpoint(self.id, self.session)
+        
     def fields(self, *, app_encryption_declaration: Union[AppEncryptionDeclarationField, list[AppEncryptionDeclarationField]]=None, app: Union[AppField, list[AppField]]=None) -> AppEncryptionDeclarationEndpoint:
         '''Fields to return for included related types.
 
@@ -156,7 +164,7 @@ class AppOfAppEncryptionDeclarationEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppResponse.parse_obj(json)
 
-class BuildListOfAppEncryptionDeclarationRelationshipsEndpoint(IDEndpoint):
+class BuildsLinkagesOfAppEncryptionDeclarationEndpoint(IDEndpoint):
     path = '/v1/appEncryptionDeclarations/{id}/relationships/builds'
 
     def create(self, request: AppEncryptionDeclarationBuildsLinkagesRequest):

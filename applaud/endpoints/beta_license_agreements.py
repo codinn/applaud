@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class BetaLicenseAgreementListEndpoint(Endpoint):
+class BetaLicenseAgreementsEndpoint(Endpoint):
     path = '/v1/betaLicenseAgreements'
 
-    def fields(self, *, beta_license_agreement: Union[BetaLicenseAgreementField, list[BetaLicenseAgreementField]]=None, app: Union[AppField, list[AppField]]=None) -> BetaLicenseAgreementListEndpoint:
+    def fields(self, *, beta_license_agreement: Union[BetaLicenseAgreementField, list[BetaLicenseAgreementField]]=None, app: Union[AppField, list[AppField]]=None) -> BetaLicenseAgreementsEndpoint:
         '''Fields to return for included related types.
 
         :param beta_license_agreement: the fields to include for returned resources of type betaLicenseAgreements
@@ -21,7 +21,7 @@ class BetaLicenseAgreementListEndpoint(Endpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaLicenseAgreementListEndpoint
+        :rtype: applaud.endpoints.BetaLicenseAgreementsEndpoint
         '''
         if beta_license_agreement: self._set_fields('betaLicenseAgreements',beta_license_agreement if type(beta_license_agreement) is list else [beta_license_agreement])
         if app: self._set_fields('apps',app if type(app) is list else [app])
@@ -30,36 +30,36 @@ class BetaLicenseAgreementListEndpoint(Endpoint):
     class Include(StringEnum):
         APP = 'app'
 
-    def filter(self, *, app: Union[str, list[str]]=None) -> BetaLicenseAgreementListEndpoint:
+    def filter(self, *, app: Union[str, list[str]]=None) -> BetaLicenseAgreementsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param app: filter by id(s) of related 'app'
         :type app: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaLicenseAgreementListEndpoint
+        :rtype: applaud.endpoints.BetaLicenseAgreementsEndpoint
         '''
         if app: self._set_filter('app', app if type(app) is list else [app])
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BetaLicenseAgreementListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BetaLicenseAgreementsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BetaLicenseAgreementListEndpoint
+        :rtype: applaud.endpoints.BetaLicenseAgreementsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None) -> BetaLicenseAgreementListEndpoint:
+    def limit(self, number: int=None) -> BetaLicenseAgreementsEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BetaLicenseAgreementListEndpoint
+        :rtype: applaud.endpoints.BetaLicenseAgreementsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -81,6 +81,10 @@ class BetaLicenseAgreementListEndpoint(Endpoint):
 class BetaLicenseAgreementEndpoint(IDEndpoint):
     path = '/v1/betaLicenseAgreements/{id}'
 
+    @endpoint('/v1/betaLicenseAgreements/{id}/app')
+    def app(self) -> AppOfBetaLicenseAgreementEndpoint:
+        return AppOfBetaLicenseAgreementEndpoint(self.id, self.session)
+        
     def fields(self, *, beta_license_agreement: Union[BetaLicenseAgreementField, list[BetaLicenseAgreementField]]=None, app: Union[AppField, list[AppField]]=None) -> BetaLicenseAgreementEndpoint:
         '''Fields to return for included related types.
 

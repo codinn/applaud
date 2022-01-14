@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppClipAppStoreReviewDetailListEndpoint(Endpoint):
+class AppClipAppStoreReviewDetailsEndpoint(Endpoint):
     path = '/v1/appClipAppStoreReviewDetails'
 
     def create(self, request: AppClipAppStoreReviewDetailCreateRequest) -> AppClipAppStoreReviewDetailResponse:

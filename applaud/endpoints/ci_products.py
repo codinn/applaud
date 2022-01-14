@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class CiProductListEndpoint(Endpoint):
+class CiProductsEndpoint(Endpoint):
     path = '/v1/ciProducts'
 
-    def fields(self, *, ci_product: Union[CiProductField, list[CiProductField]]=None, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]]=None, app: Union[AppField, list[AppField]]=None, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> CiProductListEndpoint:
+    def fields(self, *, ci_product: Union[CiProductField, list[CiProductField]]=None, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]]=None, app: Union[AppField, list[AppField]]=None, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> CiProductsEndpoint:
         '''Fields to return for included related types.
 
         :param ci_product: the fields to include for returned resources of type ciProducts
@@ -30,7 +30,7 @@ class CiProductListEndpoint(Endpoint):
         :type scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.CiProductListEndpoint
+        :rtype: applaud.endpoints.CiProductsEndpoint
         '''
         if ci_product: self._set_fields('ciProducts',ci_product if type(ci_product) is list else [ci_product])
         if ci_build_run: self._set_fields('ciBuildRuns',ci_build_run if type(ci_build_run) is list else [ci_build_run])
@@ -44,7 +44,7 @@ class CiProductListEndpoint(Endpoint):
         BUNDLE_ID = 'bundleId'
         PRIMARY_REPOSITORIES = 'primaryRepositories'
 
-    def filter(self, *, product_type: Union[CiProductType, list[CiProductType]]=None, app: Union[str, list[str]]=None) -> CiProductListEndpoint:
+    def filter(self, *, product_type: Union[CiProductType, list[CiProductType]]=None, app: Union[str, list[str]]=None) -> CiProductsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param product_type: filter by attribute 'productType'
@@ -54,7 +54,7 @@ class CiProductListEndpoint(Endpoint):
         :type app: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.CiProductListEndpoint
+        :rtype: applaud.endpoints.CiProductsEndpoint
         '''
         if product_type: self._set_filter('productType', product_type if type(product_type) is list else [product_type])
         
@@ -62,16 +62,16 @@ class CiProductListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> CiProductListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> CiProductsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.CiProductListEndpoint
+        :rtype: applaud.endpoints.CiProductsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, primary_repositories: int=None) -> CiProductListEndpoint:
+    def limit(self, number: int=None, *, primary_repositories: int=None) -> CiProductsEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -81,7 +81,7 @@ class CiProductListEndpoint(Endpoint):
         :type primary_repositories: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.CiProductListEndpoint
+        :rtype: applaud.endpoints.CiProductsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -107,6 +107,26 @@ class CiProductListEndpoint(Endpoint):
 class CiProductEndpoint(IDEndpoint):
     path = '/v1/ciProducts/{id}'
 
+    @endpoint('/v1/ciProducts/{id}/additionalRepositories')
+    def additional_repositories(self) -> AdditionalRepositoriesOfCiProductEndpoint:
+        return AdditionalRepositoriesOfCiProductEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciProducts/{id}/app')
+    def app(self) -> AppOfCiProductEndpoint:
+        return AppOfCiProductEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciProducts/{id}/buildRuns')
+    def build_runs(self) -> BuildRunsOfCiProductEndpoint:
+        return BuildRunsOfCiProductEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciProducts/{id}/primaryRepositories')
+    def primary_repositories(self) -> PrimaryRepositoriesOfCiProductEndpoint:
+        return PrimaryRepositoriesOfCiProductEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciProducts/{id}/workflows')
+    def workflows(self) -> WorkflowsOfCiProductEndpoint:
+        return WorkflowsOfCiProductEndpoint(self.id, self.session)
+        
     def fields(self, *, ci_product: Union[CiProductField, list[CiProductField]]=None, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]]=None, app: Union[AppField, list[AppField]]=None, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> CiProductEndpoint:
         '''Fields to return for included related types.
 
@@ -182,42 +202,42 @@ class CiProductEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class AdditionalRepositoryListOfCiProductEndpoint(IDEndpoint):
+class AdditionalRepositoriesOfCiProductEndpoint(IDEndpoint):
     path = '/v1/ciProducts/{id}/additionalRepositories'
 
-    def fields(self, *, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> AdditionalRepositoryListOfCiProductEndpoint:
+    def fields(self, *, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> AdditionalRepositoriesOfCiProductEndpoint:
         '''Fields to return for included related types.
 
         :param scm_repository: the fields to include for returned resources of type scmRepositories
         :type scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AdditionalRepositoryListOfCiProductEndpoint
+        :rtype: applaud.endpoints.AdditionalRepositoriesOfCiProductEndpoint
         '''
         if scm_repository: self._set_fields('scmRepositories',scm_repository if type(scm_repository) is list else [scm_repository])
         return self
         
-    def filter(self, *, id: Union[str, list[str]]=None) -> AdditionalRepositoryListOfCiProductEndpoint:
+    def filter(self, *, id: Union[str, list[str]]=None) -> AdditionalRepositoriesOfCiProductEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param id: filter by id(s)
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AdditionalRepositoryListOfCiProductEndpoint
+        :rtype: applaud.endpoints.AdditionalRepositoriesOfCiProductEndpoint
         '''
         if id: self._set_filter('id', id if type(id) is list else [id])
         
         return self
         
-    def limit(self, number: int=None) -> AdditionalRepositoryListOfCiProductEndpoint:
+    def limit(self, number: int=None) -> AdditionalRepositoriesOfCiProductEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AdditionalRepositoryListOfCiProductEndpoint
+        :rtype: applaud.endpoints.AdditionalRepositoriesOfCiProductEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -413,10 +433,10 @@ class AppOfCiProductEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppResponse.parse_obj(json)
 
-class BuildRunListOfCiProductEndpoint(IDEndpoint):
+class BuildRunsOfCiProductEndpoint(IDEndpoint):
     path = '/v1/ciProducts/{id}/buildRuns'
 
-    def fields(self, *, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BuildRunListOfCiProductEndpoint:
+    def fields(self, *, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BuildRunsOfCiProductEndpoint:
         '''Fields to return for included related types.
 
         :param ci_build_run: the fields to include for returned resources of type ciBuildRuns
@@ -426,7 +446,7 @@ class BuildRunListOfCiProductEndpoint(IDEndpoint):
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiProductEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiProductEndpoint
         '''
         if ci_build_run: self._set_fields('ciBuildRuns',ci_build_run if type(ci_build_run) is list else [ci_build_run])
         if build: self._set_fields('builds',build if type(build) is list else [build])
@@ -435,29 +455,29 @@ class BuildRunListOfCiProductEndpoint(IDEndpoint):
     class Include(StringEnum):
         BUILDS = 'builds'
 
-    def filter(self, *, builds: Union[str, list[str]]=None) -> BuildRunListOfCiProductEndpoint:
+    def filter(self, *, builds: Union[str, list[str]]=None) -> BuildRunsOfCiProductEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param builds: filter by id(s) of related 'builds'
         :type builds: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiProductEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiProductEndpoint
         '''
         if builds: self._set_filter('builds', builds if type(builds) is list else [builds])
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BuildRunListOfCiProductEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BuildRunsOfCiProductEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiProductEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiProductEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, builds: int=None) -> BuildRunListOfCiProductEndpoint:
+    def limit(self, number: int=None, *, builds: int=None) -> BuildRunsOfCiProductEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -467,7 +487,7 @@ class BuildRunListOfCiProductEndpoint(IDEndpoint):
         :type builds: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiProductEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiProductEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -490,42 +510,42 @@ class BuildRunListOfCiProductEndpoint(IDEndpoint):
         json = super()._perform_get()
         return CiBuildRunsResponse.parse_obj(json)
 
-class PrimaryRepositoryListOfCiProductEndpoint(IDEndpoint):
+class PrimaryRepositoriesOfCiProductEndpoint(IDEndpoint):
     path = '/v1/ciProducts/{id}/primaryRepositories'
 
-    def fields(self, *, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> PrimaryRepositoryListOfCiProductEndpoint:
+    def fields(self, *, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> PrimaryRepositoriesOfCiProductEndpoint:
         '''Fields to return for included related types.
 
         :param scm_repository: the fields to include for returned resources of type scmRepositories
         :type scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.PrimaryRepositoryListOfCiProductEndpoint
+        :rtype: applaud.endpoints.PrimaryRepositoriesOfCiProductEndpoint
         '''
         if scm_repository: self._set_fields('scmRepositories',scm_repository if type(scm_repository) is list else [scm_repository])
         return self
         
-    def filter(self, *, id: Union[str, list[str]]=None) -> PrimaryRepositoryListOfCiProductEndpoint:
+    def filter(self, *, id: Union[str, list[str]]=None) -> PrimaryRepositoriesOfCiProductEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param id: filter by id(s)
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.PrimaryRepositoryListOfCiProductEndpoint
+        :rtype: applaud.endpoints.PrimaryRepositoriesOfCiProductEndpoint
         '''
         if id: self._set_filter('id', id if type(id) is list else [id])
         
         return self
         
-    def limit(self, number: int=None) -> PrimaryRepositoryListOfCiProductEndpoint:
+    def limit(self, number: int=None) -> PrimaryRepositoriesOfCiProductEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.PrimaryRepositoryListOfCiProductEndpoint
+        :rtype: applaud.endpoints.PrimaryRepositoriesOfCiProductEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -544,29 +564,29 @@ class PrimaryRepositoryListOfCiProductEndpoint(IDEndpoint):
         json = super()._perform_get()
         return ScmRepositoriesResponse.parse_obj(json)
 
-class WorkflowListOfCiProductEndpoint(IDEndpoint):
+class WorkflowsOfCiProductEndpoint(IDEndpoint):
     path = '/v1/ciProducts/{id}/workflows'
 
-    def fields(self, *, ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]]=None) -> WorkflowListOfCiProductEndpoint:
+    def fields(self, *, ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]]=None) -> WorkflowsOfCiProductEndpoint:
         '''Fields to return for included related types.
 
         :param ci_workflow: the fields to include for returned resources of type ciWorkflows
         :type ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.WorkflowListOfCiProductEndpoint
+        :rtype: applaud.endpoints.WorkflowsOfCiProductEndpoint
         '''
         if ci_workflow: self._set_fields('ciWorkflows',ci_workflow if type(ci_workflow) is list else [ci_workflow])
         return self
         
-    def limit(self, number: int=None) -> WorkflowListOfCiProductEndpoint:
+    def limit(self, number: int=None) -> WorkflowsOfCiProductEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.WorkflowListOfCiProductEndpoint
+        :rtype: applaud.endpoints.WorkflowsOfCiProductEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

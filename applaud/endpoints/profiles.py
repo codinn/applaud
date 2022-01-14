@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class ProfileListEndpoint(Endpoint):
+class ProfilesEndpoint(Endpoint):
     path = '/v1/profiles'
 
-    def fields(self, *, profile: Union[ProfileField, list[ProfileField]]=None, certificate: Union[CertificateField, list[CertificateField]]=None, device: Union[DeviceField, list[DeviceField]]=None, bundle_id: Union[BundleIdField, list[BundleIdField]]=None) -> ProfileListEndpoint:
+    def fields(self, *, profile: Union[ProfileField, list[ProfileField]]=None, certificate: Union[CertificateField, list[CertificateField]]=None, device: Union[DeviceField, list[DeviceField]]=None, bundle_id: Union[BundleIdField, list[BundleIdField]]=None) -> ProfilesEndpoint:
         '''Fields to return for included related types.
 
         :param profile: the fields to include for returned resources of type profiles
@@ -27,7 +27,7 @@ class ProfileListEndpoint(Endpoint):
         :type bundle_id: Union[BundleIdField, list[BundleIdField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListEndpoint
+        :rtype: applaud.endpoints.ProfilesEndpoint
         '''
         if profile: self._set_fields('profiles',profile if type(profile) is list else [profile])
         if certificate: self._set_fields('certificates',certificate if type(certificate) is list else [certificate])
@@ -40,7 +40,7 @@ class ProfileListEndpoint(Endpoint):
         CERTIFICATES = 'certificates'
         DEVICES = 'devices'
 
-    def filter(self, *, name: Union[str, list[str]]=None, profile_state: Union[ProfileState, list[ProfileState]]=None, profile_type: Union[ProfileType, list[ProfileType]]=None, id: Union[str, list[str]]=None) -> ProfileListEndpoint:
+    def filter(self, *, name: Union[str, list[str]]=None, profile_state: Union[ProfileState, list[ProfileState]]=None, profile_type: Union[ProfileType, list[ProfileType]]=None, id: Union[str, list[str]]=None) -> ProfilesEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param name: filter by attribute 'name'
@@ -56,7 +56,7 @@ class ProfileListEndpoint(Endpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListEndpoint
+        :rtype: applaud.endpoints.ProfilesEndpoint
         '''
         if name: self._set_filter('name', name if type(name) is list else [name])
         
@@ -68,20 +68,20 @@ class ProfileListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> ProfileListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> ProfilesEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListEndpoint
+        :rtype: applaud.endpoints.ProfilesEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, id: SortOrder=None, name: SortOrder=None, profile_state: SortOrder=None, profile_type: SortOrder=None) -> ProfileListEndpoint:
+    def sort(self, *, id: SortOrder=None, name: SortOrder=None, profile_state: SortOrder=None, profile_type: SortOrder=None) -> ProfilesEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListEndpoint
+        :rtype: applaud.endpoints.ProfilesEndpoint
         '''
         if id: self.sort_expressions.append('id' if id == SortOrder.ASC else '-id')
         if name: self.sort_expressions.append('name' if name == SortOrder.ASC else '-name')
@@ -89,7 +89,7 @@ class ProfileListEndpoint(Endpoint):
         if profile_type: self.sort_expressions.append('profileType' if profile_type == SortOrder.ASC else '-profileType')
         return self
         
-    def limit(self, number: int=None, *, certificates: int=None, devices: int=None) -> ProfileListEndpoint:
+    def limit(self, number: int=None, *, certificates: int=None, devices: int=None) -> ProfilesEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -102,7 +102,7 @@ class ProfileListEndpoint(Endpoint):
         :type devices: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListEndpoint
+        :rtype: applaud.endpoints.ProfilesEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -146,6 +146,18 @@ class ProfileListEndpoint(Endpoint):
 class ProfileEndpoint(IDEndpoint):
     path = '/v1/profiles/{id}'
 
+    @endpoint('/v1/profiles/{id}/bundleId')
+    def bundle_id(self) -> BundleIdOfProfileEndpoint:
+        return BundleIdOfProfileEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/profiles/{id}/certificates')
+    def certificates(self) -> CertificatesOfProfileEndpoint:
+        return CertificatesOfProfileEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/profiles/{id}/devices')
+    def devices(self) -> DevicesOfProfileEndpoint:
+        return DevicesOfProfileEndpoint(self.id, self.session)
+        
     def fields(self, *, profile: Union[ProfileField, list[ProfileField]]=None, certificate: Union[CertificateField, list[CertificateField]]=None, device: Union[DeviceField, list[DeviceField]]=None, bundle_id: Union[BundleIdField, list[BundleIdField]]=None) -> ProfileEndpoint:
         '''Fields to return for included related types.
 
@@ -250,29 +262,29 @@ class BundleIdOfProfileEndpoint(IDEndpoint):
         json = super()._perform_get()
         return BundleIdResponse.parse_obj(json)
 
-class CertificateListOfProfileEndpoint(IDEndpoint):
+class CertificatesOfProfileEndpoint(IDEndpoint):
     path = '/v1/profiles/{id}/certificates'
 
-    def fields(self, *, certificate: Union[CertificateField, list[CertificateField]]=None) -> CertificateListOfProfileEndpoint:
+    def fields(self, *, certificate: Union[CertificateField, list[CertificateField]]=None) -> CertificatesOfProfileEndpoint:
         '''Fields to return for included related types.
 
         :param certificate: the fields to include for returned resources of type certificates
         :type certificate: Union[CertificateField, list[CertificateField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.CertificateListOfProfileEndpoint
+        :rtype: applaud.endpoints.CertificatesOfProfileEndpoint
         '''
         if certificate: self._set_fields('certificates',certificate if type(certificate) is list else [certificate])
         return self
         
-    def limit(self, number: int=None) -> CertificateListOfProfileEndpoint:
+    def limit(self, number: int=None) -> CertificatesOfProfileEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.CertificateListOfProfileEndpoint
+        :rtype: applaud.endpoints.CertificatesOfProfileEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -291,29 +303,29 @@ class CertificateListOfProfileEndpoint(IDEndpoint):
         json = super()._perform_get()
         return CertificatesResponse.parse_obj(json)
 
-class DeviceListOfProfileEndpoint(IDEndpoint):
+class DevicesOfProfileEndpoint(IDEndpoint):
     path = '/v1/profiles/{id}/devices'
 
-    def fields(self, *, device: Union[DeviceField, list[DeviceField]]=None) -> DeviceListOfProfileEndpoint:
+    def fields(self, *, device: Union[DeviceField, list[DeviceField]]=None) -> DevicesOfProfileEndpoint:
         '''Fields to return for included related types.
 
         :param device: the fields to include for returned resources of type devices
         :type device: Union[DeviceField, list[DeviceField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.DeviceListOfProfileEndpoint
+        :rtype: applaud.endpoints.DevicesOfProfileEndpoint
         '''
         if device: self._set_fields('devices',device if type(device) is list else [device])
         return self
         
-    def limit(self, number: int=None) -> DeviceListOfProfileEndpoint:
+    def limit(self, number: int=None) -> DevicesOfProfileEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.DeviceListOfProfileEndpoint
+        :rtype: applaud.endpoints.DevicesOfProfileEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

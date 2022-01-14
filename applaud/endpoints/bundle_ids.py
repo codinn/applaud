@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class BundleIdListEndpoint(Endpoint):
+class BundleIdsEndpoint(Endpoint):
     path = '/v1/bundleIds'
 
-    def fields(self, *, bundle_id: Union[BundleIdField, list[BundleIdField]]=None, bundle_id_capability: Union[BundleIdCapabilityField, list[BundleIdCapabilityField]]=None, profile: Union[ProfileField, list[ProfileField]]=None, app: Union[AppField, list[AppField]]=None) -> BundleIdListEndpoint:
+    def fields(self, *, bundle_id: Union[BundleIdField, list[BundleIdField]]=None, bundle_id_capability: Union[BundleIdCapabilityField, list[BundleIdCapabilityField]]=None, profile: Union[ProfileField, list[ProfileField]]=None, app: Union[AppField, list[AppField]]=None) -> BundleIdsEndpoint:
         '''Fields to return for included related types.
 
         :param bundle_id: the fields to include for returned resources of type bundleIds
@@ -27,7 +27,7 @@ class BundleIdListEndpoint(Endpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdListEndpoint
+        :rtype: applaud.endpoints.BundleIdsEndpoint
         '''
         if bundle_id: self._set_fields('bundleIds',bundle_id if type(bundle_id) is list else [bundle_id])
         if bundle_id_capability: self._set_fields('bundleIdCapabilities',bundle_id_capability if type(bundle_id_capability) is list else [bundle_id_capability])
@@ -40,7 +40,7 @@ class BundleIdListEndpoint(Endpoint):
         BUNDLE_ID_CAPABILITIES = 'bundleIdCapabilities'
         PROFILES = 'profiles'
 
-    def filter(self, *, identifier: Union[str, list[str]]=None, name: Union[str, list[str]]=None, platform: Union[BundleIdPlatform, list[BundleIdPlatform]]=None, seed_id: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> BundleIdListEndpoint:
+    def filter(self, *, identifier: Union[str, list[str]]=None, name: Union[str, list[str]]=None, platform: Union[BundleIdPlatform, list[BundleIdPlatform]]=None, seed_id: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> BundleIdsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param identifier: filter by attribute 'identifier'
@@ -59,7 +59,7 @@ class BundleIdListEndpoint(Endpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdListEndpoint
+        :rtype: applaud.endpoints.BundleIdsEndpoint
         '''
         if identifier: self._set_filter('identifier', identifier if type(identifier) is list else [identifier])
         
@@ -73,20 +73,20 @@ class BundleIdListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BundleIdListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BundleIdsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdListEndpoint
+        :rtype: applaud.endpoints.BundleIdsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, id: SortOrder=None, identifier: SortOrder=None, name: SortOrder=None, platform: SortOrder=None, seed_id: SortOrder=None) -> BundleIdListEndpoint:
+    def sort(self, *, id: SortOrder=None, identifier: SortOrder=None, name: SortOrder=None, platform: SortOrder=None, seed_id: SortOrder=None) -> BundleIdsEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdListEndpoint
+        :rtype: applaud.endpoints.BundleIdsEndpoint
         '''
         if id: self.sort_expressions.append('id' if id == SortOrder.ASC else '-id')
         if identifier: self.sort_expressions.append('identifier' if identifier == SortOrder.ASC else '-identifier')
@@ -95,7 +95,7 @@ class BundleIdListEndpoint(Endpoint):
         if seed_id: self.sort_expressions.append('seedId' if seed_id == SortOrder.ASC else '-seedId')
         return self
         
-    def limit(self, number: int=None, *, bundle_id_capabilities: int=None, profiles: int=None) -> BundleIdListEndpoint:
+    def limit(self, number: int=None, *, bundle_id_capabilities: int=None, profiles: int=None) -> BundleIdsEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -108,7 +108,7 @@ class BundleIdListEndpoint(Endpoint):
         :type profiles: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdListEndpoint
+        :rtype: applaud.endpoints.BundleIdsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -152,6 +152,18 @@ class BundleIdListEndpoint(Endpoint):
 class BundleIdEndpoint(IDEndpoint):
     path = '/v1/bundleIds/{id}'
 
+    @endpoint('/v1/bundleIds/{id}/app')
+    def app(self) -> AppOfBundleIdEndpoint:
+        return AppOfBundleIdEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/bundleIds/{id}/bundleIdCapabilities')
+    def bundle_id_capabilities(self) -> BundleIdCapabilitiesOfBundleIdEndpoint:
+        return BundleIdCapabilitiesOfBundleIdEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/bundleIds/{id}/profiles')
+    def profiles(self) -> ProfilesOfBundleIdEndpoint:
+        return ProfilesOfBundleIdEndpoint(self.id, self.session)
+        
     def fields(self, *, bundle_id: Union[BundleIdField, list[BundleIdField]]=None, bundle_id_capability: Union[BundleIdCapabilityField, list[BundleIdCapabilityField]]=None, profile: Union[ProfileField, list[ProfileField]]=None, app: Union[AppField, list[AppField]]=None) -> BundleIdEndpoint:
         '''Fields to return for included related types.
 
@@ -270,29 +282,29 @@ class AppOfBundleIdEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppResponse.parse_obj(json)
 
-class BundleIdCapabilityListOfBundleIdEndpoint(IDEndpoint):
+class BundleIdCapabilitiesOfBundleIdEndpoint(IDEndpoint):
     path = '/v1/bundleIds/{id}/bundleIdCapabilities'
 
-    def fields(self, *, bundle_id_capability: Union[BundleIdCapabilityField, list[BundleIdCapabilityField]]=None) -> BundleIdCapabilityListOfBundleIdEndpoint:
+    def fields(self, *, bundle_id_capability: Union[BundleIdCapabilityField, list[BundleIdCapabilityField]]=None) -> BundleIdCapabilitiesOfBundleIdEndpoint:
         '''Fields to return for included related types.
 
         :param bundle_id_capability: the fields to include for returned resources of type bundleIdCapabilities
         :type bundle_id_capability: Union[BundleIdCapabilityField, list[BundleIdCapabilityField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdCapabilityListOfBundleIdEndpoint
+        :rtype: applaud.endpoints.BundleIdCapabilitiesOfBundleIdEndpoint
         '''
         if bundle_id_capability: self._set_fields('bundleIdCapabilities',bundle_id_capability if type(bundle_id_capability) is list else [bundle_id_capability])
         return self
         
-    def limit(self, number: int=None) -> BundleIdCapabilityListOfBundleIdEndpoint:
+    def limit(self, number: int=None) -> BundleIdCapabilitiesOfBundleIdEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BundleIdCapabilityListOfBundleIdEndpoint
+        :rtype: applaud.endpoints.BundleIdCapabilitiesOfBundleIdEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -311,29 +323,29 @@ class BundleIdCapabilityListOfBundleIdEndpoint(IDEndpoint):
         json = super()._perform_get()
         return BundleIdCapabilitiesResponse.parse_obj(json)
 
-class ProfileListOfBundleIdEndpoint(IDEndpoint):
+class ProfilesOfBundleIdEndpoint(IDEndpoint):
     path = '/v1/bundleIds/{id}/profiles'
 
-    def fields(self, *, profile: Union[ProfileField, list[ProfileField]]=None) -> ProfileListOfBundleIdEndpoint:
+    def fields(self, *, profile: Union[ProfileField, list[ProfileField]]=None) -> ProfilesOfBundleIdEndpoint:
         '''Fields to return for included related types.
 
         :param profile: the fields to include for returned resources of type profiles
         :type profile: Union[ProfileField, list[ProfileField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListOfBundleIdEndpoint
+        :rtype: applaud.endpoints.ProfilesOfBundleIdEndpoint
         '''
         if profile: self._set_fields('profiles',profile if type(profile) is list else [profile])
         return self
         
-    def limit(self, number: int=None) -> ProfileListOfBundleIdEndpoint:
+    def limit(self, number: int=None) -> ProfilesOfBundleIdEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.ProfileListOfBundleIdEndpoint
+        :rtype: applaud.endpoints.ProfilesOfBundleIdEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,22 +8,22 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class DeviceListEndpoint(Endpoint):
+class DevicesEndpoint(Endpoint):
     path = '/v1/devices'
 
-    def fields(self, *, device: Union[DeviceField, list[DeviceField]]=None) -> DeviceListEndpoint:
+    def fields(self, *, device: Union[DeviceField, list[DeviceField]]=None) -> DevicesEndpoint:
         '''Fields to return for included related types.
 
         :param device: the fields to include for returned resources of type devices
         :type device: Union[DeviceField, list[DeviceField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.DeviceListEndpoint
+        :rtype: applaud.endpoints.DevicesEndpoint
         '''
         if device: self._set_fields('devices',device if type(device) is list else [device])
         return self
         
-    def filter(self, *, name: Union[str, list[str]]=None, platform: Union[BundleIdPlatform, list[BundleIdPlatform]]=None, status: Union[DeviceStatus, list[DeviceStatus]]=None, udid: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> DeviceListEndpoint:
+    def filter(self, *, name: Union[str, list[str]]=None, platform: Union[BundleIdPlatform, list[BundleIdPlatform]]=None, status: Union[DeviceStatus, list[DeviceStatus]]=None, udid: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> DevicesEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param name: filter by attribute 'name'
@@ -42,7 +42,7 @@ class DeviceListEndpoint(Endpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.DeviceListEndpoint
+        :rtype: applaud.endpoints.DevicesEndpoint
         '''
         if name: self._set_filter('name', name if type(name) is list else [name])
         
@@ -56,11 +56,11 @@ class DeviceListEndpoint(Endpoint):
         
         return self
         
-    def sort(self, *, id: SortOrder=None, name: SortOrder=None, platform: SortOrder=None, statu: SortOrder=None, udid: SortOrder=None) -> DeviceListEndpoint:
+    def sort(self, *, id: SortOrder=None, name: SortOrder=None, platform: SortOrder=None, statu: SortOrder=None, udid: SortOrder=None) -> DevicesEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.DeviceListEndpoint
+        :rtype: applaud.endpoints.DevicesEndpoint
         '''
         if id: self.sort_expressions.append('id' if id == SortOrder.ASC else '-id')
         if name: self.sort_expressions.append('name' if name == SortOrder.ASC else '-name')
@@ -69,14 +69,14 @@ class DeviceListEndpoint(Endpoint):
         if udid: self.sort_expressions.append('udid' if udid == SortOrder.ASC else '-udid')
         return self
         
-    def limit(self, number: int=None) -> DeviceListEndpoint:
+    def limit(self, number: int=None) -> DevicesEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.DeviceListEndpoint
+        :rtype: applaud.endpoints.DevicesEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

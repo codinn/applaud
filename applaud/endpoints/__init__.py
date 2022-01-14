@@ -67,6 +67,7 @@ from .scm_repositories import *
 from .territories import *
 from .user_invitations import *
 from .users import *
+from .dummy import *
 from .build_bundles import *
 from .diagnostic_signatures import *
 from .game_center_enabled_versions import *

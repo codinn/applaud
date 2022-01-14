@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class EndUserLicenseAgreementListEndpoint(Endpoint):
+class EndUserLicenseAgreementsEndpoint(Endpoint):
     path = '/v1/endUserLicenseAgreements'
 
     def create(self, request: EndUserLicenseAgreementCreateRequest) -> EndUserLicenseAgreementResponse:
@@ -28,6 +28,10 @@ class EndUserLicenseAgreementListEndpoint(Endpoint):
 class EndUserLicenseAgreementEndpoint(IDEndpoint):
     path = '/v1/endUserLicenseAgreements/{id}'
 
+    @endpoint('/v1/endUserLicenseAgreements/{id}/territories')
+    def territories(self) -> TerritoriesOfEndUserLicenseAgreementEndpoint:
+        return TerritoriesOfEndUserLicenseAgreementEndpoint(self.id, self.session)
+        
     def fields(self, *, end_user_license_agreement: Union[EndUserLicenseAgreementField, list[EndUserLicenseAgreementField]]=None, territory: Union[TerritoryField, list[TerritoryField]]=None) -> EndUserLicenseAgreementEndpoint:
         '''Fields to return for included related types.
 
@@ -104,29 +108,29 @@ class EndUserLicenseAgreementEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class TerritoryListOfEndUserLicenseAgreementEndpoint(IDEndpoint):
+class TerritoriesOfEndUserLicenseAgreementEndpoint(IDEndpoint):
     path = '/v1/endUserLicenseAgreements/{id}/territories'
 
-    def fields(self, *, territory: Union[TerritoryField, list[TerritoryField]]=None) -> TerritoryListOfEndUserLicenseAgreementEndpoint:
+    def fields(self, *, territory: Union[TerritoryField, list[TerritoryField]]=None) -> TerritoriesOfEndUserLicenseAgreementEndpoint:
         '''Fields to return for included related types.
 
         :param territory: the fields to include for returned resources of type territories
         :type territory: Union[TerritoryField, list[TerritoryField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.TerritoryListOfEndUserLicenseAgreementEndpoint
+        :rtype: applaud.endpoints.TerritoriesOfEndUserLicenseAgreementEndpoint
         '''
         if territory: self._set_fields('territories',territory if type(territory) is list else [territory])
         return self
         
-    def limit(self, number: int=None) -> TerritoryListOfEndUserLicenseAgreementEndpoint:
+    def limit(self, number: int=None) -> TerritoriesOfEndUserLicenseAgreementEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.TerritoryListOfEndUserLicenseAgreementEndpoint
+        :rtype: applaud.endpoints.TerritoriesOfEndUserLicenseAgreementEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

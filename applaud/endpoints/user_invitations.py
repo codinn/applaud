@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,10 +8,10 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class UserInvitationListEndpoint(Endpoint):
+class UserInvitationsEndpoint(Endpoint):
     path = '/v1/userInvitations'
 
-    def fields(self, *, user_invitation: Union[UserInvitationField, list[UserInvitationField]]=None, app: Union[AppField, list[AppField]]=None) -> UserInvitationListEndpoint:
+    def fields(self, *, user_invitation: Union[UserInvitationField, list[UserInvitationField]]=None, app: Union[AppField, list[AppField]]=None) -> UserInvitationsEndpoint:
         '''Fields to return for included related types.
 
         :param user_invitation: the fields to include for returned resources of type userInvitations
@@ -21,7 +21,7 @@ class UserInvitationListEndpoint(Endpoint):
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.UserInvitationListEndpoint
+        :rtype: applaud.endpoints.UserInvitationsEndpoint
         '''
         if user_invitation: self._set_fields('userInvitations',user_invitation if type(user_invitation) is list else [user_invitation])
         if app: self._set_fields('apps',app if type(app) is list else [app])
@@ -30,7 +30,7 @@ class UserInvitationListEndpoint(Endpoint):
     class Include(StringEnum):
         VISIBLE_APPS = 'visibleApps'
 
-    def filter(self, *, email: Union[str, list[str]]=None, roles: Union[UserRole, list[UserRole]]=None, visible_apps: Union[str, list[str]]=None) -> UserInvitationListEndpoint:
+    def filter(self, *, email: Union[str, list[str]]=None, roles: Union[UserRole, list[UserRole]]=None, visible_apps: Union[str, list[str]]=None) -> UserInvitationsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param email: filter by attribute 'email'
@@ -43,7 +43,7 @@ class UserInvitationListEndpoint(Endpoint):
         :type visible_apps: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.UserInvitationListEndpoint
+        :rtype: applaud.endpoints.UserInvitationsEndpoint
         '''
         if email: self._set_filter('email', email if type(email) is list else [email])
         
@@ -53,26 +53,26 @@ class UserInvitationListEndpoint(Endpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> UserInvitationListEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> UserInvitationsEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.UserInvitationListEndpoint
+        :rtype: applaud.endpoints.UserInvitationsEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, email: SortOrder=None, last_name: SortOrder=None) -> UserInvitationListEndpoint:
+    def sort(self, *, email: SortOrder=None, last_name: SortOrder=None) -> UserInvitationsEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.UserInvitationListEndpoint
+        :rtype: applaud.endpoints.UserInvitationsEndpoint
         '''
         if email: self.sort_expressions.append('email' if email == SortOrder.ASC else '-email')
         if last_name: self.sort_expressions.append('lastName' if last_name == SortOrder.ASC else '-lastName')
         return self
         
-    def limit(self, number: int=None, *, visible_apps: int=None) -> UserInvitationListEndpoint:
+    def limit(self, number: int=None, *, visible_apps: int=None) -> UserInvitationsEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -82,7 +82,7 @@ class UserInvitationListEndpoint(Endpoint):
         :type visible_apps: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.UserInvitationListEndpoint
+        :rtype: applaud.endpoints.UserInvitationsEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -122,6 +122,10 @@ class UserInvitationListEndpoint(Endpoint):
 class UserInvitationEndpoint(IDEndpoint):
     path = '/v1/userInvitations/{id}'
 
+    @endpoint('/v1/userInvitations/{id}/visibleApps')
+    def visible_apps(self) -> VisibleAppsOfUserInvitationEndpoint:
+        return VisibleAppsOfUserInvitationEndpoint(self.id, self.session)
+        
     def fields(self, *, user_invitation: Union[UserInvitationField, list[UserInvitationField]]=None, app: Union[AppField, list[AppField]]=None) -> UserInvitationEndpoint:
         '''Fields to return for included related types.
 
@@ -183,29 +187,29 @@ class UserInvitationEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class VisibleAppListOfUserInvitationEndpoint(IDEndpoint):
+class VisibleAppsOfUserInvitationEndpoint(IDEndpoint):
     path = '/v1/userInvitations/{id}/visibleApps'
 
-    def fields(self, *, app: Union[AppField, list[AppField]]=None) -> VisibleAppListOfUserInvitationEndpoint:
+    def fields(self, *, app: Union[AppField, list[AppField]]=None) -> VisibleAppsOfUserInvitationEndpoint:
         '''Fields to return for included related types.
 
         :param app: the fields to include for returned resources of type apps
         :type app: Union[AppField, list[AppField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.VisibleAppListOfUserInvitationEndpoint
+        :rtype: applaud.endpoints.VisibleAppsOfUserInvitationEndpoint
         '''
         if app: self._set_fields('apps',app if type(app) is list else [app])
         return self
         
-    def limit(self, number: int=None) -> VisibleAppListOfUserInvitationEndpoint:
+    def limit(self, number: int=None) -> VisibleAppsOfUserInvitationEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.VisibleAppListOfUserInvitationEndpoint
+        :rtype: applaud.endpoints.VisibleAppsOfUserInvitationEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppClipDefaultExperienceLocalizationListEndpoint(Endpoint):
+class AppClipDefaultExperienceLocalizationsEndpoint(Endpoint):
     path = '/v1/appClipDefaultExperienceLocalizations'
 
     def create(self, request: AppClipDefaultExperienceLocalizationCreateRequest) -> AppClipDefaultExperienceLocalizationResponse:
@@ -28,6 +28,10 @@ class AppClipDefaultExperienceLocalizationListEndpoint(Endpoint):
 class AppClipDefaultExperienceLocalizationEndpoint(IDEndpoint):
     path = '/v1/appClipDefaultExperienceLocalizations/{id}'
 
+    @endpoint('/v1/appClipDefaultExperienceLocalizations/{id}/appClipHeaderImage')
+    def app_clip_header_image(self) -> AppClipHeaderImageOfAppClipDefaultExperienceLocalizationEndpoint:
+        return AppClipHeaderImageOfAppClipDefaultExperienceLocalizationEndpoint(self.id, self.session)
+        
     def fields(self, *, app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]]=None, app_clip_header_image: Union[AppClipHeaderImageField, list[AppClipHeaderImageField]]=None) -> AppClipDefaultExperienceLocalizationEndpoint:
         '''Fields to return for included related types.
 

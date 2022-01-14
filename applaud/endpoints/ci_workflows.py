@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class CiWorkflowListEndpoint(Endpoint):
+class CiWorkflowsEndpoint(Endpoint):
     path = '/v1/ciWorkflows'
 
     def create(self, request: CiWorkflowCreateRequest) -> CiWorkflowResponse:
@@ -28,6 +28,14 @@ class CiWorkflowListEndpoint(Endpoint):
 class CiWorkflowEndpoint(IDEndpoint):
     path = '/v1/ciWorkflows/{id}'
 
+    @endpoint('/v1/ciWorkflows/{id}/buildRuns')
+    def build_runs(self) -> BuildRunsOfCiWorkflowEndpoint:
+        return BuildRunsOfCiWorkflowEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/ciWorkflows/{id}/repository')
+    def repository(self) -> RepositoryOfCiWorkflowEndpoint:
+        return RepositoryOfCiWorkflowEndpoint(self.id, self.session)
+        
     def fields(self, *, ci_workflow: Union[CiWorkflowField, list[CiWorkflowField]]=None, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, scm_repository: Union[ScmRepositoryField, list[ScmRepositoryField]]=None) -> CiWorkflowEndpoint:
         '''Fields to return for included related types.
 
@@ -95,10 +103,10 @@ class CiWorkflowEndpoint(IDEndpoint):
         '''
         super()._perform_delete()
 
-class BuildRunListOfCiWorkflowEndpoint(IDEndpoint):
+class BuildRunsOfCiWorkflowEndpoint(IDEndpoint):
     path = '/v1/ciWorkflows/{id}/buildRuns'
 
-    def fields(self, *, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BuildRunListOfCiWorkflowEndpoint:
+    def fields(self, *, ci_build_run: Union[CiBuildRunField, list[CiBuildRunField]]=None, build: Union[BuildField, list[BuildField]]=None) -> BuildRunsOfCiWorkflowEndpoint:
         '''Fields to return for included related types.
 
         :param ci_build_run: the fields to include for returned resources of type ciBuildRuns
@@ -108,7 +116,7 @@ class BuildRunListOfCiWorkflowEndpoint(IDEndpoint):
         :type build: Union[BuildField, list[BuildField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiWorkflowEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiWorkflowEndpoint
         '''
         if ci_build_run: self._set_fields('ciBuildRuns',ci_build_run if type(ci_build_run) is list else [ci_build_run])
         if build: self._set_fields('builds',build if type(build) is list else [build])
@@ -117,29 +125,29 @@ class BuildRunListOfCiWorkflowEndpoint(IDEndpoint):
     class Include(StringEnum):
         BUILDS = 'builds'
 
-    def filter(self, *, builds: Union[str, list[str]]=None) -> BuildRunListOfCiWorkflowEndpoint:
+    def filter(self, *, builds: Union[str, list[str]]=None) -> BuildRunsOfCiWorkflowEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param builds: filter by id(s) of related 'builds'
         :type builds: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiWorkflowEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiWorkflowEndpoint
         '''
         if builds: self._set_filter('builds', builds if type(builds) is list else [builds])
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> BuildRunListOfCiWorkflowEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> BuildRunsOfCiWorkflowEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiWorkflowEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiWorkflowEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def limit(self, number: int=None, *, builds: int=None) -> BuildRunListOfCiWorkflowEndpoint:
+    def limit(self, number: int=None, *, builds: int=None) -> BuildRunsOfCiWorkflowEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -149,7 +157,7 @@ class BuildRunListOfCiWorkflowEndpoint(IDEndpoint):
         :type builds: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.BuildRunListOfCiWorkflowEndpoint
+        :rtype: applaud.endpoints.BuildRunsOfCiWorkflowEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

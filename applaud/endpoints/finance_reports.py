@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,14 +8,14 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class FinanceReportListEndpoint(Endpoint):
+class FinanceReportsEndpoint(Endpoint):
     path = '/v1/financeReports'
 
     class ReportType(StringEnum):
         FINANCIAL = 'FINANCIAL'
         FINANCE_DETAIL = 'FINANCE_DETAIL'
 
-    def filter(self, *, region_code: Union[str, list[str]], report_date: Union[str, list[str]], report_type: Union[ReportType, list[ReportType]], vendor_number: Union[str, list[str]]) -> FinanceReportListEndpoint:
+    def filter(self, *, region_code: Union[str, list[str]], report_date: Union[str, list[str]], report_type: Union[ReportType, list[ReportType]], vendor_number: Union[str, list[str]]) -> FinanceReportsEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param region_code: filter by attribute 'regionCode'
@@ -31,7 +31,7 @@ class FinanceReportListEndpoint(Endpoint):
         :type vendor_number: Union[str, list[str]]
 
         :returns: self
-        :rtype: applaud.endpoints.FinanceReportListEndpoint
+        :rtype: applaud.endpoints.FinanceReportsEndpoint
         '''
         if region_code: self._set_filter('regionCode', region_code if type(region_code) is list else [region_code])
         

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppClipDefaultExperienceListEndpoint(Endpoint):
+class AppClipDefaultExperiencesEndpoint(Endpoint):
     path = '/v1/appClipDefaultExperiences'
 
     def create(self, request: AppClipDefaultExperienceCreateRequest) -> AppClipDefaultExperienceResponse:
@@ -28,6 +28,22 @@ class AppClipDefaultExperienceListEndpoint(Endpoint):
 class AppClipDefaultExperienceEndpoint(IDEndpoint):
     path = '/v1/appClipDefaultExperiences/{id}'
 
+    @endpoint('/v1/appClipDefaultExperiences/{id}/appClipAppStoreReviewDetail')
+    def app_clip_app_store_review_detail(self) -> AppClipAppStoreReviewDetailOfAppClipDefaultExperienceEndpoint:
+        return AppClipAppStoreReviewDetailOfAppClipDefaultExperienceEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appClipDefaultExperiences/{id}/appClipDefaultExperienceLocalizations')
+    def app_clip_default_experience_localizations(self) -> AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint:
+        return AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appClipDefaultExperiences/{id}/releaseWithAppStoreVersion')
+    def release_with_app_store_version(self) -> ReleaseWithAppStoreVersionOfAppClipDefaultExperienceEndpoint:
+        return ReleaseWithAppStoreVersionOfAppClipDefaultExperienceEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appClipDefaultExperiences/{id}/relationships/releaseWithAppStoreVersion')
+    def release_with_app_store_version_linkage(self) -> ReleaseWithAppStoreVersionLinkageOfAppClipDefaultExperienceEndpoint:
+        return ReleaseWithAppStoreVersionLinkageOfAppClipDefaultExperienceEndpoint(self.id, self.session)
+        
     def fields(self, *, app_clip_default_experience: Union[AppClipDefaultExperienceField, list[AppClipDefaultExperienceField]]=None, app_clip_app_store_review_detail: Union[AppClipAppStoreReviewDetailField, list[AppClipAppStoreReviewDetailField]]=None, app_store_version: Union[AppStoreVersionField, list[AppStoreVersionField]]=None, app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]]=None) -> AppClipDefaultExperienceEndpoint:
         '''Fields to return for included related types.
 
@@ -140,42 +156,42 @@ class AppClipAppStoreReviewDetailOfAppClipDefaultExperienceEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AppClipAppStoreReviewDetailResponse.parse_obj(json)
 
-class AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint(IDEndpoint):
+class AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint(IDEndpoint):
     path = '/v1/appClipDefaultExperiences/{id}/appClipDefaultExperienceLocalizations'
 
-    def fields(self, *, app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]]=None) -> AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint:
+    def fields(self, *, app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]]=None) -> AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint:
         '''Fields to return for included related types.
 
         :param app_clip_default_experience_localization: the fields to include for returned resources of type appClipDefaultExperienceLocalizations
         :type app_clip_default_experience_localization: Union[AppClipDefaultExperienceLocalizationField, list[AppClipDefaultExperienceLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint
         '''
         if app_clip_default_experience_localization: self._set_fields('appClipDefaultExperienceLocalizations',app_clip_default_experience_localization if type(app_clip_default_experience_localization) is list else [app_clip_default_experience_localization])
         return self
         
-    def filter(self, *, locale: Union[str, list[str]]=None) -> AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint:
+    def filter(self, *, locale: Union[str, list[str]]=None) -> AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param locale: filter by attribute 'locale'
         :type locale: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint
         '''
         if locale: self._set_filter('locale', locale if type(locale) is list else [locale])
         
         return self
         
-    def limit(self, number: int=None) -> AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint:
+    def limit(self, number: int=None) -> AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint
+        :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -194,7 +210,7 @@ class AppClipDefaultExperienceLocalizationListOfAppClipDefaultExperienceEndpoint
         json = super()._perform_get()
         return AppClipDefaultExperienceLocalizationsResponse.parse_obj(json)
 
-class ReleaseWithAppStoreVersionOfAppClipDefaultExperienceRelationshipsEndpoint(IDEndpoint):
+class ReleaseWithAppStoreVersionLinkageOfAppClipDefaultExperienceEndpoint(IDEndpoint):
     path = '/v1/appClipDefaultExperiences/{id}/relationships/releaseWithAppStoreVersion'
 
     def get(self) -> AppClipDefaultExperienceReleaseWithAppStoreVersionLinkageResponse:

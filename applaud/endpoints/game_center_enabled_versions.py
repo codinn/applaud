@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,17 +8,17 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class CompatibleVersionListOfGameCenterEnabledVersionRelationshipsEndpoint(IDEndpoint):
+class CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint(IDEndpoint):
     path = '/v1/gameCenterEnabledVersions/{id}/relationships/compatibleVersions'
 
-    def limit(self, number: int=None) -> CompatibleVersionListOfGameCenterEnabledVersionRelationshipsEndpoint:
+    def limit(self, number: int=None) -> CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.CompatibleVersionListOfGameCenterEnabledVersionRelationshipsEndpoint
+        :rtype: applaud.endpoints.CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -70,17 +70,17 @@ class CompatibleVersionListOfGameCenterEnabledVersionRelationshipsEndpoint(IDEnd
         json = request.dict(by_alias=True, exclude_none=True)
         super()._perform_delete(json)
 
-class CompatibleVersionListOfGameCenterEnabledVersionEndpoint(IDEndpoint):
+class CompatibleVersionsOfGameCenterEnabledVersionEndpoint(IDEndpoint):
     path = '/v1/gameCenterEnabledVersions/{id}/compatibleVersions'
 
-    def fields(self, *, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None) -> CompatibleVersionListOfGameCenterEnabledVersionEndpoint:
+    def fields(self, *, game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]]=None) -> CompatibleVersionsOfGameCenterEnabledVersionEndpoint:
         '''Fields to return for included related types.
 
         :param game_center_enabled_version: the fields to include for returned resources of type gameCenterEnabledVersions
         :type game_center_enabled_version: Union[GameCenterEnabledVersionField, list[GameCenterEnabledVersionField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.CompatibleVersionListOfGameCenterEnabledVersionEndpoint
+        :rtype: applaud.endpoints.CompatibleVersionsOfGameCenterEnabledVersionEndpoint
         '''
         if game_center_enabled_version: self._set_fields('gameCenterEnabledVersions',game_center_enabled_version if type(game_center_enabled_version) is list else [game_center_enabled_version])
         return self
@@ -88,7 +88,7 @@ class CompatibleVersionListOfGameCenterEnabledVersionEndpoint(IDEndpoint):
     class Include(StringEnum):
         COMPATIBLE_VERSIONS = 'compatibleVersions'
 
-    def filter(self, *, platform: Union[Platform, list[Platform]]=None, version_string: Union[str, list[str]]=None, app: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> CompatibleVersionListOfGameCenterEnabledVersionEndpoint:
+    def filter(self, *, platform: Union[Platform, list[Platform]]=None, version_string: Union[str, list[str]]=None, app: Union[str, list[str]]=None, id: Union[str, list[str]]=None) -> CompatibleVersionsOfGameCenterEnabledVersionEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param platform: filter by attribute 'platform'
@@ -104,7 +104,7 @@ class CompatibleVersionListOfGameCenterEnabledVersionEndpoint(IDEndpoint):
         :type id: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.CompatibleVersionListOfGameCenterEnabledVersionEndpoint
+        :rtype: applaud.endpoints.CompatibleVersionsOfGameCenterEnabledVersionEndpoint
         '''
         if platform: self._set_filter('platform', platform if type(platform) is list else [platform])
         
@@ -116,25 +116,25 @@ class CompatibleVersionListOfGameCenterEnabledVersionEndpoint(IDEndpoint):
         
         return self
         
-    def include(self, relationship: Union[Include, list[Include]]) -> CompatibleVersionListOfGameCenterEnabledVersionEndpoint:
+    def include(self, relationship: Union[Include, list[Include]]) -> CompatibleVersionsOfGameCenterEnabledVersionEndpoint:
         '''Relationship data to include in the response.
 
         :returns: self
-        :rtype: applaud.endpoints.CompatibleVersionListOfGameCenterEnabledVersionEndpoint
+        :rtype: applaud.endpoints.CompatibleVersionsOfGameCenterEnabledVersionEndpoint
         '''
         if relationship: self._set_includes(relationship if type(relationship) is list else [relationship])
         return self
         
-    def sort(self, *, version_string: SortOrder=None) -> CompatibleVersionListOfGameCenterEnabledVersionEndpoint:
+    def sort(self, *, version_string: SortOrder=None) -> CompatibleVersionsOfGameCenterEnabledVersionEndpoint:
         '''Attributes by which to sort.
 
         :returns: self
-        :rtype: applaud.endpoints.CompatibleVersionListOfGameCenterEnabledVersionEndpoint
+        :rtype: applaud.endpoints.CompatibleVersionsOfGameCenterEnabledVersionEndpoint
         '''
         if version_string: self.sort_expressions.append('versionString' if version_string == SortOrder.ASC else '-versionString')
         return self
         
-    def limit(self, number: int=None, *, compatible_versions: int=None) -> CompatibleVersionListOfGameCenterEnabledVersionEndpoint:
+    def limit(self, number: int=None, *, compatible_versions: int=None) -> CompatibleVersionsOfGameCenterEnabledVersionEndpoint:
         '''Number of resources or included related resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
@@ -144,7 +144,7 @@ class CompatibleVersionListOfGameCenterEnabledVersionEndpoint(IDEndpoint):
         :type compatible_versions: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.CompatibleVersionListOfGameCenterEnabledVersionEndpoint
+        :rtype: applaud.endpoints.CompatibleVersionsOfGameCenterEnabledVersionEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
@@ -167,3 +167,14 @@ class CompatibleVersionListOfGameCenterEnabledVersionEndpoint(IDEndpoint):
         json = super()._perform_get()
         return GameCenterEnabledVersionsResponse.parse_obj(json)
 
+class GameCenterEnabledVersionEndpoint(IDEndpoint):
+    path = '/v1/gameCenterEnabledVersions/{id}'
+
+    @endpoint('/v1/gameCenterEnabledVersions/{id}/compatibleVersions')
+    def compatible_versions(self) -> CompatibleVersionsOfGameCenterEnabledVersionEndpoint:
+        return CompatibleVersionsOfGameCenterEnabledVersionEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/gameCenterEnabledVersions/{id}/relationships/compatibleVersions')
+    def compatible_versions_linkages(self) -> CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint:
+        return CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint(self.id, self.session)
+        

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -8,7 +8,7 @@ from ..schemas.responses import *
 from ..schemas.requests import *
 from ..schemas.enums import *
 
-class AppStoreReviewDetailListEndpoint(Endpoint):
+class AppStoreReviewDetailsEndpoint(Endpoint):
     path = '/v1/appStoreReviewDetails'
 
     def create(self, request: AppStoreReviewDetailCreateRequest) -> AppStoreReviewDetailResponse:
@@ -28,6 +28,10 @@ class AppStoreReviewDetailListEndpoint(Endpoint):
 class AppStoreReviewDetailEndpoint(IDEndpoint):
     path = '/v1/appStoreReviewDetails/{id}'
 
+    @endpoint('/v1/appStoreReviewDetails/{id}/appStoreReviewAttachments')
+    def app_store_review_attachments(self) -> AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint:
+        return AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint(self.id, self.session)
+        
     def fields(self, *, app_store_review_detail: Union[AppStoreReviewDetailField, list[AppStoreReviewDetailField]]=None, app_store_review_attachment: Union[AppStoreReviewAttachmentField, list[AppStoreReviewAttachmentField]]=None) -> AppStoreReviewDetailEndpoint:
         '''Fields to return for included related types.
 
@@ -97,29 +101,29 @@ class AppStoreReviewDetailEndpoint(IDEndpoint):
         response_json = super()._perform_patch(json)
         return AppStoreReviewDetailResponse.parse_obj(response_json)
 
-class AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint(IDEndpoint):
+class AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint(IDEndpoint):
     path = '/v1/appStoreReviewDetails/{id}/appStoreReviewAttachments'
 
-    def fields(self, *, app_store_review_attachment: Union[AppStoreReviewAttachmentField, list[AppStoreReviewAttachmentField]]=None) -> AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint:
+    def fields(self, *, app_store_review_attachment: Union[AppStoreReviewAttachmentField, list[AppStoreReviewAttachmentField]]=None) -> AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint:
         '''Fields to return for included related types.
 
         :param app_store_review_attachment: the fields to include for returned resources of type appStoreReviewAttachments
         :type app_store_review_attachment: Union[AppStoreReviewAttachmentField, list[AppStoreReviewAttachmentField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint
+        :rtype: applaud.endpoints.AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint
         '''
         if app_store_review_attachment: self._set_fields('appStoreReviewAttachments',app_store_review_attachment if type(app_store_review_attachment) is list else [app_store_review_attachment])
         return self
         
-    def limit(self, number: int=None) -> AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint:
+    def limit(self, number: int=None) -> AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppStoreReviewAttachmentListOfAppStoreReviewDetailEndpoint
+        :rtype: applaud.endpoints.AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')

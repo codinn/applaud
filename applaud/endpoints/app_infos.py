@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .base import Endpoint, IDEndpoint, SortOrder
+from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
 from pydantic import parse_obj_as
@@ -11,6 +11,38 @@ from ..schemas.enums import *
 class AppInfoEndpoint(IDEndpoint):
     path = '/v1/appInfos/{id}'
 
+    @endpoint('/v1/appInfos/{id}/ageRatingDeclaration')
+    def age_rating_declaration(self) -> AgeRatingDeclarationOfAppInfoEndpoint:
+        return AgeRatingDeclarationOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/appInfoLocalizations')
+    def app_info_localizations(self) -> AppInfoLocalizationsOfAppInfoEndpoint:
+        return AppInfoLocalizationsOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/primaryCategory')
+    def primary_category(self) -> PrimaryCategoryOfAppInfoEndpoint:
+        return PrimaryCategoryOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/primarySubcategoryOne')
+    def primary_subcategory_one(self) -> PrimarySubcategoryOneOfAppInfoEndpoint:
+        return PrimarySubcategoryOneOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/primarySubcategoryTwo')
+    def primary_subcategory_two(self) -> PrimarySubcategoryTwoOfAppInfoEndpoint:
+        return PrimarySubcategoryTwoOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/secondaryCategory')
+    def secondary_category(self) -> SecondaryCategoryOfAppInfoEndpoint:
+        return SecondaryCategoryOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/secondarySubcategoryOne')
+    def secondary_subcategory_one(self) -> SecondarySubcategoryOneOfAppInfoEndpoint:
+        return SecondarySubcategoryOneOfAppInfoEndpoint(self.id, self.session)
+        
+    @endpoint('/v1/appInfos/{id}/secondarySubcategoryTwo')
+    def secondary_subcategory_two(self) -> SecondarySubcategoryTwoOfAppInfoEndpoint:
+        return SecondarySubcategoryTwoOfAppInfoEndpoint(self.id, self.session)
+        
     def fields(self, *, app_info: Union[AppInfoField, list[AppInfoField]]=None, age_rating_declaration: Union[AgeRatingDeclarationField, list[AgeRatingDeclarationField]]=None, app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]]=None, app_category: Union[AppCategoryField, list[AppCategoryField]]=None) -> AppInfoEndpoint:
         '''Fields to return for included related types.
 
@@ -121,42 +153,42 @@ class AgeRatingDeclarationOfAppInfoEndpoint(IDEndpoint):
         json = super()._perform_get()
         return AgeRatingDeclarationResponse.parse_obj(json)
 
-class AppInfoLocalizationListOfAppInfoEndpoint(IDEndpoint):
+class AppInfoLocalizationsOfAppInfoEndpoint(IDEndpoint):
     path = '/v1/appInfos/{id}/appInfoLocalizations'
 
-    def fields(self, *, app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]]=None) -> AppInfoLocalizationListOfAppInfoEndpoint:
+    def fields(self, *, app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]]=None) -> AppInfoLocalizationsOfAppInfoEndpoint:
         '''Fields to return for included related types.
 
         :param app_info_localization: the fields to include for returned resources of type appInfoLocalizations
         :type app_info_localization: Union[AppInfoLocalizationField, list[AppInfoLocalizationField]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppInfoLocalizationListOfAppInfoEndpoint
+        :rtype: applaud.endpoints.AppInfoLocalizationsOfAppInfoEndpoint
         '''
         if app_info_localization: self._set_fields('appInfoLocalizations',app_info_localization if type(app_info_localization) is list else [app_info_localization])
         return self
         
-    def filter(self, *, locale: Union[str, list[str]]=None) -> AppInfoLocalizationListOfAppInfoEndpoint:
+    def filter(self, *, locale: Union[str, list[str]]=None) -> AppInfoLocalizationsOfAppInfoEndpoint:
         '''Attributes, relationships, and IDs by which to filter.
 
         :param locale: filter by attribute 'locale'
         :type locale: Union[str, list[str]] = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppInfoLocalizationListOfAppInfoEndpoint
+        :rtype: applaud.endpoints.AppInfoLocalizationsOfAppInfoEndpoint
         '''
         if locale: self._set_filter('locale', locale if type(locale) is list else [locale])
         
         return self
         
-    def limit(self, number: int=None) -> AppInfoLocalizationListOfAppInfoEndpoint:
+    def limit(self, number: int=None) -> AppInfoLocalizationsOfAppInfoEndpoint:
         '''Number of resources to return.
 
         :param number: maximum resources per page. The maximum limit is 200
         :type number: int = None
 
         :returns: self
-        :rtype: applaud.endpoints.AppInfoLocalizationListOfAppInfoEndpoint
+        :rtype: applaud.endpoints.AppInfoLocalizationsOfAppInfoEndpoint
         '''
         if number and number > 200:
             raise ValueError(f'The maximum limit of default-limit is 200')
