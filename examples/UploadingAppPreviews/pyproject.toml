@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "uploadingapppreviews"
-version = "0.7.0"
+version = "0.9.1"
 description = "Uploading App Previews Example"
 authors = ["Yang.Y <yang@yangyubo.com>"]
 license = "MIT"
