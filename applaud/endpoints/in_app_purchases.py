@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *

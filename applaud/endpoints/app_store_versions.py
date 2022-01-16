@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *
@@ -21,9 +20,8 @@ class AppStoreVersionsEndpoint(Endpoint):
         :rtype: AppStoreVersionResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_post(json)
-        return AppStoreVersionResponse.parse_obj(response_json)
+        json = super()._perform_post(request)
+        return AppStoreVersionResponse.parse_obj(json)
 
 class AppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}'
@@ -177,9 +175,8 @@ class AppStoreVersionEndpoint(IDEndpoint):
         :rtype: AppStoreVersionResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_patch(json)
-        return AppStoreVersionResponse.parse_obj(response_json)
+        json = super()._perform_patch(request)
+        return AppStoreVersionResponse.parse_obj(json)
 
     def delete(self):
         '''Delete the resource.
@@ -237,8 +234,7 @@ class AppClipDefaultExperienceLinkageOfAppStoreVersionEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_patch(json)
+        super()._perform_patch(request)
 
 class AppClipDefaultExperienceOfAppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}/appClipDefaultExperience'
@@ -469,8 +465,7 @@ class BuildLinkageOfAppStoreVersionEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_patch(json)
+        super()._perform_patch(request)
 
 class BuildOfAppStoreVersionEndpoint(IDEndpoint):
     path = '/v1/appStoreVersions/{id}/build'

@@ -1,3 +1,4 @@
+from .base import *
 from .age_rating_declarations import *
 from .app_categories import *
 from .app_clip_advanced_experience_images import *

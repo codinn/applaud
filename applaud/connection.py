@@ -54,6 +54,9 @@ class Connection:
 
         return self._s
 
+    def generic_endpoint(self, url: str) -> GenericEndpoint:
+        return GenericEndpoint(self.session, url)
+
     # Shortcuts for root endpoints
 
     @endpoint('/v1/ageRatingDeclarations/{id}')

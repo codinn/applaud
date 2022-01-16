@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *
@@ -21,9 +20,8 @@ class AppStoreReviewDetailsEndpoint(Endpoint):
         :rtype: AppStoreReviewDetailResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_post(json)
-        return AppStoreReviewDetailResponse.parse_obj(response_json)
+        json = super()._perform_post(request)
+        return AppStoreReviewDetailResponse.parse_obj(json)
 
 class AppStoreReviewDetailEndpoint(IDEndpoint):
     path = '/v1/appStoreReviewDetails/{id}'
@@ -97,9 +95,8 @@ class AppStoreReviewDetailEndpoint(IDEndpoint):
         :rtype: AppStoreReviewDetailResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_patch(json)
-        return AppStoreReviewDetailResponse.parse_obj(response_json)
+        json = super()._perform_patch(request)
+        return AppStoreReviewDetailResponse.parse_obj(json)
 
 class AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint(IDEndpoint):
     path = '/v1/appStoreReviewDetails/{id}/appStoreReviewAttachments'

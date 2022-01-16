@@ -8,7 +8,12 @@ from .models import *
 from typing import Optional, Literal
 import datetime
 
-class AgeRatingDeclarationUpdateRequest(ApplaudModel):
+class ApplaudRequest(ApplaudModel):
+    
+    def request_dict(self) -> dict:
+       return self.dict(by_alias=True, exclude_none=True)
+
+class AgeRatingDeclarationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             alcohol_tobacco_or_drug_use_or_references: Optional[AgeRatingDeclarationLevel]
@@ -35,7 +40,7 @@ class AgeRatingDeclarationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipAdvancedExperienceImageCreateRequest(ApplaudModel):
+class AppClipAdvancedExperienceImageCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             file_name: str
@@ -46,7 +51,7 @@ class AppClipAdvancedExperienceImageCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipAdvancedExperienceImageUpdateRequest(ApplaudModel):
+class AppClipAdvancedExperienceImageUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             source_file_checksum: Optional[str]
@@ -58,7 +63,7 @@ class AppClipAdvancedExperienceImageUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipAdvancedExperienceCreateRequest(ApplaudModel):
+class AppClipAdvancedExperienceCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppClip(ApplaudModel):
@@ -101,7 +106,7 @@ class AppClipAdvancedExperienceCreateRequest(ApplaudModel):
     data: Data
     included: Optional[list[AppClipAdvancedExperienceLocalizationInlineCreate]]
 
-class AppClipAdvancedExperienceUpdateRequest(ApplaudModel):
+class AppClipAdvancedExperienceUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             action: Optional[AppClipAction]
@@ -145,7 +150,7 @@ class AppClipAdvancedExperienceUpdateRequest(ApplaudModel):
     data: Data
     included: Optional[list[AppClipAdvancedExperienceLocalizationInlineCreate]]
 
-class AppClipAppStoreReviewDetailCreateRequest(ApplaudModel):
+class AppClipAppStoreReviewDetailCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppClipDefaultExperience(ApplaudModel):
@@ -166,7 +171,7 @@ class AppClipAppStoreReviewDetailCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipAppStoreReviewDetailUpdateRequest(ApplaudModel):
+class AppClipAppStoreReviewDetailUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             invocation_urls: Optional[list[str]]
@@ -177,7 +182,7 @@ class AppClipAppStoreReviewDetailUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipDefaultExperienceLocalizationCreateRequest(ApplaudModel):
+class AppClipDefaultExperienceLocalizationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppClipDefaultExperience(ApplaudModel):
@@ -199,7 +204,7 @@ class AppClipDefaultExperienceLocalizationCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipDefaultExperienceLocalizationUpdateRequest(ApplaudModel):
+class AppClipDefaultExperienceLocalizationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             subtitle: Optional[str]
@@ -210,7 +215,7 @@ class AppClipDefaultExperienceLocalizationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipDefaultExperienceCreateRequest(ApplaudModel):
+class AppClipDefaultExperienceCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppClip(ApplaudModel):
@@ -247,7 +252,7 @@ class AppClipDefaultExperienceCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipDefaultExperienceUpdateRequest(ApplaudModel):
+class AppClipDefaultExperienceUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             action: Optional[AppClipAction]
@@ -269,7 +274,7 @@ class AppClipDefaultExperienceUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipHeaderImageCreateRequest(ApplaudModel):
+class AppClipHeaderImageCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppClipDefaultExperienceLocalization(ApplaudModel):
@@ -291,7 +296,7 @@ class AppClipHeaderImageCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipHeaderImageUpdateRequest(ApplaudModel):
+class AppClipHeaderImageUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             source_file_checksum: Optional[str]
@@ -303,7 +308,7 @@ class AppClipHeaderImageUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppInfoLocalizationCreateRequest(ApplaudModel):
+class AppInfoLocalizationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppInfo(ApplaudModel):
@@ -329,7 +334,7 @@ class AppInfoLocalizationCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppInfoLocalizationUpdateRequest(ApplaudModel):
+class AppInfoLocalizationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             name: Optional[str]
@@ -344,7 +349,7 @@ class AppInfoLocalizationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppInfoUpdateRequest(ApplaudModel):
+class AppInfoUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class PrimaryCategory(ApplaudModel):
@@ -402,7 +407,7 @@ class AppInfoUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppPreOrderCreateRequest(ApplaudModel):
+class AppPreOrderCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class App(ApplaudModel):
@@ -423,7 +428,7 @@ class AppPreOrderCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppPreOrderUpdateRequest(ApplaudModel):
+class AppPreOrderUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             app_release_date: Optional[datetime.date]
@@ -434,7 +439,7 @@ class AppPreOrderUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppPreviewSetCreateRequest(ApplaudModel):
+class AppPreviewSetCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             preview_type: PreviewType
@@ -455,7 +460,7 @@ class AppPreviewSetCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppPreviewCreateRequest(ApplaudModel):
+class AppPreviewCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppPreviewSet(ApplaudModel):
@@ -479,7 +484,7 @@ class AppPreviewCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppPreviewUpdateRequest(ApplaudModel):
+class AppPreviewUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             source_file_checksum: Optional[str]
@@ -492,7 +497,7 @@ class AppPreviewUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppScreenshotSetCreateRequest(ApplaudModel):
+class AppScreenshotSetCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             screenshot_display_type: ScreenshotDisplayType
@@ -513,7 +518,7 @@ class AppScreenshotSetCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppScreenshotCreateRequest(ApplaudModel):
+class AppScreenshotCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppScreenshotSet(ApplaudModel):
@@ -535,7 +540,7 @@ class AppScreenshotCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppScreenshotUpdateRequest(ApplaudModel):
+class AppScreenshotUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             source_file_checksum: Optional[str]
@@ -547,7 +552,7 @@ class AppScreenshotUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreReviewAttachmentCreateRequest(ApplaudModel):
+class AppStoreReviewAttachmentCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreReviewDetail(ApplaudModel):
@@ -569,7 +574,7 @@ class AppStoreReviewAttachmentCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreReviewAttachmentUpdateRequest(ApplaudModel):
+class AppStoreReviewAttachmentUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             source_file_checksum: Optional[str]
@@ -581,7 +586,7 @@ class AppStoreReviewAttachmentUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreReviewDetailCreateRequest(ApplaudModel):
+class AppStoreReviewDetailCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -609,7 +614,7 @@ class AppStoreReviewDetailCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreReviewDetailUpdateRequest(ApplaudModel):
+class AppStoreReviewDetailUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             contact_first_name: Optional[str]
@@ -627,7 +632,7 @@ class AppStoreReviewDetailUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionLocalizationCreateRequest(ApplaudModel):
+class AppStoreVersionLocalizationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -654,7 +659,7 @@ class AppStoreVersionLocalizationCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionLocalizationUpdateRequest(ApplaudModel):
+class AppStoreVersionLocalizationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             description: Optional[str]
@@ -670,7 +675,7 @@ class AppStoreVersionLocalizationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionPhasedReleaseCreateRequest(ApplaudModel):
+class AppStoreVersionPhasedReleaseCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -691,7 +696,7 @@ class AppStoreVersionPhasedReleaseCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionPhasedReleaseUpdateRequest(ApplaudModel):
+class AppStoreVersionPhasedReleaseUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             phased_release_state: Optional[PhasedReleaseState]
@@ -702,12 +707,12 @@ class AppStoreVersionPhasedReleaseUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionReleaseRequest(ApplaudModel):
+class AppStoreVersionReleaseRequest(ApplaudRequest):
     links: ResourceLinks
     id: str
     type: Literal["appStoreVersionReleaseRequests"] = "appStoreVersionReleaseRequests"
 
-class AppStoreVersionReleaseRequestCreateRequest(ApplaudModel):
+class AppStoreVersionReleaseRequestCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -724,7 +729,7 @@ class AppStoreVersionReleaseRequestCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionSubmissionCreateRequest(ApplaudModel):
+class AppStoreVersionSubmissionCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -741,7 +746,7 @@ class AppStoreVersionSubmissionCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionCreateRequest(ApplaudModel):
+class AppStoreVersionCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class App(ApplaudModel):
@@ -783,7 +788,7 @@ class AppStoreVersionCreateRequest(ApplaudModel):
 
     data: Data
 
-class AppStoreVersionUpdateRequest(ApplaudModel):
+class AppStoreVersionUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             version_string: Optional[str]
@@ -818,7 +823,7 @@ class AppStoreVersionUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppUpdateRequest(ApplaudModel):
+class AppUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             bundle_id: Optional[str]
@@ -852,7 +857,7 @@ class AppUpdateRequest(ApplaudModel):
     data: Data
     included: Optional[list[AppPriceInlineCreate]]
 
-class BetaAppClipInvocationLocalizationCreateRequest(ApplaudModel):
+class BetaAppClipInvocationLocalizationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class BetaAppClipInvocation(ApplaudModel):
@@ -874,7 +879,7 @@ class BetaAppClipInvocationLocalizationCreateRequest(ApplaudModel):
 
     data: Data
 
-class BetaAppClipInvocationLocalizationUpdateRequest(ApplaudModel):
+class BetaAppClipInvocationLocalizationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             title: Optional[str]
@@ -885,7 +890,7 @@ class BetaAppClipInvocationLocalizationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaAppClipInvocationCreateRequest(ApplaudModel):
+class BetaAppClipInvocationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class BuildBundle(ApplaudModel):
@@ -915,7 +920,7 @@ class BetaAppClipInvocationCreateRequest(ApplaudModel):
     data: Data
     included: Optional[list[BetaAppClipInvocationLocalizationInlineCreate]]
 
-class BetaAppClipInvocationUpdateRequest(ApplaudModel):
+class BetaAppClipInvocationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             url: Optional[AnyUrl]
@@ -926,7 +931,7 @@ class BetaAppClipInvocationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaAppLocalizationCreateRequest(ApplaudModel):
+class BetaAppLocalizationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class App(ApplaudModel):
@@ -952,7 +957,7 @@ class BetaAppLocalizationCreateRequest(ApplaudModel):
 
     data: Data
 
-class BetaAppLocalizationUpdateRequest(ApplaudModel):
+class BetaAppLocalizationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             feedback_email: Optional[str]
@@ -967,7 +972,7 @@ class BetaAppLocalizationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaAppReviewDetailUpdateRequest(ApplaudModel):
+class BetaAppReviewDetailUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             contact_first_name: Optional[str]
@@ -985,7 +990,7 @@ class BetaAppReviewDetailUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaAppReviewSubmissionCreateRequest(ApplaudModel):
+class BetaAppReviewSubmissionCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class Build(ApplaudModel):
@@ -1002,7 +1007,7 @@ class BetaAppReviewSubmissionCreateRequest(ApplaudModel):
 
     data: Data
 
-class BetaBuildLocalizationCreateRequest(ApplaudModel):
+class BetaBuildLocalizationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class Build(ApplaudModel):
@@ -1024,7 +1029,7 @@ class BetaBuildLocalizationCreateRequest(ApplaudModel):
 
     data: Data
 
-class BetaBuildLocalizationUpdateRequest(ApplaudModel):
+class BetaBuildLocalizationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             whats_new: Optional[str]
@@ -1035,7 +1040,7 @@ class BetaBuildLocalizationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaGroupCreateRequest(ApplaudModel):
+class BetaGroupCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class App(ApplaudModel):
@@ -1078,7 +1083,7 @@ class BetaGroupCreateRequest(ApplaudModel):
 
     data: Data
 
-class BetaGroupUpdateRequest(ApplaudModel):
+class BetaGroupUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             name: Optional[str]
@@ -1094,7 +1099,7 @@ class BetaGroupUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaLicenseAgreementUpdateRequest(ApplaudModel):
+class BetaLicenseAgreementUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             agreement_text: Optional[str]
@@ -1105,7 +1110,7 @@ class BetaLicenseAgreementUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BetaTesterInvitationCreateRequest(ApplaudModel):
+class BetaTesterInvitationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class App(ApplaudModel):
@@ -1130,7 +1135,7 @@ class BetaTesterInvitationCreateRequest(ApplaudModel):
 
     data: Data
 
-class BetaTesterCreateRequest(ApplaudModel):
+class BetaTesterCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             email: EmailStr
@@ -1161,7 +1166,7 @@ class BetaTesterCreateRequest(ApplaudModel):
 
     data: Data
 
-class BuildBetaDetailUpdateRequest(ApplaudModel):
+class BuildBetaDetailUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             auto_notify_enabled: Optional[bool]
@@ -1172,7 +1177,7 @@ class BuildBetaDetailUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BuildBetaNotificationCreateRequest(ApplaudModel):
+class BuildBetaNotificationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class Build(ApplaudModel):
@@ -1189,7 +1194,7 @@ class BuildBetaNotificationCreateRequest(ApplaudModel):
 
     data: Data
 
-class BuildUpdateRequest(ApplaudModel):
+class BuildUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             expired: Optional[bool]
@@ -1212,7 +1217,7 @@ class BuildUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BundleIdCapabilityCreateRequest(ApplaudModel):
+class BundleIdCapabilityCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class BundleId(ApplaudModel):
@@ -1234,7 +1239,7 @@ class BundleIdCapabilityCreateRequest(ApplaudModel):
 
     data: Data
 
-class BundleIdCapabilityUpdateRequest(ApplaudModel):
+class BundleIdCapabilityUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             capability_type: Optional[CapabilityType]
@@ -1246,7 +1251,7 @@ class BundleIdCapabilityUpdateRequest(ApplaudModel):
 
     data: Data
 
-class BundleIdCreateRequest(ApplaudModel):
+class BundleIdCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             identifier: str
@@ -1259,7 +1264,7 @@ class BundleIdCreateRequest(ApplaudModel):
 
     data: Data
 
-class BundleIdUpdateRequest(ApplaudModel):
+class BundleIdUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             name: Optional[str]
@@ -1270,7 +1275,7 @@ class BundleIdUpdateRequest(ApplaudModel):
 
     data: Data
 
-class CertificateCreateRequest(ApplaudModel):
+class CertificateCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             csr_content: str
@@ -1281,7 +1286,7 @@ class CertificateCreateRequest(ApplaudModel):
 
     data: Data
 
-class CiBuildRunCreateRequest(ApplaudModel):
+class CiBuildRunCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             clean: Optional[bool]
@@ -1326,7 +1331,7 @@ class CiBuildRunCreateRequest(ApplaudModel):
 
     data: Data
 
-class CiWorkflowCreateRequest(ApplaudModel):
+class CiWorkflowCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class MacOsVersion(ApplaudModel):
@@ -1381,7 +1386,7 @@ class CiWorkflowCreateRequest(ApplaudModel):
 
     data: Data
 
-class CiWorkflowUpdateRequest(ApplaudModel):
+class CiWorkflowUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             name: Optional[str]
@@ -1421,7 +1426,7 @@ class CiWorkflowUpdateRequest(ApplaudModel):
 
     data: Data
 
-class DeviceCreateRequest(ApplaudModel):
+class DeviceCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             name: str
@@ -1433,7 +1438,7 @@ class DeviceCreateRequest(ApplaudModel):
 
     data: Data
 
-class DeviceUpdateRequest(ApplaudModel):
+class DeviceUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             name: Optional[str]
@@ -1445,7 +1450,7 @@ class DeviceUpdateRequest(ApplaudModel):
 
     data: Data
 
-class EndUserLicenseAgreementCreateRequest(ApplaudModel):
+class EndUserLicenseAgreementCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class App(ApplaudModel):
@@ -1474,7 +1479,7 @@ class EndUserLicenseAgreementCreateRequest(ApplaudModel):
 
     data: Data
 
-class EndUserLicenseAgreementUpdateRequest(ApplaudModel):
+class EndUserLicenseAgreementUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             agreement_text: Optional[str]
@@ -1497,7 +1502,7 @@ class EndUserLicenseAgreementUpdateRequest(ApplaudModel):
     data: Data
 
 @deprecated
-class IdfaDeclarationCreateRequest(ApplaudModel):
+class IdfaDeclarationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -1522,7 +1527,7 @@ class IdfaDeclarationCreateRequest(ApplaudModel):
     data: Data
 
 @deprecated
-class IdfaDeclarationUpdateRequest(ApplaudModel):
+class IdfaDeclarationUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             serves_ads: Optional[bool]
@@ -1536,7 +1541,7 @@ class IdfaDeclarationUpdateRequest(ApplaudModel):
 
     data: Data
 
-class ProfileCreateRequest(ApplaudModel):
+class ProfileCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class Certificates(ApplaudModel):
@@ -1574,7 +1579,7 @@ class ProfileCreateRequest(ApplaudModel):
 
     data: Data
 
-class RoutingAppCoverageCreateRequest(ApplaudModel):
+class RoutingAppCoverageCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Relationships(ApplaudModel):
             class AppStoreVersion(ApplaudModel):
@@ -1596,7 +1601,7 @@ class RoutingAppCoverageCreateRequest(ApplaudModel):
 
     data: Data
 
-class RoutingAppCoverageUpdateRequest(ApplaudModel):
+class RoutingAppCoverageUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             source_file_checksum: Optional[str]
@@ -1608,7 +1613,7 @@ class RoutingAppCoverageUpdateRequest(ApplaudModel):
 
     data: Data
 
-class ScmPullRequest(ApplaudModel):
+class ScmPullRequest(ApplaudRequest):
     class Attributes(ApplaudModel):
         title: Optional[str]
         number: Optional[int]
@@ -1643,7 +1648,7 @@ class ScmPullRequest(ApplaudModel):
     attributes: Optional[Attributes]
     relationships: Optional[Relationships]
 
-class UserInvitationCreateRequest(ApplaudModel):
+class UserInvitationCreateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             first_name: str
@@ -1669,7 +1674,7 @@ class UserInvitationCreateRequest(ApplaudModel):
 
     data: Data
 
-class UserUpdateRequest(ApplaudModel):
+class UserUpdateRequest(ApplaudRequest):
     class Data(ApplaudModel):
         class Attributes(ApplaudModel):
             roles: Optional[list[UserRole]]
@@ -1693,119 +1698,119 @@ class UserUpdateRequest(ApplaudModel):
 
     data: Data
 
-class AppClipDefaultExperienceReleaseWithAppStoreVersionLinkageRequest(ApplaudModel):
+class AppClipDefaultExperienceReleaseWithAppStoreVersionLinkageRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["appStoreVersions"] = "appStoreVersions"
 
     data: Data
 
-class AppEncryptionDeclarationBuildsLinkagesRequest(ApplaudModel):
+class AppEncryptionDeclarationBuildsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
 
     data: list[Data]
 
-class AppPreviewSetAppPreviewsLinkagesRequest(ApplaudModel):
+class AppPreviewSetAppPreviewsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["appPreviews"] = "appPreviews"
 
     data: list[Data]
 
-class AppScreenshotSetAppScreenshotsLinkagesRequest(ApplaudModel):
+class AppScreenshotSetAppScreenshotsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["appScreenshots"] = "appScreenshots"
 
     data: list[Data]
 
-class AppStoreVersionAppClipDefaultExperienceLinkageRequest(ApplaudModel):
+class AppStoreVersionAppClipDefaultExperienceLinkageRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["appClipDefaultExperiences"] = "appClipDefaultExperiences"
 
     data: Data
 
-class AppStoreVersionBuildLinkageRequest(ApplaudModel):
+class AppStoreVersionBuildLinkageRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
 
     data: Data
 
-class AppBetaTestersLinkagesRequest(ApplaudModel):
+class AppBetaTestersLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaTesters"] = "betaTesters"
 
     data: list[Data]
 
-class BetaGroupBetaTestersLinkagesRequest(ApplaudModel):
+class BetaGroupBetaTestersLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaTesters"] = "betaTesters"
 
     data: list[Data]
 
-class BetaGroupBuildsLinkagesRequest(ApplaudModel):
+class BetaGroupBuildsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
 
     data: list[Data]
 
-class BetaTesterAppsLinkagesRequest(ApplaudModel):
+class BetaTesterAppsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["apps"] = "apps"
 
     data: list[Data]
 
-class BetaTesterBetaGroupsLinkagesRequest(ApplaudModel):
+class BetaTesterBetaGroupsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaGroups"] = "betaGroups"
 
     data: list[Data]
 
-class BetaTesterBuildsLinkagesRequest(ApplaudModel):
+class BetaTesterBuildsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
 
     data: list[Data]
 
-class BuildAppEncryptionDeclarationLinkageRequest(ApplaudModel):
+class BuildAppEncryptionDeclarationLinkageRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["appEncryptionDeclarations"] = "appEncryptionDeclarations"
 
     data: Data
 
-class BuildBetaGroupsLinkagesRequest(ApplaudModel):
+class BuildBetaGroupsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaGroups"] = "betaGroups"
 
     data: list[Data]
 
-class BuildIndividualTestersLinkagesRequest(ApplaudModel):
+class BuildIndividualTestersLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaTesters"] = "betaTesters"
 
     data: list[Data]
 
-class GameCenterEnabledVersionCompatibleVersionsLinkagesRequest(ApplaudModel):
+class GameCenterEnabledVersionCompatibleVersionsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["gameCenterEnabledVersions"] = "gameCenterEnabledVersions"
 
     data: list[Data]
 
-class UserVisibleAppsLinkagesRequest(ApplaudModel):
+class UserVisibleAppsLinkagesRequest(ApplaudRequest):
     class Data(ApplaudModel):
         id: str
         type: Literal["apps"] = "apps"

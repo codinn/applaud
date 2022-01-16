@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *
@@ -419,9 +418,8 @@ class BuildEndpoint(IDEndpoint):
         :rtype: BuildResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_patch(json)
-        return BuildResponse.parse_obj(response_json)
+        json = super()._perform_patch(request)
+        return BuildResponse.parse_obj(json)
 
 class AppOfBuildEndpoint(IDEndpoint):
     path = '/v1/builds/{id}/app'
@@ -471,8 +469,7 @@ class AppEncryptionDeclarationLinkageOfBuildEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_patch(json)
+        super()._perform_patch(request)
 
 class AppEncryptionDeclarationOfBuildEndpoint(IDEndpoint):
     path = '/v1/builds/{id}/appEncryptionDeclaration'
@@ -604,8 +601,7 @@ class BetaGroupsLinkagesOfBuildEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_post(json)
+        super()._perform_post(request)
 
     def delete(self, request: BuildBetaGroupsLinkagesRequest):
         '''Delete one or more related linkages.
@@ -615,8 +611,7 @@ class BetaGroupsLinkagesOfBuildEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_delete(json)
+        super()._perform_delete(request)
 
 class BuildBetaDetailOfBuildEndpoint(IDEndpoint):
     path = '/v1/builds/{id}/buildBetaDetail'
@@ -776,8 +771,7 @@ class IndividualTestersLinkagesOfBuildEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_post(json)
+        super()._perform_post(request)
 
     def delete(self, request: BuildIndividualTestersLinkagesRequest):
         '''Delete one or more related linkages.
@@ -787,8 +781,7 @@ class IndividualTestersLinkagesOfBuildEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_delete(json)
+        super()._perform_delete(request)
 
 class IndividualTestersOfBuildEndpoint(IDEndpoint):
     path = '/v1/builds/{id}/individualTesters'

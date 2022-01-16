@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *
@@ -45,8 +44,7 @@ class CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_post(json)
+        super()._perform_post(request)
 
     def update(self, request: GameCenterEnabledVersionCompatibleVersionsLinkagesRequest):
         '''Modify one or more related linkages.
@@ -56,8 +54,7 @@ class CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_patch(json)
+        super()._perform_patch(request)
 
     def delete(self, request: GameCenterEnabledVersionCompatibleVersionsLinkagesRequest):
         '''Delete one or more related linkages.
@@ -67,8 +64,7 @@ class CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_delete(json)
+        super()._perform_delete(request)
 
 class CompatibleVersionsOfGameCenterEnabledVersionEndpoint(IDEndpoint):
     path = '/v1/gameCenterEnabledVersions/{id}/compatibleVersions'

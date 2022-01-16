@@ -8,667 +8,670 @@ from .models import *
 from .requests import *
 from pydantic import Field
 
-class AgeRatingDeclarationResponse(ApplaudModel):
+class ApplaudResponse(ApplaudModel):
+    pass
+
+class AgeRatingDeclarationResponse(ApplaudResponse):
     data: AgeRatingDeclaration
     links: DocumentLinks
 
-class AppCategoriesResponse(ApplaudModel):
+class AppCategoriesResponse(ApplaudResponse):
     data: list[AppCategory]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppCategory, AppCategory]]]
     meta: Optional[PagingInformation]
 
-class AppCategoryResponse(ApplaudModel):
+class AppCategoryResponse(ApplaudResponse):
     data: AppCategory
     links: DocumentLinks
     included: Optional[list[Union[AppCategory, AppCategory]]]
 
-class AppClipAdvancedExperienceImageResponse(ApplaudModel):
+class AppClipAdvancedExperienceImageResponse(ApplaudResponse):
     data: AppClipAdvancedExperienceImage
     links: DocumentLinks
 
-class AppClipAdvancedExperiencesResponse(ApplaudModel):
+class AppClipAdvancedExperiencesResponse(ApplaudResponse):
     data: list[AppClipAdvancedExperience]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppClip, AppClipAdvancedExperienceImage, AppClipAdvancedExperienceLocalization]]]
     meta: Optional[PagingInformation]
 
-class AppClipAdvancedExperienceResponse(ApplaudModel):
+class AppClipAdvancedExperienceResponse(ApplaudResponse):
     data: AppClipAdvancedExperience
     links: DocumentLinks
     included: Optional[list[Union[AppClip, AppClipAdvancedExperienceImage, AppClipAdvancedExperienceLocalization]]]
 
-class AppClipAppStoreReviewDetailResponse(ApplaudModel):
+class AppClipAppStoreReviewDetailResponse(ApplaudResponse):
     data: AppClipAppStoreReviewDetail
     links: DocumentLinks
     included: Optional[list[AppClipDefaultExperience]]
 
-class AppClipDefaultExperienceLocalizationsResponse(ApplaudModel):
+class AppClipDefaultExperienceLocalizationsResponse(ApplaudResponse):
     data: list[AppClipDefaultExperienceLocalization]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppClipDefaultExperience, AppClipHeaderImage]]]
     meta: Optional[PagingInformation]
 
-class AppClipDefaultExperienceLocalizationResponse(ApplaudModel):
+class AppClipDefaultExperienceLocalizationResponse(ApplaudResponse):
     data: AppClipDefaultExperienceLocalization
     links: DocumentLinks
     included: Optional[list[Union[AppClipDefaultExperience, AppClipHeaderImage]]]
 
-class AppClipDefaultExperiencesResponse(ApplaudModel):
+class AppClipDefaultExperiencesResponse(ApplaudResponse):
     data: list[AppClipDefaultExperience]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail]]]
     meta: Optional[PagingInformation]
 
-class AppClipDefaultExperienceResponse(ApplaudModel):
+class AppClipDefaultExperienceResponse(ApplaudResponse):
     data: AppClipDefaultExperience
     links: DocumentLinks
     included: Optional[list[Union[AppClip, AppStoreVersion, AppClipDefaultExperienceLocalization, AppClipAppStoreReviewDetail]]]
 
-class AppClipDomainStatusResponse(ApplaudModel):
+class AppClipDomainStatusResponse(ApplaudResponse):
     data: AppClipDomainStatus
     links: DocumentLinks
 
-class AppClipHeaderImageResponse(ApplaudModel):
+class AppClipHeaderImageResponse(ApplaudResponse):
     data: AppClipHeaderImage
     links: DocumentLinks
     included: Optional[list[AppClipDefaultExperienceLocalization]]
 
-class AppClipsResponse(ApplaudModel):
+class AppClipsResponse(ApplaudResponse):
     data: list[AppClip]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, AppClipDefaultExperience]]]
     meta: Optional[PagingInformation]
 
-class AppClipResponse(ApplaudModel):
+class AppClipResponse(ApplaudResponse):
     data: AppClip
     links: DocumentLinks
     included: Optional[list[Union[App, AppClipDefaultExperience]]]
 
-class AppEncryptionDeclarationsResponse(ApplaudModel):
+class AppEncryptionDeclarationsResponse(ApplaudResponse):
     data: list[AppEncryptionDeclaration]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class AppEncryptionDeclarationResponse(ApplaudModel):
+class AppEncryptionDeclarationResponse(ApplaudResponse):
     data: AppEncryptionDeclaration
     links: DocumentLinks
     included: Optional[list[App]]
 
-class AppInfoLocalizationsResponse(ApplaudModel):
+class AppInfoLocalizationsResponse(ApplaudResponse):
     data: list[AppInfoLocalization]
     links: PagedDocumentLinks
     included: Optional[list[AppInfo]]
     meta: Optional[PagingInformation]
 
-class AppInfoLocalizationResponse(ApplaudModel):
+class AppInfoLocalizationResponse(ApplaudResponse):
     data: AppInfoLocalization
     links: DocumentLinks
     included: Optional[list[AppInfo]]
 
-class AppInfosResponse(ApplaudModel):
+class AppInfosResponse(ApplaudResponse):
     data: list[AppInfo]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, AgeRatingDeclaration, AppInfoLocalization, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory]]]
     meta: Optional[PagingInformation]
 
-class AppInfoResponse(ApplaudModel):
+class AppInfoResponse(ApplaudResponse):
     data: AppInfo
     links: DocumentLinks
     included: Optional[list[Union[App, AgeRatingDeclaration, AppInfoLocalization, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory, AppCategory]]]
 
-class AppPreOrderResponse(ApplaudModel):
+class AppPreOrderResponse(ApplaudResponse):
     data: AppPreOrder
     links: DocumentLinks
     included: Optional[list[App]]
 
-class AppPreviewSetsResponse(ApplaudModel):
+class AppPreviewSetsResponse(ApplaudResponse):
     data: list[AppPreviewSet]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppStoreVersionLocalization, AppPreview]]]
     meta: Optional[PagingInformation]
 
-class AppPreviewSetResponse(ApplaudModel):
+class AppPreviewSetResponse(ApplaudResponse):
     data: AppPreviewSet
     links: DocumentLinks
     included: Optional[list[Union[AppStoreVersionLocalization, AppPreview]]]
 
-class AppPreviewsResponse(ApplaudModel):
+class AppPreviewsResponse(ApplaudResponse):
     data: list[AppPreview]
     links: PagedDocumentLinks
     included: Optional[list[AppPreviewSet]]
     meta: Optional[PagingInformation]
 
-class AppPreviewResponse(ApplaudModel):
+class AppPreviewResponse(ApplaudResponse):
     data: AppPreview
     links: DocumentLinks
     included: Optional[list[AppPreviewSet]]
 
-class AppPricePointsResponse(ApplaudModel):
+class AppPricePointsResponse(ApplaudResponse):
     data: list[AppPricePoint]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppPriceTier, Territory]]]
     meta: Optional[PagingInformation]
 
-class AppPricePointResponse(ApplaudModel):
+class AppPricePointResponse(ApplaudResponse):
     data: AppPricePoint
     links: DocumentLinks
     included: Optional[list[Union[AppPriceTier, Territory]]]
 
-class AppPriceTiersResponse(ApplaudModel):
+class AppPriceTiersResponse(ApplaudResponse):
     data: list[AppPriceTier]
     links: PagedDocumentLinks
     included: Optional[list[AppPricePoint]]
     meta: Optional[PagingInformation]
 
-class AppPriceTierResponse(ApplaudModel):
+class AppPriceTierResponse(ApplaudResponse):
     data: AppPriceTier
     links: DocumentLinks
     included: Optional[list[AppPricePoint]]
 
-class AppPricesResponse(ApplaudModel):
+class AppPricesResponse(ApplaudResponse):
     data: list[AppPrice]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, AppPriceTier]]]
     meta: Optional[PagingInformation]
 
-class AppPriceResponse(ApplaudModel):
+class AppPriceResponse(ApplaudResponse):
     data: AppPrice
     links: DocumentLinks
     included: Optional[list[Union[App, AppPriceTier]]]
 
-class AppScreenshotSetsResponse(ApplaudModel):
+class AppScreenshotSetsResponse(ApplaudResponse):
     data: list[AppScreenshotSet]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppStoreVersionLocalization, AppScreenshot]]]
     meta: Optional[PagingInformation]
 
-class AppScreenshotSetResponse(ApplaudModel):
+class AppScreenshotSetResponse(ApplaudResponse):
     data: AppScreenshotSet
     links: DocumentLinks
     included: Optional[list[Union[AppStoreVersionLocalization, AppScreenshot]]]
 
-class AppScreenshotsResponse(ApplaudModel):
+class AppScreenshotsResponse(ApplaudResponse):
     data: list[AppScreenshot]
     links: PagedDocumentLinks
     included: Optional[list[AppScreenshotSet]]
     meta: Optional[PagingInformation]
 
-class AppScreenshotResponse(ApplaudModel):
+class AppScreenshotResponse(ApplaudResponse):
     data: AppScreenshot
     links: DocumentLinks
     included: Optional[list[AppScreenshotSet]]
 
-class AppStoreReviewAttachmentsResponse(ApplaudModel):
+class AppStoreReviewAttachmentsResponse(ApplaudResponse):
     data: list[AppStoreReviewAttachment]
     links: PagedDocumentLinks
     included: Optional[list[AppStoreReviewDetail]]
     meta: Optional[PagingInformation]
 
-class AppStoreReviewAttachmentResponse(ApplaudModel):
+class AppStoreReviewAttachmentResponse(ApplaudResponse):
     data: AppStoreReviewAttachment
     links: DocumentLinks
     included: Optional[list[AppStoreReviewDetail]]
 
-class AppStoreReviewDetailResponse(ApplaudModel):
+class AppStoreReviewDetailResponse(ApplaudResponse):
     data: AppStoreReviewDetail
     links: DocumentLinks
     included: Optional[list[Union[AppStoreVersion, AppStoreReviewAttachment]]]
 
-class AppStoreVersionLocalizationsResponse(ApplaudModel):
+class AppStoreVersionLocalizationsResponse(ApplaudResponse):
     data: list[AppStoreVersionLocalization]
     links: PagedDocumentLinks
     included: Optional[list[Union[AppStoreVersion, AppScreenshotSet, AppPreviewSet]]]
     meta: Optional[PagingInformation]
 
-class AppStoreVersionLocalizationResponse(ApplaudModel):
+class AppStoreVersionLocalizationResponse(ApplaudResponse):
     data: AppStoreVersionLocalization
     links: DocumentLinks
     included: Optional[list[Union[AppStoreVersion, AppScreenshotSet, AppPreviewSet]]]
 
-class AppStoreVersionPhasedReleaseResponse(ApplaudModel):
+class AppStoreVersionPhasedReleaseResponse(ApplaudResponse):
     data: AppStoreVersionPhasedRelease
     links: DocumentLinks
 
-class AppStoreVersionReleaseRequestResponse(ApplaudModel):
+class AppStoreVersionReleaseRequestResponse(ApplaudResponse):
     data: AppStoreVersionReleaseRequest
     links: DocumentLinks
 
-class AppStoreVersionSubmissionResponse(ApplaudModel):
+class AppStoreVersionSubmissionResponse(ApplaudResponse):
     data: AppStoreVersionSubmission
     links: DocumentLinks
     included: Optional[list[AppStoreVersion]]
 
-class AppStoreVersionsResponse(ApplaudModel):
+class AppStoreVersionsResponse(ApplaudResponse):
     data: list[AppStoreVersion]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, IdfaDeclaration, AppClipDefaultExperience]]]
     meta: Optional[PagingInformation]
 
-class AppStoreVersionResponse(ApplaudModel):
+class AppStoreVersionResponse(ApplaudResponse):
     data: AppStoreVersion
     links: DocumentLinks
     included: Optional[list[Union[App, AgeRatingDeclaration, AppStoreVersionLocalization, Build, AppStoreVersionPhasedRelease, RoutingAppCoverage, AppStoreReviewDetail, AppStoreVersionSubmission, IdfaDeclaration, AppClipDefaultExperience]]]
 
-class AppsResponse(ApplaudModel):
+class AppsResponse(ApplaudResponse):
     data: list[App]
     links: PagedDocumentLinks
     included: Optional[list[Union[CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, GameCenterEnabledVersion]]]
     meta: Optional[PagingInformation]
 
-class AppResponse(ApplaudModel):
+class AppResponse(ApplaudResponse):
     data: App
     links: DocumentLinks
     included: Optional[list[Union[CiProduct, BetaGroup, AppStoreVersion, PrereleaseVersion, BetaAppLocalization, Build, BetaLicenseAgreement, BetaAppReviewDetail, AppInfo, AppClip, EndUserLicenseAgreement, AppPreOrder, AppPrice, Territory, InAppPurchase, GameCenterEnabledVersion]]]
 
-class BetaAppClipInvocationLocalizationResponse(ApplaudModel):
+class BetaAppClipInvocationLocalizationResponse(ApplaudResponse):
     data: BetaAppClipInvocationLocalization
     links: DocumentLinks
 
-class BetaAppClipInvocationsResponse(ApplaudModel):
+class BetaAppClipInvocationsResponse(ApplaudResponse):
     data: list[BetaAppClipInvocation]
     links: PagedDocumentLinks
     included: Optional[list[BetaAppClipInvocationLocalization]]
     meta: Optional[PagingInformation]
 
-class BetaAppClipInvocationResponse(ApplaudModel):
+class BetaAppClipInvocationResponse(ApplaudResponse):
     data: BetaAppClipInvocation
     links: DocumentLinks
     included: Optional[list[BetaAppClipInvocationLocalization]]
 
-class BetaAppLocalizationsResponse(ApplaudModel):
+class BetaAppLocalizationsResponse(ApplaudResponse):
     data: list[BetaAppLocalization]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class BetaAppLocalizationResponse(ApplaudModel):
+class BetaAppLocalizationResponse(ApplaudResponse):
     data: BetaAppLocalization
     links: DocumentLinks
     included: Optional[list[App]]
 
-class BetaAppReviewDetailsResponse(ApplaudModel):
+class BetaAppReviewDetailsResponse(ApplaudResponse):
     data: list[BetaAppReviewDetail]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class BetaAppReviewDetailResponse(ApplaudModel):
+class BetaAppReviewDetailResponse(ApplaudResponse):
     data: BetaAppReviewDetail
     links: DocumentLinks
     included: Optional[list[App]]
 
-class BetaAppReviewSubmissionsResponse(ApplaudModel):
+class BetaAppReviewSubmissionsResponse(ApplaudResponse):
     data: list[BetaAppReviewSubmission]
     links: PagedDocumentLinks
     included: Optional[list[Build]]
     meta: Optional[PagingInformation]
 
-class BetaAppReviewSubmissionResponse(ApplaudModel):
+class BetaAppReviewSubmissionResponse(ApplaudResponse):
     data: BetaAppReviewSubmission
     links: DocumentLinks
     included: Optional[list[Build]]
 
-class BetaBuildLocalizationsResponse(ApplaudModel):
+class BetaBuildLocalizationsResponse(ApplaudResponse):
     data: list[BetaBuildLocalization]
     links: PagedDocumentLinks
     included: Optional[list[Build]]
     meta: Optional[PagingInformation]
 
-class BetaBuildLocalizationResponse(ApplaudModel):
+class BetaBuildLocalizationResponse(ApplaudResponse):
     data: BetaBuildLocalization
     links: DocumentLinks
     included: Optional[list[Build]]
 
-class BetaGroupsResponse(ApplaudModel):
+class BetaGroupsResponse(ApplaudResponse):
     data: list[BetaGroup]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, Build, BetaTester]]]
     meta: Optional[PagingInformation]
 
-class BetaGroupResponse(ApplaudModel):
+class BetaGroupResponse(ApplaudResponse):
     data: BetaGroup
     links: DocumentLinks
     included: Optional[list[Union[App, Build, BetaTester]]]
 
-class BetaLicenseAgreementsResponse(ApplaudModel):
+class BetaLicenseAgreementsResponse(ApplaudResponse):
     data: list[BetaLicenseAgreement]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class BetaLicenseAgreementResponse(ApplaudModel):
+class BetaLicenseAgreementResponse(ApplaudResponse):
     data: BetaLicenseAgreement
     links: DocumentLinks
     included: Optional[list[App]]
 
-class BetaTesterInvitationResponse(ApplaudModel):
+class BetaTesterInvitationResponse(ApplaudResponse):
     data: BetaTesterInvitation
     links: DocumentLinks
 
-class BetaTestersResponse(ApplaudModel):
+class BetaTestersResponse(ApplaudResponse):
     data: list[BetaTester]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, BetaGroup, Build]]]
     meta: Optional[PagingInformation]
 
-class BetaTesterResponse(ApplaudModel):
+class BetaTesterResponse(ApplaudResponse):
     data: BetaTester
     links: DocumentLinks
     included: Optional[list[Union[App, BetaGroup, Build]]]
 
-class BuildBetaDetailsResponse(ApplaudModel):
+class BuildBetaDetailsResponse(ApplaudResponse):
     data: list[BuildBetaDetail]
     links: PagedDocumentLinks
     included: Optional[list[Build]]
     meta: Optional[PagingInformation]
 
-class BuildBetaDetailResponse(ApplaudModel):
+class BuildBetaDetailResponse(ApplaudResponse):
     data: BuildBetaDetail
     links: DocumentLinks
     included: Optional[list[Build]]
 
-class BuildBetaNotificationResponse(ApplaudModel):
+class BuildBetaNotificationResponse(ApplaudResponse):
     data: BuildBetaNotification
     links: DocumentLinks
 
-class BuildBundleFileSizesResponse(ApplaudModel):
+class BuildBundleFileSizesResponse(ApplaudResponse):
     data: list[BuildBundleFileSize]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BuildIconsResponse(ApplaudModel):
+class BuildIconsResponse(ApplaudResponse):
     data: list[BuildIcon]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BuildsResponse(ApplaudModel):
+class BuildsResponse(ApplaudResponse):
     data: list[Build]
     links: PagedDocumentLinks
     included: Optional[list[Union[PrereleaseVersion, BetaTester, BetaBuildLocalization, AppEncryptionDeclaration, BetaAppReviewSubmission, App, BuildBetaDetail, AppStoreVersion, BuildIcon, BuildBundle]]]
     meta: Optional[PagingInformation]
 
-class BuildResponse(ApplaudModel):
+class BuildResponse(ApplaudResponse):
     data: Build
     links: DocumentLinks
     included: Optional[list[Union[PrereleaseVersion, BetaTester, BetaBuildLocalization, AppEncryptionDeclaration, BetaAppReviewSubmission, App, BuildBetaDetail, AppStoreVersion, BuildIcon, BuildBundle]]]
 
-class BundleIdCapabilitiesResponse(ApplaudModel):
+class BundleIdCapabilitiesResponse(ApplaudResponse):
     data: list[BundleIdCapability]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BundleIdCapabilityResponse(ApplaudModel):
+class BundleIdCapabilityResponse(ApplaudResponse):
     data: BundleIdCapability
     links: DocumentLinks
 
-class BundleIdsResponse(ApplaudModel):
+class BundleIdsResponse(ApplaudResponse):
     data: list[BundleId]
     links: PagedDocumentLinks
     included: Optional[list[Union[Profile, BundleIdCapability, App]]]
     meta: Optional[PagingInformation]
 
-class BundleIdResponse(ApplaudModel):
+class BundleIdResponse(ApplaudResponse):
     data: BundleId
     links: DocumentLinks
     included: Optional[list[Union[Profile, BundleIdCapability, App]]]
 
-class CertificatesResponse(ApplaudModel):
+class CertificatesResponse(ApplaudResponse):
     data: list[Certificate]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class CertificateResponse(ApplaudModel):
+class CertificateResponse(ApplaudResponse):
     data: Certificate
     links: DocumentLinks
 
-class CiArtifactsResponse(ApplaudModel):
+class CiArtifactsResponse(ApplaudResponse):
     data: list[CiArtifact]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class CiArtifactResponse(ApplaudModel):
+class CiArtifactResponse(ApplaudResponse):
     data: CiArtifact
     links: DocumentLinks
 
-class CiBuildActionsResponse(ApplaudModel):
+class CiBuildActionsResponse(ApplaudResponse):
     data: list[CiBuildAction]
     links: PagedDocumentLinks
     included: Optional[list[CiBuildRun]]
     meta: Optional[PagingInformation]
 
-class CiBuildActionResponse(ApplaudModel):
+class CiBuildActionResponse(ApplaudResponse):
     data: CiBuildAction
     links: DocumentLinks
     included: Optional[list[CiBuildRun]]
 
-class CiBuildRunsResponse(ApplaudModel):
+class CiBuildRunsResponse(ApplaudResponse):
     data: list[CiBuildRun]
     links: PagedDocumentLinks
     included: Optional[list[Union[Build, CiWorkflow, CiProduct, ScmGitReference, ScmGitReference, ScmPullRequest]]]
     meta: Optional[PagingInformation]
 
-class CiBuildRunResponse(ApplaudModel):
+class CiBuildRunResponse(ApplaudResponse):
     data: CiBuildRun
     links: DocumentLinks
     included: Optional[list[Union[Build, CiWorkflow, CiProduct, ScmGitReference, ScmGitReference, ScmPullRequest]]]
 
-class CiIssuesResponse(ApplaudModel):
+class CiIssuesResponse(ApplaudResponse):
     data: list[CiIssue]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class CiIssueResponse(ApplaudModel):
+class CiIssueResponse(ApplaudResponse):
     data: CiIssue
     links: DocumentLinks
 
-class CiMacOsVersionsResponse(ApplaudModel):
+class CiMacOsVersionsResponse(ApplaudResponse):
     data: list[CiMacOsVersion]
     links: PagedDocumentLinks
     included: Optional[list[CiXcodeVersion]]
     meta: Optional[PagingInformation]
 
-class CiMacOsVersionResponse(ApplaudModel):
+class CiMacOsVersionResponse(ApplaudResponse):
     data: CiMacOsVersion
     links: DocumentLinks
     included: Optional[list[CiXcodeVersion]]
 
-class CiProductsResponse(ApplaudModel):
+class CiProductsResponse(ApplaudResponse):
     data: list[CiProduct]
     links: PagedDocumentLinks
     included: Optional[list[Union[App, BundleId, ScmRepository]]]
     meta: Optional[PagingInformation]
 
-class CiProductResponse(ApplaudModel):
+class CiProductResponse(ApplaudResponse):
     data: CiProduct
     links: DocumentLinks
     included: Optional[list[Union[App, BundleId, ScmRepository]]]
 
-class CiTestResultsResponse(ApplaudModel):
+class CiTestResultsResponse(ApplaudResponse):
     data: list[CiTestResult]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class CiTestResultResponse(ApplaudModel):
+class CiTestResultResponse(ApplaudResponse):
     data: CiTestResult
     links: DocumentLinks
 
-class CiWorkflowsResponse(ApplaudModel):
+class CiWorkflowsResponse(ApplaudResponse):
     data: list[CiWorkflow]
     links: PagedDocumentLinks
     included: Optional[list[Union[CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion]]]
     meta: Optional[PagingInformation]
 
-class CiWorkflowResponse(ApplaudModel):
+class CiWorkflowResponse(ApplaudResponse):
     data: CiWorkflow
     links: DocumentLinks
     included: Optional[list[Union[CiProduct, ScmRepository, CiXcodeVersion, CiMacOsVersion]]]
 
-class CiXcodeVersionsResponse(ApplaudModel):
+class CiXcodeVersionsResponse(ApplaudResponse):
     data: list[CiXcodeVersion]
     links: PagedDocumentLinks
     included: Optional[list[CiMacOsVersion]]
     meta: Optional[PagingInformation]
 
-class CiXcodeVersionResponse(ApplaudModel):
+class CiXcodeVersionResponse(ApplaudResponse):
     data: CiXcodeVersion
     links: DocumentLinks
     included: Optional[list[CiMacOsVersion]]
 
-class DevicesResponse(ApplaudModel):
+class DevicesResponse(ApplaudResponse):
     data: list[Device]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class DeviceResponse(ApplaudModel):
+class DeviceResponse(ApplaudResponse):
     data: Device
     links: DocumentLinks
 
-class DiagnosticLogsResponse(ApplaudModel):
+class DiagnosticLogsResponse(ApplaudResponse):
     data: list[DiagnosticLog]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class DiagnosticSignaturesResponse(ApplaudModel):
+class DiagnosticSignaturesResponse(ApplaudResponse):
     data: list[DiagnosticSignature]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class EndUserLicenseAgreementResponse(ApplaudModel):
+class EndUserLicenseAgreementResponse(ApplaudResponse):
     data: EndUserLicenseAgreement
     links: DocumentLinks
     included: Optional[list[Union[App, Territory]]]
 
-class GameCenterEnabledVersionsResponse(ApplaudModel):
+class GameCenterEnabledVersionsResponse(ApplaudResponse):
     data: list[GameCenterEnabledVersion]
     links: PagedDocumentLinks
     included: Optional[list[Union[GameCenterEnabledVersion, App]]]
     meta: Optional[PagingInformation]
 
 @deprecated
-class IdfaDeclarationResponse(ApplaudModel):
+class IdfaDeclarationResponse(ApplaudResponse):
     data: IdfaDeclaration
     links: DocumentLinks
     included: Optional[list[AppStoreVersion]]
 
-class InAppPurchasesResponse(ApplaudModel):
+class InAppPurchasesResponse(ApplaudResponse):
     data: list[InAppPurchase]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class InAppPurchaseResponse(ApplaudModel):
+class InAppPurchaseResponse(ApplaudResponse):
     data: InAppPurchase
     links: DocumentLinks
     included: Optional[list[App]]
 
-class PerfPowerMetricsResponse(ApplaudModel):
+class PerfPowerMetricsResponse(ApplaudResponse):
     data: list[PerfPowerMetric]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class PreReleaseVersionsResponse(ApplaudModel):
+class PreReleaseVersionsResponse(ApplaudResponse):
     data: list[PrereleaseVersion]
     links: PagedDocumentLinks
     included: Optional[list[Union[Build, App]]]
     meta: Optional[PagingInformation]
 
-class PrereleaseVersionResponse(ApplaudModel):
+class PrereleaseVersionResponse(ApplaudResponse):
     data: PrereleaseVersion
     links: DocumentLinks
     included: Optional[list[Union[Build, App]]]
 
-class ProfilesResponse(ApplaudModel):
+class ProfilesResponse(ApplaudResponse):
     data: list[Profile]
     links: PagedDocumentLinks
     included: Optional[list[Union[BundleId, Device, Certificate]]]
     meta: Optional[PagingInformation]
 
-class ProfileResponse(ApplaudModel):
+class ProfileResponse(ApplaudResponse):
     data: Profile
     links: DocumentLinks
     included: Optional[list[Union[BundleId, Device, Certificate]]]
 
-class RoutingAppCoverageResponse(ApplaudModel):
+class RoutingAppCoverageResponse(ApplaudResponse):
     data: RoutingAppCoverage
     links: DocumentLinks
     included: Optional[list[AppStoreVersion]]
 
-class ScmGitReferencesResponse(ApplaudModel):
+class ScmGitReferencesResponse(ApplaudResponse):
     data: list[ScmGitReference]
     links: PagedDocumentLinks
     included: Optional[list[ScmRepository]]
     meta: Optional[PagingInformation]
 
-class ScmGitReferenceResponse(ApplaudModel):
+class ScmGitReferenceResponse(ApplaudResponse):
     data: ScmGitReference
     links: DocumentLinks
     included: Optional[list[ScmRepository]]
 
-class ScmProvidersResponse(ApplaudModel):
+class ScmProvidersResponse(ApplaudResponse):
     data: list[ScmProvider]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class ScmProviderResponse(ApplaudModel):
+class ScmProviderResponse(ApplaudResponse):
     data: ScmProvider
     links: DocumentLinks
 
-class ScmPullRequestsResponse(ApplaudModel):
+class ScmPullRequestsResponse(ApplaudResponse):
     data: list[ScmPullRequest]
     links: PagedDocumentLinks
     included: Optional[list[ScmRepository]]
     meta: Optional[PagingInformation]
 
-class ScmPullRequestResponse(ApplaudModel):
+class ScmPullRequestResponse(ApplaudResponse):
     data: ScmPullRequest
     links: DocumentLinks
     included: Optional[list[ScmRepository]]
 
-class ScmRepositoriesResponse(ApplaudModel):
+class ScmRepositoriesResponse(ApplaudResponse):
     data: list[ScmRepository]
     links: PagedDocumentLinks
     included: Optional[list[Union[ScmProvider, ScmGitReference]]]
     meta: Optional[PagingInformation]
 
-class ScmRepositoryResponse(ApplaudModel):
+class ScmRepositoryResponse(ApplaudResponse):
     data: ScmRepository
     links: DocumentLinks
     included: Optional[list[Union[ScmProvider, ScmGitReference]]]
 
-class TerritoriesResponse(ApplaudModel):
+class TerritoriesResponse(ApplaudResponse):
     data: list[Territory]
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class TerritoryResponse(ApplaudModel):
+class TerritoryResponse(ApplaudResponse):
     data: Territory
     links: DocumentLinks
 
-class UserInvitationsResponse(ApplaudModel):
+class UserInvitationsResponse(ApplaudResponse):
     data: list[UserInvitation]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class UserInvitationResponse(ApplaudModel):
+class UserInvitationResponse(ApplaudResponse):
     data: UserInvitation
     links: DocumentLinks
     included: Optional[list[App]]
 
-class UsersResponse(ApplaudModel):
+class UsersResponse(ApplaudResponse):
     data: list[User]
     links: PagedDocumentLinks
     included: Optional[list[App]]
     meta: Optional[PagingInformation]
 
-class UserResponse(ApplaudModel):
+class UserResponse(ApplaudResponse):
     data: User
     links: DocumentLinks
     included: Optional[list[App]]
 
-class AppClipDefaultExperienceReleaseWithAppStoreVersionLinkageResponse(ApplaudModel):
+class AppClipDefaultExperienceReleaseWithAppStoreVersionLinkageResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["appStoreVersions"] = "appStoreVersions"
@@ -676,7 +679,7 @@ class AppClipDefaultExperienceReleaseWithAppStoreVersionLinkageResponse(ApplaudM
     data: Data
     links: DocumentLinks
 
-class AppPreviewSetAppPreviewsLinkagesResponse(ApplaudModel):
+class AppPreviewSetAppPreviewsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["appPreviews"] = "appPreviews"
@@ -685,7 +688,7 @@ class AppPreviewSetAppPreviewsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class AppScreenshotSetAppScreenshotsLinkagesResponse(ApplaudModel):
+class AppScreenshotSetAppScreenshotsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["appScreenshots"] = "appScreenshots"
@@ -694,7 +697,7 @@ class AppScreenshotSetAppScreenshotsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class AppStoreVersionAppClipDefaultExperienceLinkageResponse(ApplaudModel):
+class AppStoreVersionAppClipDefaultExperienceLinkageResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["appClipDefaultExperiences"] = "appClipDefaultExperiences"
@@ -702,7 +705,7 @@ class AppStoreVersionAppClipDefaultExperienceLinkageResponse(ApplaudModel):
     data: Data
     links: DocumentLinks
 
-class AppStoreVersionBuildLinkageResponse(ApplaudModel):
+class AppStoreVersionBuildLinkageResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
@@ -710,7 +713,7 @@ class AppStoreVersionBuildLinkageResponse(ApplaudModel):
     data: Data
     links: DocumentLinks
 
-class BetaGroupBetaTestersLinkagesResponse(ApplaudModel):
+class BetaGroupBetaTestersLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaTesters"] = "betaTesters"
@@ -719,7 +722,7 @@ class BetaGroupBetaTestersLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BetaGroupBuildsLinkagesResponse(ApplaudModel):
+class BetaGroupBuildsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
@@ -728,7 +731,7 @@ class BetaGroupBuildsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BetaTesterAppsLinkagesResponse(ApplaudModel):
+class BetaTesterAppsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["apps"] = "apps"
@@ -737,7 +740,7 @@ class BetaTesterAppsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BetaTesterBetaGroupsLinkagesResponse(ApplaudModel):
+class BetaTesterBetaGroupsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaGroups"] = "betaGroups"
@@ -746,7 +749,7 @@ class BetaTesterBetaGroupsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BetaTesterBuildsLinkagesResponse(ApplaudModel):
+class BetaTesterBuildsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["builds"] = "builds"
@@ -755,7 +758,7 @@ class BetaTesterBuildsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class BuildAppEncryptionDeclarationLinkageResponse(ApplaudModel):
+class BuildAppEncryptionDeclarationLinkageResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["appEncryptionDeclarations"] = "appEncryptionDeclarations"
@@ -763,7 +766,7 @@ class BuildAppEncryptionDeclarationLinkageResponse(ApplaudModel):
     data: Data
     links: DocumentLinks
 
-class BuildIndividualTestersLinkagesResponse(ApplaudModel):
+class BuildIndividualTestersLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["betaTesters"] = "betaTesters"
@@ -772,7 +775,7 @@ class BuildIndividualTestersLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class GameCenterEnabledVersionCompatibleVersionsLinkagesResponse(ApplaudModel):
+class GameCenterEnabledVersionCompatibleVersionsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["gameCenterEnabledVersions"] = "gameCenterEnabledVersions"
@@ -781,7 +784,7 @@ class GameCenterEnabledVersionCompatibleVersionsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class UserVisibleAppsLinkagesResponse(ApplaudModel):
+class UserVisibleAppsLinkagesResponse(ApplaudResponse):
     class Data(ApplaudModel):
         id: str
         type: Literal["apps"] = "apps"
@@ -790,7 +793,7 @@ class UserVisibleAppsLinkagesResponse(ApplaudModel):
     links: PagedDocumentLinks
     meta: Optional[PagingInformation]
 
-class ErrorResponse(ApplaudModel):
+class ErrorResponse(ApplaudResponse):
     class Error(ApplaudModel):
         code: str
         detail: str

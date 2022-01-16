@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *
@@ -21,9 +20,8 @@ class AppPreviewSetsEndpoint(Endpoint):
         :rtype: AppPreviewSetResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_post(json)
-        return AppPreviewSetResponse.parse_obj(response_json)
+        json = super()._perform_post(request)
+        return AppPreviewSetResponse.parse_obj(json)
 
 class AppPreviewSetEndpoint(IDEndpoint):
     path = '/v1/appPreviewSets/{id}'
@@ -135,8 +133,7 @@ class AppPreviewsLinkagesOfAppPreviewSetEndpoint(IDEndpoint):
 
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        super()._perform_patch(json)
+        super()._perform_patch(request)
 
 class AppPreviewsOfAppPreviewSetEndpoint(IDEndpoint):
     path = '/v1/appPreviewSets/{id}/appPreviews'

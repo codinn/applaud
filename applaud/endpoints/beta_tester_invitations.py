@@ -2,7 +2,6 @@ from __future__ import annotations
 from .base import Endpoint, IDEndpoint, SortOrder, endpoint
 from ..fields import *
 from typing import Union
-from pydantic import parse_obj_as
 from ..schemas.models import *
 from ..schemas.responses import *
 from ..schemas.requests import *
@@ -21,7 +20,6 @@ class BetaTesterInvitationsEndpoint(Endpoint):
         :rtype: BetaTesterInvitationResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a request or a HTTP error occurred.
         '''
-        json = request.dict(by_alias=True, exclude_none=True)
-        response_json = super()._perform_post(json)
-        return BetaTesterInvitationResponse.parse_obj(response_json)
+        json = super()._perform_post(request)
+        return BetaTesterInvitationResponse.parse_obj(json)
 
