@@ -303,7 +303,7 @@ connection.app_store_version(version_id).delete()
 1. HTTP request exceptions raised by [Python Requests](https://docs.python-requests.org/en/latest/api/#exceptions)
 2. Remote service returns an [ErrorResponse](https://developer.apple.com/documentation/appstoreconnectapi/errorresponse)
 
-For the second case, `applaud` raises an `EndpointException` exception, and attaches all `[ErrorResponse.Error](https://developer.apple.com/documentation/appstoreconnectapi/errorresponse/errors)` objects in `EndpointException.errors` attribute.
+For the second case, `applaud` raises an `EndpointException` exception, and attaches all [`ErrorResponse.Error`](https://developer.apple.com/documentation/appstoreconnectapi/errorresponse/errors) objects in `EndpointException.errors` attribute.
 
 Some errors are harmless, for example, App Store Connect has no API for you to tell whether a tester has accepted beta test invitation or not. When you trying to resend invitations to testers, you may encounter an `ALREADY_ACCEPTED` error, it's safe to just ignore such error:
 
