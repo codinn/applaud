@@ -69,17 +69,21 @@ class Endpoint:
         self._query_params['sort'] = ','.join(expressions)
 
     def __parse_response(self, response: requests.Response) -> Any:
-        if response.ok:
-            return response.json()
-        
-        json = response.json()
-        errors: list[ErrorResponse.Error] = ErrorResponse.parse_obj(json).errors if json else None
+        try:
+            json = response.json()
+            if response.ok:
+                return json
+            
+            errors: list[ErrorResponse.Error] = ErrorResponse.parse_obj(json).errors if json else None
 
-        if errors:
-            # Errors from the App Store Connect service
-            raise EndpointException(errors, response)
+            if errors:
+                # Errors from the App Store Connect service
+                raise EndpointException(errors, response)
 
-        response.raise_for_status()
+            response.raise_for_status()
+        except requests.exceptions.JSONDecodeError as error:
+            # Response body does not contain valid json.
+            return None
 
     def _perform_get(self) -> Any:
         '''Perform a GET request to the specified endpoint.'''
