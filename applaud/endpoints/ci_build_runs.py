@@ -81,8 +81,8 @@ class CiBuildRunEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CiBuildRunEndpoint
         '''
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -122,8 +122,8 @@ class ActionsOfCiBuildRunEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.ActionsOfCiBuildRunEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -290,24 +290,24 @@ class BuildsOfCiBuildRunEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildsOfCiBuildRunEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if individual_testers and individual_testers > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if individual_testers: self._set_limit('individualTesters', individual_testers)
+            raise ValueError(f'The maximum limit of individual_testers is 50')
+        if individual_testers: self._set_limit(individual_testers, 'individualTesters')
 
         if beta_build_localizations and beta_build_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_build_localizations: self._set_limit('betaBuildLocalizations', beta_build_localizations)
+            raise ValueError(f'The maximum limit of beta_build_localizations is 50')
+        if beta_build_localizations: self._set_limit(beta_build_localizations, 'betaBuildLocalizations')
 
         if icons and icons > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if icons: self._set_limit('icons', icons)
+            raise ValueError(f'The maximum limit of icons is 50')
+        if icons: self._set_limit(icons, 'icons')
 
         if build_bundles and build_bundles > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if build_bundles: self._set_limit('buildBundles', build_bundles)
+            raise ValueError(f'The maximum limit of build_bundles is 50')
+        if build_bundles: self._set_limit(build_bundles, 'buildBundles')
 
         return self
 

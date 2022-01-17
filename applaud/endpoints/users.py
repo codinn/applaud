@@ -84,12 +84,12 @@ class UsersEndpoint(Endpoint):
         :rtype: applaud.endpoints.UsersEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if visible_apps and visible_apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if visible_apps: self._set_limit('visibleApps', visible_apps)
+            raise ValueError(f'The maximum limit of visible_apps is 50')
+        if visible_apps: self._set_limit(visible_apps, 'visibleApps')
 
         return self
 
@@ -153,8 +153,8 @@ class UserEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.UserEndpoint
         '''
         if visible_apps and visible_apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if visible_apps: self._set_limit('visibleApps', visible_apps)
+            raise ValueError(f'The maximum limit of visible_apps is 50')
+        if visible_apps: self._set_limit(visible_apps, 'visibleApps')
 
         return self
 
@@ -202,8 +202,8 @@ class VisibleAppsLinkagesOfUserEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.VisibleAppsLinkagesOfUserEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -273,8 +273,8 @@ class VisibleAppsOfUserEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.VisibleAppsOfUserEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

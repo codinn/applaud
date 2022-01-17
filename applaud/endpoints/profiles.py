@@ -104,16 +104,16 @@ class ProfilesEndpoint(Endpoint):
         :rtype: applaud.endpoints.ProfilesEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if certificates and certificates > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if certificates: self._set_limit('certificates', certificates)
+            raise ValueError(f'The maximum limit of certificates is 50')
+        if certificates: self._set_limit(certificates, 'certificates')
 
         if devices and devices > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if devices: self._set_limit('devices', devices)
+            raise ValueError(f'The maximum limit of devices is 50')
+        if devices: self._set_limit(devices, 'devices')
 
         return self
 
@@ -207,12 +207,12 @@ class ProfileEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.ProfileEndpoint
         '''
         if certificates and certificates > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if certificates: self._set_limit('certificates', certificates)
+            raise ValueError(f'The maximum limit of certificates is 50')
+        if certificates: self._set_limit(certificates, 'certificates')
 
         if devices and devices > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if devices: self._set_limit('devices', devices)
+            raise ValueError(f'The maximum limit of devices is 50')
+        if devices: self._set_limit(devices, 'devices')
 
         return self
 
@@ -285,8 +285,8 @@ class CertificatesOfProfileEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CertificatesOfProfileEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -326,8 +326,8 @@ class DevicesOfProfileEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.DevicesOfProfileEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

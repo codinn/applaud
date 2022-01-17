@@ -44,8 +44,8 @@ class InAppPurchaseEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.InAppPurchaseEndpoint
         '''
         if apps and apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if apps: self._set_limit('apps', apps)
+            raise ValueError(f'The maximum limit of apps is 50')
+        if apps: self._set_limit(apps, 'apps')
 
         return self
 

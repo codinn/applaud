@@ -193,24 +193,24 @@ class BuildsEndpoint(Endpoint):
         :rtype: applaud.endpoints.BuildsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if beta_build_localizations and beta_build_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_build_localizations: self._set_limit('betaBuildLocalizations', beta_build_localizations)
+            raise ValueError(f'The maximum limit of beta_build_localizations is 50')
+        if beta_build_localizations: self._set_limit(beta_build_localizations, 'betaBuildLocalizations')
 
         if build_bundles and build_bundles > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if build_bundles: self._set_limit('buildBundles', build_bundles)
+            raise ValueError(f'The maximum limit of build_bundles is 50')
+        if build_bundles: self._set_limit(build_bundles, 'buildBundles')
 
         if icons and icons > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if icons: self._set_limit('icons', icons)
+            raise ValueError(f'The maximum limit of icons is 50')
+        if icons: self._set_limit(icons, 'icons')
 
         if individual_testers and individual_testers > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if individual_testers: self._set_limit('individualTesters', individual_testers)
+            raise ValueError(f'The maximum limit of individual_testers is 50')
+        if individual_testers: self._set_limit(individual_testers, 'individualTesters')
 
         return self
 
@@ -380,20 +380,20 @@ class BuildEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildEndpoint
         '''
         if beta_build_localizations and beta_build_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_build_localizations: self._set_limit('betaBuildLocalizations', beta_build_localizations)
+            raise ValueError(f'The maximum limit of beta_build_localizations is 50')
+        if beta_build_localizations: self._set_limit(beta_build_localizations, 'betaBuildLocalizations')
 
         if build_bundles and build_bundles > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if build_bundles: self._set_limit('buildBundles', build_bundles)
+            raise ValueError(f'The maximum limit of build_bundles is 50')
+        if build_bundles: self._set_limit(build_bundles, 'buildBundles')
 
         if icons and icons > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if icons: self._set_limit('icons', icons)
+            raise ValueError(f'The maximum limit of icons is 50')
+        if icons: self._set_limit(icons, 'icons')
 
         if individual_testers and individual_testers > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if individual_testers: self._set_limit('individualTesters', individual_testers)
+            raise ValueError(f'The maximum limit of individual_testers is 50')
+        if individual_testers: self._set_limit(individual_testers, 'individualTesters')
 
         return self
 
@@ -574,8 +574,8 @@ class BetaBuildLocalizationsOfBuildEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaBuildLocalizationsOfBuildEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -677,8 +677,8 @@ class DiagnosticSignaturesOfBuildEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.DiagnosticSignaturesOfBuildEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -718,8 +718,8 @@ class IconsOfBuildEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.IconsOfBuildEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -747,8 +747,8 @@ class IndividualTestersLinkagesOfBuildEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.IndividualTestersLinkagesOfBuildEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -808,8 +808,8 @@ class IndividualTestersOfBuildEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.IndividualTestersOfBuildEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

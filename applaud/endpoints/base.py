@@ -51,8 +51,11 @@ class Endpoint:
         values = [r.value for r in includes]
         self._query_params['include'] = ','.join(values)
 
-    def _set_limit(self, key: str, limit: int):
-        self._query_params[f'limit[{key}]'] = limit
+    def _set_limit(self, limit: int, related: Optional[str]=None):
+        if related:
+            self._query_params[f'limit[{related}]'] = limit
+        else:
+            self._query_params['limit'] = limit
 
     def _set_fields(self, key: str, value: list[Enum]):
         items = [item.value for item in value]

@@ -64,12 +64,12 @@ class AppPriceTiersEndpoint(Endpoint):
         :rtype: applaud.endpoints.AppPriceTiersEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if price_points and price_points > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if price_points: self._set_limit('pricePoints', price_points)
+            raise ValueError(f'The maximum limit of price_points is 50')
+        if price_points: self._set_limit(price_points, 'pricePoints')
 
         return self
 
@@ -129,8 +129,8 @@ class AppPriceTierEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppPriceTierEndpoint
         '''
         if price_points and price_points > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if price_points: self._set_limit('pricePoints', price_points)
+            raise ValueError(f'The maximum limit of price_points is 50')
+        if price_points: self._set_limit(price_points, 'pricePoints')
 
         return self
 
@@ -170,8 +170,8 @@ class PricePointsOfAppPriceTierEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.PricePointsOfAppPriceTierEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

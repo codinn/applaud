@@ -127,20 +127,20 @@ class BetaTestersEndpoint(Endpoint):
         :rtype: applaud.endpoints.BetaTestersEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if apps and apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if apps: self._set_limit('apps', apps)
+            raise ValueError(f'The maximum limit of apps is 50')
+        if apps: self._set_limit(apps, 'apps')
 
         if beta_groups and beta_groups > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_groups: self._set_limit('betaGroups', beta_groups)
+            raise ValueError(f'The maximum limit of beta_groups is 50')
+        if beta_groups: self._set_limit(beta_groups, 'betaGroups')
 
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -249,16 +249,16 @@ class BetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaTesterEndpoint
         '''
         if apps and apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if apps: self._set_limit('apps', apps)
+            raise ValueError(f'The maximum limit of apps is 50')
+        if apps: self._set_limit(apps, 'apps')
 
         if beta_groups and beta_groups > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_groups: self._set_limit('betaGroups', beta_groups)
+            raise ValueError(f'The maximum limit of beta_groups is 50')
+        if beta_groups: self._set_limit(beta_groups, 'betaGroups')
 
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -293,8 +293,8 @@ class AppsLinkagesOfBetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppsLinkagesOfBetaTesterEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -344,8 +344,8 @@ class AppsOfBetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppsOfBetaTesterEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -373,8 +373,8 @@ class BetaGroupsLinkagesOfBetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaGroupsLinkagesOfBetaTesterEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -434,8 +434,8 @@ class BetaGroupsOfBetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaGroupsOfBetaTesterEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -463,8 +463,8 @@ class BuildsLinkagesOfBetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildsLinkagesOfBetaTesterEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -524,8 +524,8 @@ class BuildsOfBetaTesterEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildsOfBetaTesterEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

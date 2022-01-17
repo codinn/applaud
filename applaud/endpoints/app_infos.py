@@ -96,8 +96,8 @@ class AppInfoEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppInfoEndpoint
         '''
         if app_info_localizations and app_info_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_info_localizations: self._set_limit('appInfoLocalizations', app_info_localizations)
+            raise ValueError(f'The maximum limit of app_info_localizations is 50')
+        if app_info_localizations: self._set_limit(app_info_localizations, 'appInfoLocalizations')
 
         return self
 
@@ -189,8 +189,8 @@ class AppInfoLocalizationsOfAppInfoEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppInfoLocalizationsOfAppInfoEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

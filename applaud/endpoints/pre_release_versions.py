@@ -108,12 +108,12 @@ class PreReleaseVersionsEndpoint(Endpoint):
         :rtype: applaud.endpoints.PreReleaseVersionsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -182,8 +182,8 @@ class PreReleaseVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.PreReleaseVersionEndpoint
         '''
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -249,8 +249,8 @@ class BuildsOfPreReleaseVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildsOfPreReleaseVersionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

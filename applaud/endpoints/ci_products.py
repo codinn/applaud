@@ -83,12 +83,12 @@ class CiProductsEndpoint(Endpoint):
         :rtype: applaud.endpoints.CiProductsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if primary_repositories and primary_repositories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if primary_repositories: self._set_limit('primaryRepositories', primary_repositories)
+            raise ValueError(f'The maximum limit of primary_repositories is 50')
+        if primary_repositories: self._set_limit(primary_repositories, 'primaryRepositories')
 
         return self
 
@@ -178,8 +178,8 @@ class CiProductEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CiProductEndpoint
         '''
         if primary_repositories and primary_repositories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if primary_repositories: self._set_limit('primaryRepositories', primary_repositories)
+            raise ValueError(f'The maximum limit of primary_repositories is 50')
+        if primary_repositories: self._set_limit(primary_repositories, 'primaryRepositories')
 
         return self
 
@@ -239,8 +239,8 @@ class AdditionalRepositoriesOfCiProductEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AdditionalRepositoriesOfCiProductEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -376,48 +376,48 @@ class AppOfCiProductEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppOfCiProductEndpoint
         '''
         if beta_groups and beta_groups > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_groups: self._set_limit('betaGroups', beta_groups)
+            raise ValueError(f'The maximum limit of beta_groups is 50')
+        if beta_groups: self._set_limit(beta_groups, 'betaGroups')
 
         if app_store_versions and app_store_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_versions: self._set_limit('appStoreVersions', app_store_versions)
+            raise ValueError(f'The maximum limit of app_store_versions is 50')
+        if app_store_versions: self._set_limit(app_store_versions, 'appStoreVersions')
 
         if pre_release_versions and pre_release_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if pre_release_versions: self._set_limit('preReleaseVersions', pre_release_versions)
+            raise ValueError(f'The maximum limit of pre_release_versions is 50')
+        if pre_release_versions: self._set_limit(pre_release_versions, 'preReleaseVersions')
 
         if beta_app_localizations and beta_app_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_app_localizations: self._set_limit('betaAppLocalizations', beta_app_localizations)
+            raise ValueError(f'The maximum limit of beta_app_localizations is 50')
+        if beta_app_localizations: self._set_limit(beta_app_localizations, 'betaAppLocalizations')
 
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         if app_infos and app_infos > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_infos: self._set_limit('appInfos', app_infos)
+            raise ValueError(f'The maximum limit of app_infos is 50')
+        if app_infos: self._set_limit(app_infos, 'appInfos')
 
         if app_clips and app_clips > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clips: self._set_limit('appClips', app_clips)
+            raise ValueError(f'The maximum limit of app_clips is 50')
+        if app_clips: self._set_limit(app_clips, 'appClips')
 
         if prices and prices > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if prices: self._set_limit('prices', prices)
+            raise ValueError(f'The maximum limit of prices is 50')
+        if prices: self._set_limit(prices, 'prices')
 
         if available_territories and available_territories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if available_territories: self._set_limit('availableTerritories', available_territories)
+            raise ValueError(f'The maximum limit of available_territories is 50')
+        if available_territories: self._set_limit(available_territories, 'availableTerritories')
 
         if in_app_purchases and in_app_purchases > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if in_app_purchases: self._set_limit('inAppPurchases', in_app_purchases)
+            raise ValueError(f'The maximum limit of in_app_purchases is 50')
+        if in_app_purchases: self._set_limit(in_app_purchases, 'inAppPurchases')
 
         if game_center_enabled_versions and game_center_enabled_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if game_center_enabled_versions: self._set_limit('gameCenterEnabledVersions', game_center_enabled_versions)
+            raise ValueError(f'The maximum limit of game_center_enabled_versions is 50')
+        if game_center_enabled_versions: self._set_limit(game_center_enabled_versions, 'gameCenterEnabledVersions')
 
         return self
 
@@ -489,12 +489,12 @@ class BuildRunsOfCiProductEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildRunsOfCiProductEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -547,8 +547,8 @@ class PrimaryRepositoriesOfCiProductEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.PrimaryRepositoriesOfCiProductEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -588,8 +588,8 @@ class WorkflowsOfCiProductEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.WorkflowsOfCiProductEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

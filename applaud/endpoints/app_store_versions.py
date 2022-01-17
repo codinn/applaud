@@ -149,8 +149,8 @@ class AppStoreVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreVersionEndpoint
         '''
         if app_store_version_localizations and app_store_version_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_version_localizations: self._set_limit('appStoreVersionLocalizations', app_store_version_localizations)
+            raise ValueError(f'The maximum limit of app_store_version_localizations is 50')
+        if app_store_version_localizations: self._set_limit(app_store_version_localizations, 'appStoreVersionLocalizations')
 
         return self
 
@@ -277,8 +277,8 @@ class AppClipDefaultExperienceOfAppStoreVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipDefaultExperienceOfAppStoreVersionEndpoint
         '''
         if app_clip_default_experience_localizations and app_clip_default_experience_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clip_default_experience_localizations: self._set_limit('appClipDefaultExperienceLocalizations', app_clip_default_experience_localizations)
+            raise ValueError(f'The maximum limit of app_clip_default_experience_localizations is 50')
+        if app_clip_default_experience_localizations: self._set_limit(app_clip_default_experience_localizations, 'appClipDefaultExperienceLocalizations')
 
         return self
 
@@ -334,8 +334,8 @@ class AppStoreReviewDetailOfAppStoreVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreReviewDetailOfAppStoreVersionEndpoint
         '''
         if app_store_review_attachments and app_store_review_attachments > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_review_attachments: self._set_limit('appStoreReviewAttachments', app_store_review_attachments)
+            raise ValueError(f'The maximum limit of app_store_review_attachments is 50')
+        if app_store_review_attachments: self._set_limit(app_store_review_attachments, 'appStoreReviewAttachments')
 
         return self
 
@@ -375,8 +375,8 @@ class AppStoreVersionLocalizationsOfAppStoreVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreVersionLocalizationsOfAppStoreVersionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

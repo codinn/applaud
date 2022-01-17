@@ -32,8 +32,8 @@ class TerritoriesEndpoint(Endpoint):
         :rtype: applaud.endpoints.TerritoriesEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

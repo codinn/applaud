@@ -69,8 +69,8 @@ class EndUserLicenseAgreementEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.EndUserLicenseAgreementEndpoint
         '''
         if territories and territories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if territories: self._set_limit('territories', territories)
+            raise ValueError(f'The maximum limit of territories is 50')
+        if territories: self._set_limit(territories, 'territories')
 
         return self
 
@@ -130,8 +130,8 @@ class TerritoriesOfEndUserLicenseAgreementEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.TerritoriesOfEndUserLicenseAgreementEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

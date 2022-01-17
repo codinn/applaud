@@ -62,8 +62,8 @@ class AppClipAdvancedExperienceEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipAdvancedExperienceEndpoint
         '''
         if localizations and localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if localizations: self._set_limit('localizations', localizations)
+            raise ValueError(f'The maximum limit of localizations is 50')
+        if localizations: self._set_limit(localizations, 'localizations')
 
         return self
 

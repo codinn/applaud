@@ -66,8 +66,8 @@ class ScmRepositoriesEndpoint(Endpoint):
         :rtype: applaud.endpoints.ScmRepositoriesEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -162,8 +162,8 @@ class GitReferencesOfScmRepositoryEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.GitReferencesOfScmRepositoryEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -203,8 +203,8 @@ class PullRequestsOfScmRepositoryEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.PullRequestsOfScmRepositoryEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

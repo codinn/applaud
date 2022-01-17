@@ -226,52 +226,52 @@ class AppsEndpoint(Endpoint):
         :rtype: applaud.endpoints.AppsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_clips and app_clips > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clips: self._set_limit('appClips', app_clips)
+            raise ValueError(f'The maximum limit of app_clips is 50')
+        if app_clips: self._set_limit(app_clips, 'appClips')
 
         if app_infos and app_infos > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_infos: self._set_limit('appInfos', app_infos)
+            raise ValueError(f'The maximum limit of app_infos is 50')
+        if app_infos: self._set_limit(app_infos, 'appInfos')
 
         if app_store_versions and app_store_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_versions: self._set_limit('appStoreVersions', app_store_versions)
+            raise ValueError(f'The maximum limit of app_store_versions is 50')
+        if app_store_versions: self._set_limit(app_store_versions, 'appStoreVersions')
 
         if available_territories and available_territories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if available_territories: self._set_limit('availableTerritories', available_territories)
+            raise ValueError(f'The maximum limit of available_territories is 50')
+        if available_territories: self._set_limit(available_territories, 'availableTerritories')
 
         if beta_app_localizations and beta_app_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_app_localizations: self._set_limit('betaAppLocalizations', beta_app_localizations)
+            raise ValueError(f'The maximum limit of beta_app_localizations is 50')
+        if beta_app_localizations: self._set_limit(beta_app_localizations, 'betaAppLocalizations')
 
         if beta_groups and beta_groups > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_groups: self._set_limit('betaGroups', beta_groups)
+            raise ValueError(f'The maximum limit of beta_groups is 50')
+        if beta_groups: self._set_limit(beta_groups, 'betaGroups')
 
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         if game_center_enabled_versions and game_center_enabled_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if game_center_enabled_versions: self._set_limit('gameCenterEnabledVersions', game_center_enabled_versions)
+            raise ValueError(f'The maximum limit of game_center_enabled_versions is 50')
+        if game_center_enabled_versions: self._set_limit(game_center_enabled_versions, 'gameCenterEnabledVersions')
 
         if in_app_purchases and in_app_purchases > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if in_app_purchases: self._set_limit('inAppPurchases', in_app_purchases)
+            raise ValueError(f'The maximum limit of in_app_purchases is 50')
+        if in_app_purchases: self._set_limit(in_app_purchases, 'inAppPurchases')
 
         if pre_release_versions and pre_release_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if pre_release_versions: self._set_limit('preReleaseVersions', pre_release_versions)
+            raise ValueError(f'The maximum limit of pre_release_versions is 50')
+        if pre_release_versions: self._set_limit(pre_release_versions, 'preReleaseVersions')
 
         if prices and prices > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if prices: self._set_limit('prices', prices)
+            raise ValueError(f'The maximum limit of prices is 50')
+        if prices: self._set_limit(prices, 'prices')
 
         return self
 
@@ -508,48 +508,48 @@ class AppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppEndpoint
         '''
         if app_clips and app_clips > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clips: self._set_limit('appClips', app_clips)
+            raise ValueError(f'The maximum limit of app_clips is 50')
+        if app_clips: self._set_limit(app_clips, 'appClips')
 
         if app_infos and app_infos > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_infos: self._set_limit('appInfos', app_infos)
+            raise ValueError(f'The maximum limit of app_infos is 50')
+        if app_infos: self._set_limit(app_infos, 'appInfos')
 
         if app_store_versions and app_store_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_versions: self._set_limit('appStoreVersions', app_store_versions)
+            raise ValueError(f'The maximum limit of app_store_versions is 50')
+        if app_store_versions: self._set_limit(app_store_versions, 'appStoreVersions')
 
         if available_territories and available_territories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if available_territories: self._set_limit('availableTerritories', available_territories)
+            raise ValueError(f'The maximum limit of available_territories is 50')
+        if available_territories: self._set_limit(available_territories, 'availableTerritories')
 
         if beta_app_localizations and beta_app_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_app_localizations: self._set_limit('betaAppLocalizations', beta_app_localizations)
+            raise ValueError(f'The maximum limit of beta_app_localizations is 50')
+        if beta_app_localizations: self._set_limit(beta_app_localizations, 'betaAppLocalizations')
 
         if beta_groups and beta_groups > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_groups: self._set_limit('betaGroups', beta_groups)
+            raise ValueError(f'The maximum limit of beta_groups is 50')
+        if beta_groups: self._set_limit(beta_groups, 'betaGroups')
 
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         if game_center_enabled_versions and game_center_enabled_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if game_center_enabled_versions: self._set_limit('gameCenterEnabledVersions', game_center_enabled_versions)
+            raise ValueError(f'The maximum limit of game_center_enabled_versions is 50')
+        if game_center_enabled_versions: self._set_limit(game_center_enabled_versions, 'gameCenterEnabledVersions')
 
         if in_app_purchases and in_app_purchases > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if in_app_purchases: self._set_limit('inAppPurchases', in_app_purchases)
+            raise ValueError(f'The maximum limit of in_app_purchases is 50')
+        if in_app_purchases: self._set_limit(in_app_purchases, 'inAppPurchases')
 
         if pre_release_versions and pre_release_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if pre_release_versions: self._set_limit('preReleaseVersions', pre_release_versions)
+            raise ValueError(f'The maximum limit of pre_release_versions is 50')
+        if pre_release_versions: self._set_limit(pre_release_versions, 'preReleaseVersions')
 
         if prices and prices > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if prices: self._set_limit('prices', prices)
+            raise ValueError(f'The maximum limit of prices is 50')
+        if prices: self._set_limit(prices, 'prices')
 
         return self
 
@@ -634,12 +634,12 @@ class AppClipsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_clip_default_experiences and app_clip_default_experiences > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clip_default_experiences: self._set_limit('appClipDefaultExperiences', app_clip_default_experiences)
+            raise ValueError(f'The maximum limit of app_clip_default_experiences is 50')
+        if app_clip_default_experiences: self._set_limit(app_clip_default_experiences, 'appClipDefaultExperiences')
 
         return self
 
@@ -698,12 +698,12 @@ class AppInfosOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppInfosOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_info_localizations and app_info_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_info_localizations: self._set_limit('appInfoLocalizations', app_info_localizations)
+            raise ValueError(f'The maximum limit of app_info_localizations is 50')
+        if app_info_localizations: self._set_limit(app_info_localizations, 'appInfoLocalizations')
 
         return self
 
@@ -790,12 +790,12 @@ class AppStoreVersionsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreVersionsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_store_version_localizations and app_store_version_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_version_localizations: self._set_limit('appStoreVersionLocalizations', app_store_version_localizations)
+            raise ValueError(f'The maximum limit of app_store_version_localizations is 50')
+        if app_store_version_localizations: self._set_limit(app_store_version_localizations, 'appStoreVersionLocalizations')
 
         return self
 
@@ -835,8 +835,8 @@ class AvailableTerritoriesOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AvailableTerritoriesOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -876,8 +876,8 @@ class BetaAppLocalizationsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaAppLocalizationsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -943,8 +943,8 @@ class BetaGroupsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaGroupsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -1023,8 +1023,8 @@ class BuildsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -1080,8 +1080,8 @@ class CiProductOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CiProductOfAppEndpoint
         '''
         if primary_repositories and primary_repositories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if primary_repositories: self._set_limit('primaryRepositories', primary_repositories)
+            raise ValueError(f'The maximum limit of primary_repositories is 50')
+        if primary_repositories: self._set_limit(primary_repositories, 'primaryRepositories')
 
         return self
 
@@ -1194,12 +1194,12 @@ class GameCenterEnabledVersionsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.GameCenterEnabledVersionsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if compatible_versions and compatible_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if compatible_versions: self._set_limit('compatibleVersions', compatible_versions)
+            raise ValueError(f'The maximum limit of compatible_versions is 50')
+        if compatible_versions: self._set_limit(compatible_versions, 'compatibleVersions')
 
         return self
 
@@ -1287,12 +1287,12 @@ class InAppPurchasesOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.InAppPurchasesOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if apps and apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if apps: self._set_limit('apps', apps)
+            raise ValueError(f'The maximum limit of apps is 50')
+        if apps: self._set_limit(apps, 'apps')
 
         return self
 
@@ -1395,8 +1395,8 @@ class PreReleaseVersionsOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.PreReleaseVersionsOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -1436,8 +1436,8 @@ class PricesOfAppEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.PricesOfAppEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

@@ -51,12 +51,12 @@ class CiXcodeVersionsEndpoint(Endpoint):
         :rtype: applaud.endpoints.CiXcodeVersionsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if mac_os_versions and mac_os_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if mac_os_versions: self._set_limit('macOsVersions', mac_os_versions)
+            raise ValueError(f'The maximum limit of mac_os_versions is 50')
+        if mac_os_versions: self._set_limit(mac_os_versions, 'macOsVersions')
 
         return self
 
@@ -116,8 +116,8 @@ class CiXcodeVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CiXcodeVersionEndpoint
         '''
         if mac_os_versions and mac_os_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if mac_os_versions: self._set_limit('macOsVersions', mac_os_versions)
+            raise ValueError(f'The maximum limit of mac_os_versions is 50')
+        if mac_os_versions: self._set_limit(mac_os_versions, 'macOsVersions')
 
         return self
 
@@ -176,12 +176,12 @@ class MacOsVersionsOfCiXcodeVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.MacOsVersionsOfCiXcodeVersionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if xcode_versions and xcode_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if xcode_versions: self._set_limit('xcodeVersions', xcode_versions)
+            raise ValueError(f'The maximum limit of xcode_versions is 50')
+        if xcode_versions: self._set_limit(xcode_versions, 'xcodeVersions')
 
         return self
 

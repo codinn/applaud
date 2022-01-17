@@ -84,12 +84,12 @@ class UserInvitationsEndpoint(Endpoint):
         :rtype: applaud.endpoints.UserInvitationsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if visible_apps and visible_apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if visible_apps: self._set_limit('visibleApps', visible_apps)
+            raise ValueError(f'The maximum limit of visible_apps is 50')
+        if visible_apps: self._set_limit(visible_apps, 'visibleApps')
 
         return self
 
@@ -162,8 +162,8 @@ class UserInvitationEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.UserInvitationEndpoint
         '''
         if visible_apps and visible_apps > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if visible_apps: self._set_limit('visibleApps', visible_apps)
+            raise ValueError(f'The maximum limit of visible_apps is 50')
+        if visible_apps: self._set_limit(visible_apps, 'visibleApps')
 
         return self
 
@@ -210,8 +210,8 @@ class VisibleAppsOfUserInvitationEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.VisibleAppsOfUserInvitationEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

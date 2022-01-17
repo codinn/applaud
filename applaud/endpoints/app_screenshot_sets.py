@@ -73,8 +73,8 @@ class AppScreenshotSetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppScreenshotSetEndpoint
         '''
         if app_screenshots and app_screenshots > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_screenshots: self._set_limit('appScreenshots', app_screenshots)
+            raise ValueError(f'The maximum limit of app_screenshots is 50')
+        if app_screenshots: self._set_limit(app_screenshots, 'appScreenshots')
 
         return self
 
@@ -109,8 +109,8 @@ class AppScreenshotsLinkagesOfAppScreenshotSetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppScreenshotsLinkagesOfAppScreenshotSetEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -160,8 +160,8 @@ class AppScreenshotsOfAppScreenshotSetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppScreenshotsOfAppScreenshotSetEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

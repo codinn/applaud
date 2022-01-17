@@ -69,8 +69,8 @@ class AppStoreReviewDetailEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreReviewDetailEndpoint
         '''
         if app_store_review_attachments and app_store_review_attachments > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_review_attachments: self._set_limit('appStoreReviewAttachments', app_store_review_attachments)
+            raise ValueError(f'The maximum limit of app_store_review_attachments is 50')
+        if app_store_review_attachments: self._set_limit(app_store_review_attachments, 'appStoreReviewAttachments')
 
         return self
 
@@ -123,8 +123,8 @@ class AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreReviewAttachmentsOfAppStoreReviewDetailEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

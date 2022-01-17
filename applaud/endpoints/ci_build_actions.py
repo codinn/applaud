@@ -102,8 +102,8 @@ class ArtifactsOfCiBuildActionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.ArtifactsOfCiBuildActionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -159,8 +159,8 @@ class BuildRunOfCiBuildActionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BuildRunOfCiBuildActionEndpoint
         '''
         if builds and builds > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if builds: self._set_limit('builds', builds)
+            raise ValueError(f'The maximum limit of builds is 50')
+        if builds: self._set_limit(builds, 'builds')
 
         return self
 
@@ -200,8 +200,8 @@ class IssuesOfCiBuildActionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.IssuesOfCiBuildActionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -241,8 +241,8 @@ class TestResultsOfCiBuildActionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.TestResultsOfCiBuildActionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

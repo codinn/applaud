@@ -73,12 +73,12 @@ class AppCategoriesEndpoint(Endpoint):
         :rtype: applaud.endpoints.AppCategoriesEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if subcategories and subcategories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if subcategories: self._set_limit('subcategories', subcategories)
+            raise ValueError(f'The maximum limit of subcategories is 50')
+        if subcategories: self._set_limit(subcategories, 'subcategories')
 
         return self
 
@@ -139,8 +139,8 @@ class AppCategoryEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppCategoryEndpoint
         '''
         if subcategories and subcategories > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if subcategories: self._set_limit('subcategories', subcategories)
+            raise ValueError(f'The maximum limit of subcategories is 50')
+        if subcategories: self._set_limit(subcategories, 'subcategories')
 
         return self
 
@@ -206,8 +206,8 @@ class SubcategoriesOfAppCategoryEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.SubcategoriesOfAppCategoryEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

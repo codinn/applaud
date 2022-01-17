@@ -61,8 +61,8 @@ class AppClipEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipEndpoint
         '''
         if app_clip_default_experiences and app_clip_default_experiences > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clip_default_experiences: self._set_limit('appClipDefaultExperiences', app_clip_default_experiences)
+            raise ValueError(f'The maximum limit of app_clip_default_experiences is 50')
+        if app_clip_default_experiences: self._set_limit(app_clip_default_experiences, 'appClipDefaultExperiences')
 
         return self
 
@@ -144,12 +144,12 @@ class AppClipAdvancedExperiencesOfAppClipEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipAdvancedExperiencesOfAppClipEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if localizations and localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if localizations: self._set_limit('localizations', localizations)
+            raise ValueError(f'The maximum limit of localizations is 50')
+        if localizations: self._set_limit(localizations, 'localizations')
 
         return self
 
@@ -220,12 +220,12 @@ class AppClipDefaultExperiencesOfAppClipEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipDefaultExperiencesOfAppClipEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_clip_default_experience_localizations and app_clip_default_experience_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clip_default_experience_localizations: self._set_limit('appClipDefaultExperienceLocalizations', app_clip_default_experience_localizations)
+            raise ValueError(f'The maximum limit of app_clip_default_experience_localizations is 50')
+        if app_clip_default_experience_localizations: self._set_limit(app_clip_default_experience_localizations, 'appClipDefaultExperienceLocalizations')
 
         return self
 

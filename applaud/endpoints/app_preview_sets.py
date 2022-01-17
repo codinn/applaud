@@ -73,8 +73,8 @@ class AppPreviewSetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppPreviewSetEndpoint
         '''
         if app_previews and app_previews > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_previews: self._set_limit('appPreviews', app_previews)
+            raise ValueError(f'The maximum limit of app_previews is 50')
+        if app_previews: self._set_limit(app_previews, 'appPreviews')
 
         return self
 
@@ -109,8 +109,8 @@ class AppPreviewsLinkagesOfAppPreviewSetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppPreviewsLinkagesOfAppPreviewSetEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -160,8 +160,8 @@ class AppPreviewsOfAppPreviewSetEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppPreviewsOfAppPreviewSetEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

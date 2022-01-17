@@ -60,8 +60,8 @@ class BetaAppClipInvocationEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BetaAppClipInvocationEndpoint
         '''
         if beta_app_clip_invocation_localizations and beta_app_clip_invocation_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if beta_app_clip_invocation_localizations: self._set_limit('betaAppClipInvocationLocalizations', beta_app_clip_invocation_localizations)
+            raise ValueError(f'The maximum limit of beta_app_clip_invocation_localizations is 50')
+        if beta_app_clip_invocation_localizations: self._set_limit(beta_app_clip_invocation_localizations, 'betaAppClipInvocationLocalizations')
 
         return self
 

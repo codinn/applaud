@@ -110,16 +110,16 @@ class BundleIdsEndpoint(Endpoint):
         :rtype: applaud.endpoints.BundleIdsEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if bundle_id_capabilities and bundle_id_capabilities > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if bundle_id_capabilities: self._set_limit('bundleIdCapabilities', bundle_id_capabilities)
+            raise ValueError(f'The maximum limit of bundle_id_capabilities is 50')
+        if bundle_id_capabilities: self._set_limit(bundle_id_capabilities, 'bundleIdCapabilities')
 
         if profiles and profiles > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if profiles: self._set_limit('profiles', profiles)
+            raise ValueError(f'The maximum limit of profiles is 50')
+        if profiles: self._set_limit(profiles, 'profiles')
 
         return self
 
@@ -213,12 +213,12 @@ class BundleIdEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BundleIdEndpoint
         '''
         if bundle_id_capabilities and bundle_id_capabilities > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if bundle_id_capabilities: self._set_limit('bundleIdCapabilities', bundle_id_capabilities)
+            raise ValueError(f'The maximum limit of bundle_id_capabilities is 50')
+        if bundle_id_capabilities: self._set_limit(bundle_id_capabilities, 'bundleIdCapabilities')
 
         if profiles and profiles > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if profiles: self._set_limit('profiles', profiles)
+            raise ValueError(f'The maximum limit of profiles is 50')
+        if profiles: self._set_limit(profiles, 'profiles')
 
         return self
 
@@ -304,8 +304,8 @@ class BundleIdCapabilitiesOfBundleIdEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.BundleIdCapabilitiesOfBundleIdEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -345,8 +345,8 @@ class ProfilesOfBundleIdEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.ProfilesOfBundleIdEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 

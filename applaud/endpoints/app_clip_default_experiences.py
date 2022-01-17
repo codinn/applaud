@@ -91,8 +91,8 @@ class AppClipDefaultExperienceEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppClipDefaultExperienceEndpoint
         '''
         if app_clip_default_experience_localizations and app_clip_default_experience_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_clip_default_experience_localizations: self._set_limit('appClipDefaultExperienceLocalizations', app_clip_default_experience_localizations)
+            raise ValueError(f'The maximum limit of app_clip_default_experience_localizations is 50')
+        if app_clip_default_experience_localizations: self._set_limit(app_clip_default_experience_localizations, 'appClipDefaultExperienceLocalizations')
 
         return self
 
@@ -191,8 +191,8 @@ class AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint(ID
         :rtype: applaud.endpoints.AppClipDefaultExperienceLocalizationsOfAppClipDefaultExperienceEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -272,8 +272,8 @@ class ReleaseWithAppStoreVersionOfAppClipDefaultExperienceEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.ReleaseWithAppStoreVersionOfAppClipDefaultExperienceEndpoint
         '''
         if app_store_version_localizations and app_store_version_localizations > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_store_version_localizations: self._set_limit('appStoreVersionLocalizations', app_store_version_localizations)
+            raise ValueError(f'The maximum limit of app_store_version_localizations is 50')
+        if app_store_version_localizations: self._set_limit(app_store_version_localizations, 'appStoreVersionLocalizations')
 
         return self
 

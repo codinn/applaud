@@ -81,12 +81,12 @@ class AppStoreVersionLocalizationEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppStoreVersionLocalizationEndpoint
         '''
         if app_preview_sets and app_preview_sets > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_preview_sets: self._set_limit('appPreviewSets', app_preview_sets)
+            raise ValueError(f'The maximum limit of app_preview_sets is 50')
+        if app_preview_sets: self._set_limit(app_preview_sets, 'appPreviewSets')
 
         if app_screenshot_sets and app_screenshot_sets > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_screenshot_sets: self._set_limit('appScreenshotSets', app_screenshot_sets)
+            raise ValueError(f'The maximum limit of app_screenshot_sets is 50')
+        if app_screenshot_sets: self._set_limit(app_screenshot_sets, 'appScreenshotSets')
 
         return self
 
@@ -178,12 +178,12 @@ class AppPreviewSetsOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppPreviewSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_previews and app_previews > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_previews: self._set_limit('appPreviews', app_previews)
+            raise ValueError(f'The maximum limit of app_previews is 50')
+        if app_previews: self._set_limit(app_previews, 'appPreviews')
 
         return self
 
@@ -255,12 +255,12 @@ class AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.AppScreenshotSetsOfAppStoreVersionLocalizationEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if app_screenshots and app_screenshots > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if app_screenshots: self._set_limit('appScreenshots', app_screenshots)
+            raise ValueError(f'The maximum limit of app_screenshots is 50')
+        if app_screenshots: self._set_limit(app_screenshots, 'appScreenshots')
 
         return self
 

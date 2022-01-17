@@ -20,8 +20,8 @@ class CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CompatibleVersionsLinkagesOfGameCenterEnabledVersionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         return self
 
@@ -143,12 +143,12 @@ class CompatibleVersionsOfGameCenterEnabledVersionEndpoint(IDEndpoint):
         :rtype: applaud.endpoints.CompatibleVersionsOfGameCenterEnabledVersionEndpoint
         '''
         if number and number > 200:
-            raise ValueError(f'The maximum limit of default-limit is 200')
-        if number: self._set_limit('default-limit', number)
+            raise ValueError(f'The maximum limit of number is 200')
+        if number: self._set_limit(number)
         
         if compatible_versions and compatible_versions > 50:
-            raise ValueError(f'The maximum limit is 50')
-        if compatible_versions: self._set_limit('compatibleVersions', compatible_versions)
+            raise ValueError(f'The maximum limit of compatible_versions is 50')
+        if compatible_versions: self._set_limit(compatible_versions, 'compatibleVersions')
 
         return self
 
