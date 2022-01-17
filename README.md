@@ -164,7 +164,7 @@ The corresponding code in `Applaud`:
 # Return a response contains 10 apps at most
 connection.apps().limit(10).get()
 
-# Raise a ValueError exception, the maxinmu allowed value is 400
+# Raise a ValueError exception, the maxinmu allowed value is 200
 connection.apps().limit(400).get()
 ```
 
