@@ -1,5 +1,5 @@
 import os
-from applaud.endpoints.sales_reports import SalesReportsEndpoint
+from applaud.endpoints.finance_reports import FinanceReportsEndpoint
 from applaud.connection import Connection
 
 KEY_ID = "XXXXXXXXXX"
@@ -14,12 +14,11 @@ with open(PATH_TO_KEY, 'r') as f:
 # Create the Connection
 connection = Connection(ISSUER_ID, KEY_ID, PRIVATE_KEY)
 
-r = connection.sales_reports().filter(
-    report_sub_type=SalesReportsEndpoint.ReportSubType.SUMMARY, # or 'SUMMARY'
-    report_type=SalesReportsEndpoint.ReportType.SALES, # or 'SALES'
-    frequency=SalesReportsEndpoint.Frequency.MONTHLY, # or 'MONTHLY'
+r = connection.finance_reports().filter(
+    report_type=FinanceReportsEndpoint.ReportType.FINANCE_DETAIL, # or 'FINANCE_DETAIL'
+    region_code='Z1',
     report_date='2021-12',
     vendor_number=VENDOR_NUMBER
 ).get()
 
-r.save('sales_reports.txt', decompress=True)
+r.save('finance_reports.txt', decompress=True)
