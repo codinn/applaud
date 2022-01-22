@@ -66,14 +66,13 @@ class SalesReportsEndpoint(Endpoint):
         
         return self
         
-    def get(self) -> bytes:
+    def get(self) -> GzipStreamResponse:
         '''Get one or more resources.
 
         :returns: List of SalesReports
-        :rtype: bytes
+        :rtype: GzipStreamResponse
         :raises: :py:class:`applaud.schemas.responses.ErrorResponse`: if a error reponse returned.
                  :py:class:`requests.RequestException`: if a connection or a HTTP error occurred.
         '''
-        json = super()._perform_get()
-        return bytes.parse_obj(json)
+        return super()._perform_get(stream=True)
 

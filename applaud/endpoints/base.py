@@ -1,7 +1,7 @@
 from enum import Enum, auto
 from typing import Any, Union, Optional, TypeVar
 import requests
-from ..schemas.responses import ApplaudResponse, ErrorResponse
+from ..schemas.responses import JSONResponse, ErrorResponse, GzipResponse, GzipStreamResponse
 from ..schemas.requests import ApplaudRequest
 import functools
 
@@ -72,43 +72,51 @@ class Endpoint:
         self._query_params['sort'] = ','.join(expressions)
 
     def __parse_response(self, response: requests.Response) -> Any:
-        try:
+        content_type = response.headers['Content-Type']
+
+        if content_type == 'application/json':
             json = response.json()
+
             if response.ok:
                 return json
-            
+
             errors: list[ErrorResponse.Error] = ErrorResponse.parse_obj(json).errors if json else None
 
             if errors:
                 # Errors from the App Store Connect service
                 raise EndpointException(errors, response)
+        elif content_type == 'application/a-gzip':
+            return GzipStreamResponse(response)
 
-            response.raise_for_status()
-        except requests.exceptions.JSONDecodeError as error:
-            # Response body does not contain valid json.
-            return None
+        response.raise_for_status()
+        return response
 
-    def _perform_get(self) -> Any:
+    def _perform_get(self, **kwargs) -> Any:
         '''Perform a GET request to the specified endpoint.'''
-        response = self.session.get(self.endpoint_path, params=self._query_params, headers={})
+        if 'params' in kwargs:
+            kwargs['params'].update(self._query_params)
+        else:
+            kwargs['params'] = self._query_params
+
+        response = self.session.get(self.endpoint_path, **kwargs)
         return self.__parse_response(response)
 
-    def _perform_post(self, request: Union[ApplaudRequest, dict, None]=None) -> Any:
+    def _perform_post(self, request: Union[ApplaudRequest, dict, None]=None, **kwargs) -> Any:
         '''Perform a POST request to the specified endpoint.'''
         request_json = request.request_dict() if isinstance(request, ApplaudRequest) else request
-        response = self.session.post(self.endpoint_path, json=request_json, headers={})
+        response = self.session.post(self.endpoint_path, json=request_json, **kwargs)
         return self.__parse_response(response)
 
-    def _perform_patch(self, request: Union[ApplaudRequest, dict, None]=None) -> Any:
+    def _perform_patch(self, request: Union[ApplaudRequest, dict, None]=None, **kwargs) -> Any:
         '''Perform a PATCH request to the specified endpoint.'''
         request_json = request.request_dict() if isinstance(request, ApplaudRequest) else request
-        response = self.session.patch(self.endpoint_path, json=request_json, headers={})
+        response = self.session.patch(self.endpoint_path, json=request_json, **kwargs)
         return self.__parse_response(response)
 
-    def _perform_delete(self, request: Union[ApplaudRequest, dict, None]=None):
+    def _perform_delete(self, request: Union[ApplaudRequest, dict, None]=None, **kwargs):
         '''Perform a DELETE request to the specified endpoint.'''
         request_json = request.request_dict() if isinstance(request, ApplaudRequest) else request
-        response = self.session.delete(self.endpoint_path, json=request_json, headers={})
+        response = self.session.delete(self.endpoint_path, json=request_json, **kwargs)
         self.__parse_response(response)
 
 class IDEndpoint(Endpoint):
@@ -120,7 +128,7 @@ class IDEndpoint(Endpoint):
 
 class GenericEndpoint(Endpoint):
 
-    RESPONSE = TypeVar("RESPONSE", bound=Optional[ApplaudResponse])
+    RESPONSE = TypeVar("RESPONSE", bound=Optional[JSONResponse])
 
     def __init__(self, session: requests.Session, url: str):
         self.path = url.removeprefix(ENDPOINT_BASE_URL)
